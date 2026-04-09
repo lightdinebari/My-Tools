@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Robots.txt Generator – RankRise SEO</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+<style>
+  /* ── SCOPED WRAPPER ── */
+  #rr-robots-tool * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  #rr-robots-tool {
+    --rr-bg:        #f5f7fa;
+    --rr-card:      #ffffff;
+    --rr-border:    #e2e8f0;
+    --rr-accent:    #1a56db;
+    --rr-accent2:   #0e9f6e;
+    --rr-danger:    #e02424;
+    --rr-text:      #1e293b;
+    --rr-muted:     #64748b;
+    --rr-code-bg:   #0f172a;
+    --rr-code-text: #e2e8f0;
+    --rr-radius:    10px;
+    --rr-shadow:    0 2px 12px rgba(0,0,0,.08);
+    font-family: 'DM Sans', sans-serif;
+    color: var(--rr-text);
+    background: var(--rr-bg);
+    padding: 32px 16px 60px;
+    line-height: 1.6;
+  }
+
+  /* ── HEADER ── */
+  #rr-robots-tool .rr-header {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+  #rr-robots-tool .rr-header .rr-badge {
+    display: inline-block;
+    background: #dbeafe;
+    color: var(--rr-accent);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-bottom: 12px;
+  }
+  #rr-robots-tool .rr-header h1 {
+    font-size: clamp(22px, 4vw, 32px);
+    font-weight: 700;
+    color: var(--rr-text);
+    margin-bottom: 8px;
+  }
+  #rr-robots-tool .rr-header p {
+    color: var(--rr-muted);
+    font-size: 15px;
+    max-width: 560px;
+    margin: 0 auto;
+  }
+
+  /* ── LAYOUT ── */
+  #rr-robots-tool .rr-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  @media (max-width: 768px) {
+    #rr-robots-tool .rr-layout { grid-template-columns: 1fr; }
+  }
+
+  /* ── CARD ── */
+  #rr-robots-tool .rr-card {
+    background: var(--rr-card);
+    border: 1px solid var(--rr-border);
+    border-radius: var(--rr-radius);
+    box-shadow: var(--rr-shadow);
+    padding: 24px;
+  }
+  #rr-robots-tool .rr-card-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--rr-text);
+    margin-bottom: 18px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--rr-border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  #rr-robots-tool .rr-card-title span.rr-icon {
+    width: 28px; height: 28px;
+    border-radius: 6px;
+    background: #dbeafe;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px;
+  }
+
+  /* ── FORM ELEMENTS ── */
+  #rr-robots-tool label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--rr-text);
+    margin-bottom: 5px;
+  }
+  #rr-robots-tool .rr-hint {
+    font-size: 11.5px;
+    color: var(--rr-muted);
+    margin-bottom: 8px;
+    font-weight: 400;
+  }
+  #rr-robots-tool input[type="text"],
+  #rr-robots-tool input[type="number"],
+  #rr-robots-tool select,
+  #rr-robots-tool textarea {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1.5px solid var(--rr-border);
+    border-radius: 7px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--rr-text);
+    background: #f8fafc;
+    transition: border-color .2s, box-shadow .2s;
+    outline: none;
+    margin-bottom: 14px;
+  }
+  #rr-robots-tool input[type="text"]:focus,
+  #rr-robots-tool input[type="number"]:focus,
+  #rr-robots-tool select:focus,
+  #rr-robots-tool textarea:focus {
+    border-color: var(--rr-accent);
+    box-shadow: 0 0 0 3px rgba(26,86,219,.1);
+    background: #fff;
+  }
+  #rr-robots-tool textarea { resize: vertical; min-height: 80px; }
+
+  /* ── TOGGLE SWITCH ── */
+  #rr-robots-tool .rr-toggle-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--rr-border);
+    margin-bottom: 4px;
+  }
+  #rr-robots-tool .rr-toggle-row:last-child { border-bottom: none; }
+  #rr-robots-tool .rr-toggle-label {
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--rr-text);
+  }
+  #rr-robots-tool .rr-toggle-sub {
+    font-size: 11.5px;
+    color: var(--rr-muted);
+  }
+  #rr-robots-tool .rr-switch {
+    position: relative;
+    width: 42px; height: 24px;
+    flex-shrink: 0;
+    margin-left: 12px;
+  }
+  #rr-robots-tool .rr-switch input { opacity: 0; width: 0; height: 0; }
+  #rr-robots-tool .rr-switch-slider {
+    position: absolute; inset: 0;
+    background: #cbd5e1;
+    border-radius: 24px;
+    cursor: pointer;
+    transition: background .2s;
+  }
+  #rr-robots-tool .rr-switch-slider::before {
+    content: '';
+    position: absolute;
+    width: 18px; height: 18px;
+    left: 3px; top: 3px;
+    background: #fff;
+    border-radius: 50%;
+    transition: transform .2s;
+    box-shadow: 0 1px 3px rgba(0,0,0,.2);
+  }
+  #rr-robots-tool .rr-switch input:checked + .rr-switch-slider { background: var(--rr-accent); }
+  #rr-robots-tool .rr-switch input:checked + .rr-switch-slider::before { transform: translateX(18px); }
+
+  /* ── BOT SECTION ── */
+  #rr-robots-tool .rr-section-title {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    color: var(--rr-muted);
+    margin: 18px 0 10px;
+  }
+  #rr-robots-tool .rr-bot-entry {
+    background: #f8fafc;
+    border: 1px solid var(--rr-border);
+    border-radius: 8px;
+    padding: 14px;
+    margin-bottom: 10px;
+    position: relative;
+  }
+  #rr-robots-tool .rr-bot-entry select { margin-bottom: 10px; }
+  #rr-robots-tool .rr-bot-entry textarea { margin-bottom: 0; }
+  #rr-robots-tool .rr-remove-btn {
+    position: absolute;
+    top: 10px; right: 10px;
+    background: none;
+    border: none;
+    color: var(--rr-danger);
+    font-size: 17px;
+    cursor: pointer;
+    line-height: 1;
+    padding: 2px 6px;
+    border-radius: 4px;
+    transition: background .15s;
+  }
+  #rr-robots-tool .rr-remove-btn:hover { background: #fee2e2; }
+
+  /* ── BUTTONS ── */
+  #rr-robots-tool .rr-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 18px;
+    border-radius: 7px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .18s;
+    border: none;
+    outline: none;
+  }
+  #rr-robots-tool .rr-btn-primary {
+    background: var(--rr-accent);
+    color: #fff;
+    width: 100%;
+    justify-content: center;
+    padding: 12px;
+    font-size: 15px;
+    margin-top: 6px;
+  }
+  #rr-robots-tool .rr-btn-primary:hover { background: #1741b0; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(26,86,219,.3); }
+  #rr-robots-tool .rr-btn-outline {
+    background: #fff;
+    color: var(--rr-accent);
+    border: 1.5px solid var(--rr-accent);
+  }
+  #rr-robots-tool .rr-btn-outline:hover { background: #eff6ff; }
+  #rr-robots-tool .rr-btn-success {
+    background: var(--rr-accent2);
+    color: #fff;
+  }
+  #rr-robots-tool .rr-btn-success:hover { background: #057a55; }
+  #rr-robots-tool .rr-btn-sm { padding: 6px 12px; font-size: 13px; }
+
+  /* ── OUTPUT PANEL ── */
+  #rr-robots-tool .rr-output-panel {
+    grid-column: 1 / -1;
+    display: none;
+  }
+  #rr-robots-tool .rr-output-panel.visible { display: block; }
+  #rr-robots-tool .rr-output-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  #rr-robots-tool .rr-output-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--rr-text);
+  }
+  #rr-robots-tool .rr-output-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  #rr-robots-tool .rr-code-block {
+    background: var(--rr-code-bg);
+    border-radius: 8px;
+    padding: 20px;
+    overflow-x: auto;
+  }
+  #rr-robots-tool .rr-code-block pre {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13.5px;
+    color: var(--rr-code-text);
+    white-space: pre;
+    line-height: 1.8;
+  }
+  #rr-robots-tool .rr-code-block pre .cm { color: #94a3b8; }   /* comment */
+  #rr-robots-tool .rr-code-block pre .kw { color: #60a5fa; }   /* keyword */
+  #rr-robots-tool .rr-code-block pre .vl { color: #34d399; }   /* value */
+  #rr-robots-tool .rr-code-block pre .dn { color: #f87171; }   /* disallow */
+
+  /* ── TOAST ── */
+  #rr-robots-tool .rr-toast {
+    position: fixed;
+    bottom: 28px; right: 28px;
+    background: #1e293b;
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    box-shadow: 0 8px 24px rgba(0,0,0,.2);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all .3s;
+    z-index: 9999;
+    pointer-events: none;
+  }
+  #rr-robots-tool .rr-toast.show { opacity: 1; transform: translateY(0); }
+
+  /* ── INFO BOX ── */
+  #rr-robots-tool .rr-info {
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-left: 4px solid var(--rr-accent);
+    border-radius: 8px;
+    padding: 14px 16px;
+    font-size: 13.5px;
+    color: #1e3a5f;
+    margin-top: 14px;
+    line-height: 1.7;
+  }
+  #rr-robots-tool .rr-info strong { display: block; margin-bottom: 4px; }
+
+  /* ── CRAWL DELAY ROW ── */
+  #rr-robots-tool .rr-row { display: flex; gap: 10px; }
+  #rr-robots-tool .rr-row > div { flex: 1; }
+</style>
+</head>
+<body>
+
+<div id="rr-robots-tool">
+
+  <!-- HEADER -->
+  <div class="rr-header">
+    <div class="rr-badge">🛠 Free SEO Tool</div>
+    <h1>Robots.txt Generator</h1>
+    <p>Build a professional robots.txt file for your website. Control which bots can crawl your pages and protect sensitive directories.</p>
+  </div>
+
+  <div class="rr-layout" id="rrLayout">
+
+    <!-- LEFT: GLOBAL SETTINGS -->
+    <div class="rr-card">
+      <div class="rr-card-title">
+        <span class="rr-icon">⚙️</span> Global Settings
+      </div>
+
+      <label>Your Website URL</label>
+      <div class="rr-hint">Used to generate your sitemap line automatically.</div>
+      <input type="text" id="rrSiteUrl" placeholder="https://www.yoursite.com" />
+
+      <label>Sitemap URL</label>
+      <div class="rr-hint">Leave blank to auto-generate from site URL above.</div>
+      <input type="text" id="rrSitemapUrl" placeholder="https://www.yoursite.com/sitemap.xml" />
+
+      <div class="rr-section-title">Googlebot Presets</div>
+
+      <div class="rr-toggle-row">
+        <div>
+          <div class="rr-toggle-label">Allow Googlebot</div>
+          <div class="rr-toggle-sub">Let Google crawl your full site</div>
+        </div>
+        <label class="rr-switch">
+          <input type="checkbox" id="rrAllowGoogle" checked />
+          <span class="rr-switch-slider"></span>
+        </label>
+      </div>
+
+      <div class="rr-toggle-row">
+        <div>
+          <div class="rr-toggle-label">Block Google Images Bot</div>
+          <div class="rr-toggle-sub">Prevent image indexing (rare use case)</div>
+        </div>
+        <label class="rr-switch">
+          <input type="checkbox" id="rrBlockGoogleImages" />
+          <span class="rr-switch-slider"></span>
+        </label>
+      </div>
+
+      <div class="rr-toggle-row">
+        <div>
+          <div class="rr-toggle-label">Block Adsbot-Google</div>
+          <div class="rr-toggle-sub">Block Google's ad-scanning bot</div>
+        </div>
+        <label class="rr-switch">
+          <input type="checkbox" id="rrBlockAdsbot" />
+          <span class="rr-switch-slider"></span>
+        </label>
+      </div>
+
+      <div class="rr-section-title">Other Search Engines</div>
+
+      <div class="rr-toggle-row">
+        <div>
+          <div class="rr-toggle-label">Allow Bingbot</div>
+          <div class="rr-toggle-sub">Microsoft Bing crawler</div>
+        </div>
+        <label class="rr-switch">
+          <input type="checkbox" id="rrAllowBing" checked />
+          <span class="rr-switch-slider"></span>
+        </label>
+      </div>
+
+      <div class="rr-toggle-row">
+        <div>
+          <div class="rr-toggle-label">Allow Yandex</div>
+          <div class="rr-toggle-sub">Russian search engine bot</div>
+        </div>
+        <label class="rr-switch">
+          <input type="checkbox" id="rrAllowYandex" />
+          <span class="rr-switch-slider"></span>
+        </label>
+      </div>
+
+      <div class="rr-toggle-row">
+        <div>
+          <div class="rr-toggle-label">Allow DuckDuckBot</div>
+          <div class="rr-toggle-sub">DuckDuckGo crawler</div>
+        </div>
+        <label class="rr-switch">
+          <input type="checkbox" id="rrAllowDuck" />
+          <span class="rr-switch-slider"></span>
+        </label>
+      </div>
+
+      <div class="rr-section-title">AI & Scraper Bots</div>
+
+      <div class="rr-toggle-row">
+        <div>
+          <div class="rr-toggle-label">Block GPTBot (OpenAI)</div>
+          <div class="rr-toggle-sub">Prevent ChatGPT from training on your content</div>
+        </div>
+        <label class="rr-switch">
+          <input type="checkbox" id="rrBlockGPT" />
+          <span class="rr-switch-slider"></span>
+        </label>
+      </div>
+
+      <div class="rr-toggle-row">
+        <div>
+          <div class="rr-toggle-label">Block CCBot (Common Crawl)</div>
+          <div class="rr-toggle-sub">Used to train many AI models</div>
+        </div>
+        <label class="rr-switch">
+          <input type="checkbox" id="rrBlockCC" />
+          <span class="rr-switch-slider"></span>
+        </label>
+      </div>
+
+      <div class="rr-toggle-row">
+        <div>
+          <div class="rr-toggle-label">Block Semrush Bot</div>
+          <div class="rr-toggle-sub">SEMrush scraper bot</div>
+        </div>
+        <label class="rr-switch">
+          <input type="checkbox" id="rrBlockSemrush" />
+          <span class="rr-switch-slider"></span>
+        </label>
+      </div>
+
+      <div class="rr-toggle-row">
+        <div>
+          <div class="rr-toggle-label">Block AhrefsBot</div>
+          <div class="rr-toggle-sub">Ahrefs backlink crawler</div>
+        </div>
+        <label class="rr-switch">
+          <input type="checkbox" id="rrBlockAhrefs" />
+          <span class="rr-switch-slider"></span>
+        </label>
+      </div>
+
+    </div>
+
+    <!-- RIGHT: ADVANCED RULES -->
+    <div class="rr-card">
+      <div class="rr-card-title">
+        <span class="rr-icon">🔧</span> Advanced Rules
+      </div>
+
+      <label>Disallow Paths (Global – All Bots)</label>
+      <div class="rr-hint">One path per line. E.g: /admin/ &nbsp;/private/ &nbsp;/wp-login.php</div>
+      <textarea id="rrGlobalDisallow" placeholder="/admin/&#10;/private/&#10;/login/&#10;/search?"></textarea>
+
+      <label>Allow Paths (Override disallow)</label>
+      <div class="rr-hint">Force-allow specific paths even if parent is disallowed.</div>
+      <textarea id="rrGlobalAllow" placeholder="/admin/public/"></textarea>
+
+      <div class="rr-row">
+        <div>
+          <label>Crawl Delay (seconds)</label>
+          <div class="rr-hint">Slow down crawlers. 0 = none.</div>
+          <input type="number" id="rrCrawlDelay" value="0" min="0" max="60" />
+        </div>
+        <div>
+          <label>Apply Crawl Delay To</label>
+          <div class="rr-hint">Which bot group.</div>
+          <select id="rrCrawlDelayTarget">
+            <option value="*">All bots (*)</option>
+            <option value="Googlebot">Googlebot</option>
+            <option value="Bingbot">Bingbot</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="rr-section-title">Custom Bot Rules</div>
+      <div id="rrCustomBots"></div>
+      <button class="rr-btn rr-btn-outline rr-btn-sm" onclick="rrAddBot()" style="margin-bottom:18px;">
+        ＋ Add Custom Bot Rule
+      </button>
+
+      <div class="rr-section-title">Blogger-Specific Paths</div>
+      <div class="rr-toggle-row">
+        <div>
+          <div class="rr-toggle-label">Block /search pages</div>
+          <div class="rr-toggle-sub">Prevents duplicate content issues on Blogger</div>
+        </div>
+        <label class="rr-switch">
+          <input type="checkbox" id="rrBlockBloggerSearch" checked />
+          <span class="rr-switch-slider"></span>
+        </label>
+      </div>
+      <div class="rr-toggle-row">
+        <div>
+          <div class="rr-toggle-label">Block /feeds/ directory</div>
+          <div class="rr-toggle-sub">Reduces duplicate crawling of RSS feeds</div>
+        </div>
+        <label class="rr-switch">
+          <input type="checkbox" id="rrBlockFeeds" />
+          <span class="rr-switch-slider"></span>
+        </label>
+      </div>
+      <div class="rr-toggle-row">
+        <div>
+          <div class="rr-toggle-label">Block label pages</div>
+          <div class="rr-toggle-sub">Prevents /search/label/ pages from crawling</div>
+        </div>
+        <label class="rr-switch">
+          <input type="checkbox" id="rrBlockLabels" />
+          <span class="rr-switch-slider"></span>
+        </label>
+      </div>
+
+      <button class="rr-btn rr-btn-primary" onclick="rrGenerate()">
+        ⚡ Generate Robots.txt
+      </button>
+
+      <div class="rr-info">
+        <strong>💡 Pro Tip for Blogger Users</strong>
+        After generating, go to <strong>Blogger → Settings → Crawlers and indexing</strong>, enable Custom robots.txt, and paste your output there.
+      </div>
+    </div>
+
+    <!-- OUTPUT PANEL -->
+    <div class="rr-card rr-output-panel" id="rrOutputPanel">
+      <div class="rr-output-header">
+        <div class="rr-output-title">✅ Your robots.txt Output</div>
+        <div class="rr-output-actions">
+          <button class="rr-btn rr-btn-outline rr-btn-sm" onclick="rrCopy()">📋 Copy</button>
+          <button class="rr-btn rr-btn-success rr-btn-sm" onclick="rrDownload()">⬇ Download</button>
+          <button class="rr-btn rr-btn-outline rr-btn-sm" onclick="rrReset()">🔄 Reset</button>
+        </div>
+      </div>
+      <div class="rr-code-block">
+        <pre id="rrOutputPre"></pre>
+      </div>
+    </div>
+
+  </div><!-- /rr-layout -->
+
+  <div class="rr-toast" id="rrToast"></div>
+
+</div><!-- /rr-robots-tool -->
+
+<script>
+(function () {
+  "use strict";
+
+  var botCount = 0;
+
+  window.rrAddBot = function () {
+    botCount++;
+    var id = "rrBot" + botCount;
+    var div = document.createElement("div");
+    div.className = "rr-bot-entry";
+    div.id = id;
+    div.innerHTML =
+      '<button class="rr-remove-btn" onclick="rrRemoveBot(\'' + id + '\')" title="Remove">✕</button>' +
+      '<label>User-agent</label>' +
+      '<select>' +
+        '<option value="*">* (All bots)</option>' +
+        '<option value="Googlebot">Googlebot</option>' +
+        '<option value="Bingbot">Bingbot</option>' +
+        '<option value="Yandex">YandexBot</option>' +
+        '<option value="Baidu">Baiduspider</option>' +
+        '<option value="custom">Custom (type below)</option>' +
+      '</select>' +
+      '<div id="' + id + 'custom" style="display:none;margin-bottom:10px;">' +
+        '<input type="text" placeholder="MyCustomBot" style="margin-bottom:0;" />' +
+      '</div>' +
+      '<label>Action</label>' +
+      '<select class="rr-action-sel" style="margin-bottom:10px;">' +
+        '<option value="allow">Allow All</option>' +
+        '<option value="block">Block All</option>' +
+        '<option value="partial">Custom Paths</option>' +
+      '</select>' +
+      '<div class="rr-partial-area" style="display:none;">' +
+        '<label>Disallow Paths</label>' +
+        '<textarea placeholder="/private/&#10;/secret/" style="min-height:60px;"></textarea>' +
+        '<label>Allow Paths</label>' +
+        '<textarea placeholder="/private/public/" style="min-height:50px;margin-bottom:0;"></textarea>' +
+      '</div>';
+
+    var container = document.getElementById("rrCustomBots");
+    container.appendChild(div);
+
+    // Show custom name input
+    div.querySelectorAll("select")[0].addEventListener("change", function () {
+      document.getElementById(id + "custom").style.display =
+        this.value === "custom" ? "block" : "none";
+    });
+    // Show partial area
+    div.querySelector(".rr-action-sel").addEventListener("change", function () {
+      div.querySelector(".rr-partial-area").style.display =
+        this.value === "partial" ? "block" : "none";
+    });
+  };
+
+  window.rrRemoveBot = function (id) {
+    var el = document.getElementById(id);
+    if (el) el.remove();
+  };
+
+  window.rrGenerate = function () {
+    var lines = [];
+    var siteUrl = (document.getElementById("rrSiteUrl").value || "").trim().replace(/\/$/, "");
+    var sitemapUrl = (document.getElementById("rrSitemapUrl").value || "").trim();
+    if (!sitemapUrl && siteUrl) sitemapUrl = siteUrl + "/sitemap.xml";
+
+    var globalDisallow = (document.getElementById("rrGlobalDisallow").value || "")
+      .split("\n").map(function(l){return l.trim();}).filter(Boolean);
+    var globalAllow = (document.getElementById("rrGlobalAllow").value || "")
+      .split("\n").map(function(l){return l.trim();}).filter(Boolean);
+    var crawlDelay = parseInt(document.getElementById("rrCrawlDelay").value) || 0;
+    var crawlDelayTarget = document.getElementById("rrCrawlDelayTarget").value;
+
+    var blockBloggerSearch = document.getElementById("rrBlockBloggerSearch").checked;
+    var blockFeeds = document.getElementById("rrBlockFeeds").checked;
+    var blockLabels = document.getElementById("rrBlockLabels").checked;
+
+    lines.push("# Generated by RankRise SEO Robots.txt Generator");
+    lines.push("# " + new Date().toUTCString());
+    lines.push("");
+
+    // ── GLOBAL WILDCARD ──
+    var allDisallow = globalDisallow.slice();
+    var allAllow = globalAllow.slice();
+
+    if (blockBloggerSearch) {
+      allDisallow.push("/search");
+      allDisallow.push("/search?");
+      allDisallow.push("/?m=1");
+    }
+    if (blockFeeds) allDisallow.push("/feeds/");
+    if (blockLabels) allDisallow.push("/search/label/");
+
+    lines.push("User-agent: *");
+    if (allDisallow.length) {
+      allDisallow.forEach(function(p){ lines.push("Disallow: " + p); });
+    } else {
+      lines.push("Disallow:");
+    }
+    allAllow.forEach(function(p){ lines.push("Allow: " + p); });
+    if (crawlDelay > 0 && crawlDelayTarget === "*") {
+      lines.push("Crawl-delay: " + crawlDelay);
+    }
+    lines.push("");
+
+    // ── GOOGLEBOT ──
+    var allowGoogle = document.getElementById("rrAllowGoogle").checked;
+    lines.push("# Google");
+    lines.push("User-agent: Googlebot");
+    if (allowGoogle) {
+      lines.push("Allow: /");
+      if (crawlDelay > 0 && crawlDelayTarget === "Googlebot") lines.push("Crawl-delay: " + crawlDelay);
+    } else {
+      lines.push("Disallow: /");
+    }
+    lines.push("");
+
+    if (document.getElementById("rrBlockGoogleImages").checked) {
+      lines.push("User-agent: Googlebot-Image");
+      lines.push("Disallow: /");
+      lines.push("");
+    }
+    if (document.getElementById("rrBlockAdsbot").checked) {
+      lines.push("User-agent: AdsBot-Google");
+      lines.push("Disallow: /");
+      lines.push("");
+    }
+
+    // ── BINGBOT ──
+    var allowBing = document.getElementById("rrAllowBing").checked;
+    lines.push("# Bing");
+    lines.push("User-agent: Bingbot");
+    if (allowBing) {
+      lines.push("Allow: /");
+      if (crawlDelay > 0 && crawlDelayTarget === "Bingbot") lines.push("Crawl-delay: " + crawlDelay);
+    } else {
+      lines.push("Disallow: /");
+    }
+    lines.push("");
+
+    // ── YANDEX ──
+    if (document.getElementById("rrAllowYandex").checked) {
+      lines.push("User-agent: YandexBot");
+      lines.push("Allow: /");
+      lines.push("");
+    }
+
+    // ── DUCKDUCKBOT ──
+    if (document.getElementById("rrAllowDuck").checked) {
+      lines.push("User-agent: DuckDuckBot");
+      lines.push("Allow: /");
+      lines.push("");
+    }
+
+    // ── AI / SCRAPERS ──
+    var aiBlocks = [];
+    if (document.getElementById("rrBlockGPT").checked) aiBlocks.push("GPTBot");
+    if (document.getElementById("rrBlockCC").checked) aiBlocks.push("CCBot");
+    if (document.getElementById("rrBlockSemrush").checked) aiBlocks.push("SemrushBot");
+    if (document.getElementById("rrBlockAhrefs").checked) aiBlocks.push("AhrefsBot");
+
+    if (aiBlocks.length) {
+      lines.push("# AI & Scraper Bots");
+      aiBlocks.forEach(function(bot) {
+        lines.push("User-agent: " + bot);
+        lines.push("Disallow: /");
+        lines.push("");
+      });
+    }
+
+    // ── CUSTOM BOTS ──
+    var customEntries = document.querySelectorAll(".rr-bot-entry");
+    if (customEntries.length) {
+      lines.push("# Custom Bot Rules");
+      customEntries.forEach(function(entry) {
+        var selects = entry.querySelectorAll("select");
+        var agentSel = selects[0].value;
+        var actionSel = entry.querySelector(".rr-action-sel").value;
+        var agentName = agentSel === "custom"
+          ? (entry.querySelector("#" + entry.id + "custom input") ? entry.querySelector("#" + entry.id + "custom input").value.trim() : "")
+          : agentSel;
+        if (!agentName) return;
+
+        lines.push("User-agent: " + agentName);
+        if (actionSel === "allow") {
+          lines.push("Allow: /");
+        } else if (actionSel === "block") {
+          lines.push("Disallow: /");
+        } else {
+          var textareas = entry.querySelectorAll(".rr-partial-area textarea");
+          var dis = (textareas[0].value || "").split("\n").map(function(l){return l.trim();}).filter(Boolean);
+          var al = (textareas[1].value || "").split("\n").map(function(l){return l.trim();}).filter(Boolean);
+          dis.forEach(function(p){ lines.push("Disallow: " + p); });
+          al.forEach(function(p){ lines.push("Allow: " + p); });
+        }
+        lines.push("");
+      });
+    }
+
+    // ── SITEMAP ──
+    if (sitemapUrl) {
+      lines.push("# Sitemap");
+      lines.push("Sitemap: " + sitemapUrl);
+    }
+
+    var raw = lines.join("\n");
+
+    // ── SYNTAX HIGHLIGHT ──
+    var highlighted = lines.map(function(line) {
+      if (line.startsWith("#")) return '<span class="cm">' + esc(line) + '</span>';
+      if (line.startsWith("User-agent:")) return '<span class="kw">User-agent:</span><span class="vl">' + esc(line.slice(11)) + '</span>';
+      if (line.startsWith("Disallow:")) {
+        var val = line.slice(9).trim();
+        return '<span class="kw">Disallow:</span> <span class="dn">' + esc(val) + '</span>';
+      }
+      if (line.startsWith("Allow:")) return '<span class="kw">Allow:</span><span class="vl">' + esc(line.slice(6)) + '</span>';
+      if (line.startsWith("Crawl-delay:")) return '<span class="kw">Crawl-delay:</span><span class="vl">' + esc(line.slice(12)) + '</span>';
+      if (line.startsWith("Sitemap:")) return '<span class="kw">Sitemap:</span><span class="vl">' + esc(line.slice(8)) + '</span>';
+      return esc(line);
+    }).join("\n");
+
+    document.getElementById("rrOutputPre").innerHTML = highlighted;
+    document.getElementById("rrOutputPre").dataset.raw = raw;
+
+    var panel = document.getElementById("rrOutputPanel");
+    panel.classList.add("visible");
+    setTimeout(function(){
+      panel.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 100);
+  };
+
+  function esc(str) {
+    return str.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+  }
+
+  window.rrCopy = function () {
+    var raw = document.getElementById("rrOutputPre").dataset.raw || "";
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(raw).then(function(){
+        rrToast("✅ Copied to clipboard!");
+      });
+    } else {
+      var ta = document.createElement("textarea");
+      ta.value = raw; document.body.appendChild(ta);
+      ta.select(); document.execCommand("copy"); ta.remove();
+      rrToast("✅ Copied to clipboard!");
+    }
+  };
+
+  window.rrDownload = function () {
+    var raw = document.getElementById("rrOutputPre").dataset.raw || "";
+    var blob = new Blob([raw], { type: "text/plain" });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = "robots.txt";
+    a.click();
+    rrToast("⬇ Downloading robots.txt…");
+  };
+
+  window.rrReset = function () {
+    document.getElementById("rrOutputPanel").classList.remove("visible");
+    document.getElementById("rrOutputPre").innerHTML = "";
+  };
+
+  function rrToast(msg) {
+    var t = document.getElementById("rrToast");
+    t.textContent = msg;
+    t.classList.add("show");
+    setTimeout(function(){ t.classList.remove("show"); }, 2800);
+  }
+
+})();
+</script>
+</body>
+</html>
