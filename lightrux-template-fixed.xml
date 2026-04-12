@@ -1,0 +1,2111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html b:version='2' class='v2' expr:dir='data:blog.languageDirection'
+  xmlns='http://www.w3.org/1999/xhtml'
+  xmlns:b='http://www.google.com/2005/gml/b'
+  xmlns:data='http://www.google.com/2005/gml/data'
+  xmlns:expr='http://www.google.com/2005/gml/expr'>
+<b:skin><![CDATA[
+/* ============================================
+   LIGHTRUX BLOGGER THEME
+   Dark Techy • Professional • Fast
+   ============================================ */
+
+/* --- CSS Variables (Easy Customization) --- */
+:root {
+  --bg-primary: #000000;
+  --bg-secondary: #080d1a;
+  --bg-card: #0c1220;
+  --bg-card-hover: #111827;
+  --blue-primary: #4DB8FF;
+  --blue-deep: #1A3A6B;
+  --blue-glow: rgba(77, 184, 255, 0.15);
+  --blue-glow-strong: rgba(77, 184, 255, 0.3);
+  --text-primary: #F0F6FF;
+  --text-secondary: #8BA5C4;
+  --text-muted: #4A6080;
+  --border: rgba(77, 184, 255, 0.12);
+  --border-hover: rgba(77, 184, 255, 0.35);
+  --font-display: 'Orbitron', 'Exo 2', sans-serif;
+  --font-body: 'Exo 2', 'Rajdhani', sans-serif;
+  --radius: 8px;
+  --radius-lg: 14px;
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- Reset & Base --- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.7;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Star field background */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-image:
+    radial-gradient(1px 1px at 10% 15%, rgba(77,184,255,0.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 25% 40%, rgba(255,255,255,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 50% 10%, rgba(77,184,255,0.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 70% 60%, rgba(255,255,255,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 85% 25%, rgba(77,184,255,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 90% 80%, rgba(255,255,255,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 35% 75%, rgba(77,184,255,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 60% 90%, rgba(255,255,255,0.2) 0%, transparent 100%),
+    radial-gradient(2px 2px at 15% 55%, rgba(77,184,255,0.2) 0%, transparent 100%),
+    radial-gradient(1px 1px at 45% 30%, rgba(255,255,255,0.3) 0%, transparent 100%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+a { color: var(--blue-primary); text-decoration: none; transition: var(--transition); }
+a:hover { color: #fff; }
+img { max-width: 100%; height: auto; display: block; }
+ul { list-style: none; }
+
+/* --- Google Fonts --- */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Exo+2:wght@300;400;500;600;700&display=swap');
+
+/* ============================================
+   HEADER & NAVIGATION
+   ============================================ */
+#lx-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  transition: var(--transition);
+}
+
+#lx-header.scrolled {
+  background: rgba(0, 5, 15, 0.95);
+  border-bottom-color: var(--border-hover);
+  box-shadow: 0 4px 30px rgba(77, 184, 255, 0.08);
+}
+
+.lx-nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px;
+}
+
+/* Logo */
+.lx-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.lx-logo img {
+  height: 42px;
+  width: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid var(--border-hover);
+  box-shadow: 0 0 12px rgba(77,184,255,0.25);
+}
+
+.lx-logo-text {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.05em;
+}
+
+.lx-logo-text span {
+  color: var(--blue-primary);
+}
+
+/* Desktop Nav */
+.lx-nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.lx-nav-menu > li {
+  position: relative;
+}
+
+.lx-nav-menu > li > a {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 14px;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  border-radius: var(--radius);
+  transition: var(--transition);
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.lx-nav-menu > li > a:hover,
+.lx-nav-menu > li > a.active {
+  color: var(--blue-primary);
+  background: var(--blue-glow);
+}
+
+/* Dropdown arrow */
+.lx-nav-menu > li > a .lx-arrow {
+  font-size: 0.6rem;
+  opacity: 0.6;
+  transition: var(--transition);
+}
+
+.lx-nav-menu > li:hover > a .lx-arrow {
+  transform: rotate(180deg);
+  opacity: 1;
+}
+
+/* Dropdown */
+.lx-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 200px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: var(--transition);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6), 0 0 0 1px rgba(77,184,255,0.05);
+  z-index: 100;
+}
+
+.lx-nav-menu > li:hover .lx-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.lx-dropdown a {
+  display: block;
+  padding: 9px 14px;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  border-radius: 6px;
+  transition: var(--transition);
+}
+
+.lx-dropdown a:hover {
+  color: var(--blue-primary);
+  background: var(--blue-glow);
+}
+
+/* Nav Right */
+.lx-nav-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Search button */
+.lx-search-btn {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  font-size: 0.9rem;
+}
+
+.lx-search-btn:hover {
+  border-color: var(--blue-primary);
+  color: var(--blue-primary);
+  background: var(--blue-glow);
+}
+
+/* Hamburger */
+.lx-hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+}
+
+.lx-hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--text-secondary);
+  border-radius: 2px;
+  transition: var(--transition);
+}
+
+.lx-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); background: var(--blue-primary); }
+.lx-hamburger.open span:nth-child(2) { opacity: 0; }
+.lx-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); background: var(--blue-primary); }
+
+/* Mobile menu */
+.lx-mobile-menu {
+  display: none;
+  position: fixed;
+  top: 68px; left: 0; right: 0;
+  background: rgba(0, 5, 15, 0.97);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 24px 24px;
+  z-index: 999;
+  max-height: calc(100vh - 68px);
+  overflow-y: auto;
+}
+
+.lx-mobile-menu.open { display: block; }
+
+.lx-mobile-menu a {
+  display: block;
+  padding: 12px 16px;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  border-radius: var(--radius);
+  margin-bottom: 2px;
+  transition: var(--transition);
+}
+
+.lx-mobile-menu a:hover {
+  color: var(--blue-primary);
+  background: var(--blue-glow);
+}
+
+.lx-mobile-sub {
+  padding-left: 16px;
+  border-left: 1px solid var(--border);
+  margin-left: 16px;
+  margin-top: 2px;
+}
+
+/* Search Overlay */
+.lx-search-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.92);
+  z-index: 2000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.lx-search-overlay.open { display: flex; }
+
+.lx-search-box {
+  width: 100%;
+  max-width: 600px;
+}
+
+.lx-search-box input {
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-hover);
+  border-radius: var(--radius-lg);
+  padding: 16px 20px;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  outline: none;
+}
+
+.lx-search-box input:focus {
+  border-color: var(--blue-primary);
+  box-shadow: 0 0 20px var(--blue-glow-strong);
+}
+
+.lx-search-close {
+  display: block;
+  margin-top: 12px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+/* ============================================
+   HERO SECTION
+   ============================================ */
+#lx-hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 120px 24px 80px;
+  overflow: hidden;
+}
+
+/* Hero background glow */
+#lx-hero::before {
+  content: '';
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(77,184,255,0.08) 0%, rgba(26,58,107,0.05) 40%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Orbit rings */
+#lx-hero::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 700px;
+  height: 700px;
+  border: 1px solid rgba(77,184,255,0.05);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: lx-orbit-pulse 6s ease-in-out infinite;
+}
+
+@keyframes lx-orbit-pulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+  50% { transform: translate(-50%, -50%) scale(1.05); opacity: 1; }
+}
+
+.lx-hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 760px;
+}
+
+.lx-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--blue-glow);
+  border: 1px solid var(--border-hover);
+  border-radius: 100px;
+  padding: 6px 16px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--blue-primary);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  animation: lx-fade-up 0.8s ease both;
+}
+
+.lx-hero-badge::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--blue-primary);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--blue-primary);
+  animation: lx-blink 2s ease-in-out infinite;
+}
+
+@keyframes lx-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+.lx-hero-logo {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 28px;
+  border: 2px solid rgba(77,184,255,0.3);
+  box-shadow:
+    0 0 0 8px rgba(77,184,255,0.05),
+    0 0 40px rgba(77,184,255,0.2),
+    0 0 80px rgba(77,184,255,0.1);
+  animation: lx-fade-up 0.9s ease 0.1s both;
+}
+
+.lx-hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: 0.06em;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  animation: lx-fade-up 1s ease 0.2s both;
+}
+
+.lx-hero-title .lx-glow {
+  color: var(--blue-primary);
+  text-shadow: 0 0 30px rgba(77,184,255,0.5), 0 0 60px rgba(77,184,255,0.2);
+}
+
+.lx-hero-sub {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 520px;
+  margin: 0 auto 36px;
+  font-weight: 400;
+  line-height: 1.7;
+  animation: lx-fade-up 1s ease 0.3s both;
+}
+
+.lx-hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--blue-primary);
+  color: #000;
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 14px 28px;
+  border-radius: var(--radius);
+  transition: var(--transition);
+  animation: lx-fade-up 1s ease 0.4s both;
+  box-shadow: 0 4px 24px rgba(77,184,255,0.3);
+}
+
+.lx-hero-cta:hover {
+  background: #fff;
+  color: #000;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 40px rgba(77,184,255,0.4);
+}
+
+.lx-hero-cta svg {
+  width: 16px;
+  height: 16px;
+  transition: var(--transition);
+}
+
+.lx-hero-cta:hover svg {
+  transform: translateY(4px);
+}
+
+/* Scroll indicator */
+.lx-scroll-hint {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  animation: lx-fade-up 1s ease 0.8s both;
+}
+
+.lx-scroll-line {
+  width: 1px;
+  height: 32px;
+  background: linear-gradient(to bottom, var(--blue-primary), transparent);
+  animation: lx-scroll-anim 2s ease-in-out infinite;
+}
+
+@keyframes lx-scroll-anim {
+  0% { transform: scaleY(0); transform-origin: top; }
+  50% { transform: scaleY(1); transform-origin: top; }
+  51% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+@keyframes lx-fade-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================================
+   MAIN CONTENT WRAPPER
+   ============================================ */
+#lx-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 24px 80px;
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 40px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Section heading */
+.lx-section-heading {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 32px;
+}
+
+.lx-section-heading h2 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.lx-section-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, var(--border-hover), transparent);
+}
+
+.lx-section-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--blue-primary);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--blue-primary);
+  flex-shrink: 0;
+}
+
+/* ============================================
+   BLOG POST CARDS
+   ============================================ */
+.lx-posts-grid {
+  display: grid;
+  gap: 24px;
+}
+
+.lx-post-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: var(--transition);
+  position: relative;
+}
+
+.lx-post-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--blue-primary), transparent);
+  opacity: 0;
+  transition: var(--transition);
+}
+
+.lx-post-card:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 0 1px rgba(77,184,255,0.08);
+  background: var(--bg-card-hover);
+}
+
+.lx-post-card:hover::before {
+  opacity: 1;
+}
+
+.lx-post-thumb {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+  transition: var(--transition);
+}
+
+.lx-post-card:hover .lx-post-thumb {
+  transform: scale(1.02);
+}
+
+.lx-post-thumb-wrap {
+  overflow: hidden;
+  position: relative;
+}
+
+.lx-post-thumb-placeholder {
+  width: 100%;
+  height: 200px;
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--blue-deep) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lx-post-thumb-placeholder svg {
+  width: 48px;
+  height: 48px;
+  opacity: 0.2;
+  color: var(--blue-primary);
+}
+
+.lx-post-label {
+  display: inline-block;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--blue-primary);
+  background: var(--blue-glow);
+  border: 1px solid rgba(77,184,255,0.2);
+  border-radius: 4px;
+  padding: 3px 10px;
+  margin-bottom: 10px;
+}
+
+.lx-post-body {
+  padding: 22px 24px 24px;
+}
+
+.lx-post-title {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.45;
+  margin-bottom: 10px;
+  letter-spacing: 0.02em;
+  transition: var(--transition);
+}
+
+.lx-post-card:hover .lx-post-title {
+  color: var(--blue-primary);
+}
+
+.lx-post-snippet {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin-bottom: 16px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.lx-post-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.lx-post-meta-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.lx-post-date {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.lx-read-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--blue-primary);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: var(--transition);
+}
+
+.lx-read-more:hover {
+  gap: 10px;
+  color: #fff;
+}
+
+/* Pagination */
+.lx-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 40px;
+}
+
+.lx-pagination a,
+.lx-pagination span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius);
+  font-size: 0.85rem;
+  font-weight: 500;
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  transition: var(--transition);
+}
+
+.lx-pagination a:hover {
+  border-color: var(--blue-primary);
+  color: var(--blue-primary);
+  background: var(--blue-glow);
+}
+
+/* ============================================
+   SIDEBAR
+   ============================================ */
+#lx-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.lx-widget {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  transition: var(--transition);
+}
+
+.lx-widget:hover {
+  border-color: rgba(77,184,255,0.2);
+}
+
+.lx-widget-title {
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--blue-primary);
+  margin-bottom: 18px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lx-widget-title::before {
+  content: '';
+  width: 3px;
+  height: 14px;
+  background: var(--blue-primary);
+  border-radius: 2px;
+  box-shadow: 0 0 8px rgba(77,184,255,0.5);
+}
+
+/* About widget */
+.lx-about-widget {
+  text-align: center;
+}
+
+.lx-about-logo {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 0 auto 14px;
+  border: 2px solid rgba(77,184,255,0.3);
+  box-shadow: 0 0 20px rgba(77,184,255,0.15);
+}
+
+.lx-about-name {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.lx-about-desc {
+  font-size: 0.83rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Social icons */
+.lx-social-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.lx-social-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 6px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-muted);
+  font-size: 0.65rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: var(--transition);
+}
+
+.lx-social-link svg {
+  width: 18px;
+  height: 18px;
+}
+
+.lx-social-link:hover {
+  border-color: var(--border-hover);
+  color: var(--blue-primary);
+  background: var(--blue-glow);
+  transform: translateY(-2px);
+}
+
+/* Categories widget */
+.lx-category-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.lx-category-list a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 12px;
+  border-radius: var(--radius);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  transition: var(--transition);
+  border: 1px solid transparent;
+}
+
+.lx-category-list a:hover {
+  color: var(--blue-primary);
+  background: var(--blue-glow);
+  border-color: var(--border);
+}
+
+.lx-category-count {
+  font-size: 0.72rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 7px;
+  color: var(--text-muted);
+}
+
+/* Popular posts widget */
+.lx-popular-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.lx-popular-item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.lx-popular-num {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: var(--border-hover);
+  line-height: 1;
+  flex-shrink: 0;
+  min-width: 24px;
+}
+
+.lx-popular-title {
+  font-size: 0.83rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  transition: var(--transition);
+}
+
+.lx-popular-item:hover .lx-popular-title {
+  color: var(--blue-primary);
+}
+
+/* Search widget */
+.lx-search-widget {
+  position: relative;
+}
+
+.lx-search-widget input {
+  width: 100%;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 11px 44px 11px 14px;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  outline: none;
+  transition: var(--transition);
+}
+
+.lx-search-widget input:focus {
+  border-color: var(--blue-primary);
+  box-shadow: 0 0 0 3px var(--blue-glow);
+}
+
+.lx-search-widget input::placeholder {
+  color: var(--text-muted);
+}
+
+.lx-search-widget button {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+}
+
+.lx-search-widget button:hover {
+  color: var(--blue-primary);
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+#lx-footer {
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border);
+  position: relative;
+  z-index: 1;
+}
+
+.lx-footer-top {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 56px 24px 40px;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 40px;
+}
+
+.lx-footer-brand .lx-logo {
+  margin-bottom: 14px;
+}
+
+.lx-footer-brand p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  max-width: 240px;
+  margin-bottom: 20px;
+}
+
+.lx-footer-social {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.lx-footer-social a {
+  width: 34px;
+  height: 34px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  transition: var(--transition);
+}
+
+.lx-footer-social a:hover {
+  border-color: var(--blue-primary);
+  color: var(--blue-primary);
+  background: var(--blue-glow);
+}
+
+.lx-footer-social a svg {
+  width: 15px;
+  height: 15px;
+}
+
+.lx-footer-col h4 {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+}
+
+.lx-footer-col ul {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.lx-footer-col ul a {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  transition: var(--transition);
+}
+
+.lx-footer-col ul a:hover {
+  color: var(--blue-primary);
+  padding-left: 4px;
+}
+
+.lx-footer-bottom {
+  border-top: 1px solid var(--border);
+  padding: 18px 24px;
+}
+
+.lx-footer-bottom-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.lx-footer-bottom p {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.lx-footer-bottom p span {
+  color: var(--blue-primary);
+}
+
+/* ============================================
+   SINGLE POST PAGE
+   ============================================ */
+.lx-post-header {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 100px 24px 40px;
+  text-align: center;
+}
+
+.lx-post-header .lx-post-label {
+  margin-bottom: 16px;
+}
+
+.lx-post-header h1 {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.3;
+  margin-bottom: 16px;
+  letter-spacing: 0.02em;
+}
+
+.lx-post-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-bottom: 32px;
+}
+
+.lx-post-info span {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.lx-featured-image {
+  max-width: 900px;
+  margin: 0 auto 48px;
+  padding: 0 24px;
+}
+
+.lx-featured-image img {
+  width: 100%;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+}
+
+/* Post content */
+.lx-post-content {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 24px 60px;
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.85;
+}
+
+.lx-post-content h1,
+.lx-post-content h2,
+.lx-post-content h3,
+.lx-post-content h4 {
+  font-family: var(--font-display);
+  color: var(--text-primary);
+  margin: 36px 0 14px;
+  letter-spacing: 0.02em;
+}
+
+.lx-post-content h2 { font-size: 1.45rem; font-weight: 700; }
+.lx-post-content h3 { font-size: 1.2rem; font-weight: 600; }
+.lx-post-content h4 { font-size: 1rem; font-weight: 600; }
+
+.lx-post-content p { margin-bottom: 20px; }
+
+.lx-post-content a {
+  color: var(--blue-primary);
+  border-bottom: 1px solid rgba(77,184,255,0.3);
+}
+
+.lx-post-content a:hover {
+  border-bottom-color: var(--blue-primary);
+}
+
+.lx-post-content ul,
+.lx-post-content ol {
+  padding-left: 24px;
+  margin-bottom: 20px;
+}
+
+.lx-post-content ul { list-style: none; }
+
+.lx-post-content ul li {
+  position: relative;
+  padding-left: 18px;
+  margin-bottom: 8px;
+}
+
+.lx-post-content ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 6px;
+  height: 6px;
+  background: var(--blue-primary);
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(77,184,255,0.5);
+}
+
+.lx-post-content ol li { margin-bottom: 8px; }
+
+.lx-post-content blockquote {
+  border-left: 3px solid var(--blue-primary);
+  background: var(--bg-card);
+  padding: 16px 20px;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  margin: 24px 0;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.lx-post-content pre {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  overflow-x: auto;
+  margin: 24px 0;
+  font-size: 0.875rem;
+}
+
+.lx-post-content code {
+  font-family: 'Courier New', monospace;
+  font-size: 0.875em;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 2px 6px;
+  border-radius: 4px;
+  color: var(--blue-primary);
+}
+
+.lx-post-content img {
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  margin: 24px 0;
+}
+
+.lx-post-content hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 36px 0;
+}
+
+/* Post tags */
+.lx-post-tags {
+  max-width: 780px;
+  margin: 0 auto 40px;
+  padding: 0 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.lx-post-tags a {
+  font-size: 0.78rem;
+  padding: 5px 12px;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  color: var(--text-muted);
+  transition: var(--transition);
+}
+
+.lx-post-tags a:hover {
+  border-color: var(--blue-primary);
+  color: var(--blue-primary);
+  background: var(--blue-glow);
+}
+
+/* Share buttons */
+.lx-share {
+  max-width: 780px;
+  margin: 0 auto 48px;
+  padding: 24px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-left: 24px;
+  margin-right: 24px;
+}
+
+.lx-share-label {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-right: 4px;
+}
+
+.lx-share a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: var(--transition);
+}
+
+.lx-share a:hover {
+  border-color: var(--border-hover);
+  color: var(--blue-primary);
+  background: var(--blue-glow);
+}
+
+/* Comments */
+.lx-comments {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 24px 60px;
+}
+
+.lx-comments h3 {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  margin-bottom: 24px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ============================================
+   UTILITY
+   ============================================ */
+.lx-divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--border), transparent);
+  margin: 40px 0;
+}
+
+.lx-back-top {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 42px;
+  height: 42px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-hover);
+  border-radius: var(--radius);
+  color: var(--blue-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+  z-index: 900;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.lx-back-top.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.lx-back-top:hover {
+  background: var(--blue-primary);
+  color: #000;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(77,184,255,0.3);
+}
+
+/* ============================================
+   STATIC PAGES
+   ============================================ */
+.lx-page-header {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 100px 24px 40px;
+  text-align: center;
+}
+
+.lx-page-header h1 {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 0.04em;
+  margin-bottom: 12px;
+}
+
+.lx-page-header p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+}
+
+.lx-page-content {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 0 24px 80px;
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1024px) {
+  #lx-main {
+    grid-template-columns: 1fr;
+  }
+
+  #lx-sidebar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .lx-footer-top {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .lx-nav-menu { display: none; }
+  .lx-hamburger { display: flex; }
+
+  #lx-sidebar {
+    grid-template-columns: 1fr;
+  }
+
+  .lx-footer-top {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .lx-footer-bottom-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .lx-share {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .lx-hero-title { font-size: 2rem; }
+  .lx-social-grid { grid-template-columns: repeat(3, 1fr); }
+  .lx-back-top { bottom: 16px; right: 16px; }
+}
+
+/* ============================================
+   BLOGGER WIDGET OVERRIDES
+   ============================================ */
+.widget { margin-bottom: 0 !important; }
+.widget-content { margin: 0 !important; }
+#blog-pager { text-align: center; margin-top: 32px; }
+#blog-pager a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 18px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  margin: 0 4px;
+  transition: var(--transition);
+}
+#blog-pager a:hover {
+  border-color: var(--blue-primary);
+  color: var(--blue-primary);
+  background: var(--blue-glow);
+}
+.post-footer { display: none; }
+]]></b:skin>
+]]></b:skin>
+
+<b:template-skin>
+  <b:variable name="background.color" description="Background Color" type="color" default="#000000" value="#000000"/>
+  <b:variable name="text.color" description="Text Color" type="color" default="#F0F6FF" value="#F0F6FF"/>
+  <b:variable name="accent.color" description="Accent Blue" type="color" default="#4DB8FF" value="#4DB8FF"/>
+</b:template-skin>
+
+<head>
+  <meta charset='UTF-8'/>
+  <meta content='width=device-width, initial-scale=1' name='viewport'/>
+  <b:include data='blog' name='all-head-content'/>
+
+  <!-- SEO Meta -->
+  <b:if cond='data:blog.pageType == &quot;index&quot;'>
+    <title><data:blog.title/></title>
+    <meta expr:content='data:blog.metaDescription' name='description'/>
+  <b:else/>
+    <b:if cond='data:blog.pageType == &quot;item&quot;'>
+      <title><data:blog.pageName/> | <data:blog.title/></title>
+      <meta expr:content='data:blog.metaDescription' name='description'/>
+    <b:else/>
+      <title><data:blog.pageName/> | <data:blog.title/></title>
+    </b:if>
+  </b:if>
+
+  <!-- Open Graph -->
+  <meta expr:content='data:blog.title' property='og:site_name'/>
+  <b:if cond='data:blog.pageType == &quot;item&quot;'>
+    <meta expr:content='data:blog.pageName' property='og:title'/>
+    <meta content='article' property='og:type'/>
+  <b:else/>
+    <meta expr:content='data:blog.title' property='og:title'/>
+    <meta content='website' property='og:type'/>
+  </b:if>
+  <meta expr:content='data:blog.canonicalUrl' property='og:url'/>
+
+  <!-- Canonical -->
+  <link expr:href='data:blog.canonicalUrl' rel='canonical'/>
+
+  <!-- Favicon (using your Lightrux logo) -->
+  <link href='https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiZ6sqk5bCXJe0ztQ98ZABJYXsLLEM1J9qmm-9lNaiP50lSuehL_CBoIPsFC7mwhUdrqZipJk_ut1cBCjAOpo4-7THvlrBteHu5sxaWrb4XLtj6ZkrH_JvguJUJmhsbePox499y63xIDlXuy6ud5GaxLldOJelEtoo8mInkQ8b9rDgF9M4/s1600/1000042198.jpg' rel='icon' type='image/jpeg'/>
+
+  <!-- Google Fonts -->
+  <link href='https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&amp;family=Exo+2:wght@300;400;500;600;700&amp;display=swap' rel='stylesheet'/>
+
+  <!-- Schema.org -->
+  <script type='application/ld+json'>
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Lightrux",
+    "url": "<data:blog.homepageUrl/>",
+    "description": "Lightrux — SEO, Blogging &amp; Digital Tools"
+  }
+  </script>
+</head>
+<body>
+
+<!-- ============ HEADER ============ -->
+<header id='lx-header'>
+  <div class='lx-nav-inner'>
+
+    <!-- Logo -->
+    <a class='lx-logo' expr:href='data:blog.homepageUrl'>
+      <img alt='Lightrux' src='https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiZ6sqk5bCXJe0ztQ98ZABJYXsLLEM1J9qmm-9lNaiP50lSuehL_CBoIPsFC7mwhUdrqZipJk_ut1cBCjAOpo4-7THvlrBteHu5sxaWrb4XLtj6ZkrH_JvguJUJmhsbePox499y63xIDlXuy6ud5GaxLldOJelEtoo8mInkQ8b9rDgF9M4/s1600/1000042198.jpg'/>
+      <span class='lx-logo-text'>Light<span>rux</span></span>
+    </a>
+
+    <!-- Desktop Navigation — Edit links in Blogger Layout > Pages widget -->
+    <nav>
+      <ul class='lx-nav-menu' id='lx-nav-menu'>
+        <li><a expr:href='data:blog.homepageUrl'>Home</a></li>
+        <li>
+          <a href='#'>Blog <span class='lx-arrow'>▾</span></a>
+          <ul class='lx-dropdown'>
+            <!-- Add/edit dropdown links here or via Layout -->
+            <li><a href='/search/label/SEO'>SEO</a></li>
+            <li><a href='/search/label/Blogging'>Blogging</a></li>
+            <li><a href='/search/label/AdSense'>AdSense</a></li>
+          </ul>
+        </li>
+        <li><a href='/p/about-us.html'>About</a></li>
+        <li><a href='/p/contact-us.html'>Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Right side -->
+    <div class='lx-nav-right'>
+      <button aria-label='Search' class='lx-search-btn' id='lx-search-open' type='button'>
+        <svg fill='none' stroke='currentColor' stroke-width='2' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><circle cx='11' cy='11' r='8'/><path d='m21 21-4.35-4.35'/></svg>
+      </button>
+      <button aria-label='Menu' class='lx-hamburger' id='lx-hamburger' type='button'>
+        <span/><span/><span/>
+      </button>
+    </div>
+
+  </div>
+</header>
+
+<!-- Mobile Menu -->
+<div id='lx-mobile-menu'>
+  <a expr:href='data:blog.homepageUrl'>Home</a>
+  <a href='#'>Blog</a>
+  <div class='lx-mobile-sub'>
+    <a href='/search/label/SEO'>SEO</a>
+    <a href='/search/label/Blogging'>Blogging</a>
+    <a href='/search/label/AdSense'>AdSense</a>
+  </div>
+  <a href='/p/about-us.html'>About</a>
+  <a href='/p/contact-us.html'>Contact</a>
+</div>
+
+<!-- Search Overlay -->
+<div id='lx-search-overlay'>
+  <div class='lx-search-box'>
+    <b:include name='quick-edit-page'/>
+    <input id='lx-search-input' placeholder='Search Lightrux...' type='text'/>
+    <span class='lx-search-close' id='lx-search-close'>Press ESC or click to close</span>
+  </div>
+</div>
+
+<!-- ============ HERO (Homepage only) ============ -->
+<b:if cond='data:blog.pageType == &quot;index&quot;'>
+<section id='lx-hero'>
+  <div class='lx-hero-inner'>
+    <div class='lx-hero-badge'>SEO • Blogging • Digital Tools</div>
+    <img alt='Lightrux' class='lx-hero-logo' src='https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiZ6sqk5bCXJe0ztQ98ZABJYXsLLEM1J9qmm-9lNaiP50lSuehL_CBoIPsFC7mwhUdrqZipJk_ut1cBCjAOpo4-7THvlrBteHu5sxaWrb4XLtj6ZkrH_JvguJUJmhsbePox499y63xIDlXuy6ud5GaxLldOJelEtoo8mInkQ8b9rDgF9M4/s1600/1000042198.jpg'/>
+    <h1 class='lx-hero-title'>Welcome to <span class='lx-glow'>Lightrux</span></h1>
+    <p class='lx-hero-sub'>Your hub for SEO strategies, blogging tips, AdSense guides, and digital tools to help you grow online.</p>
+    <a class='lx-hero-cta' href='#lx-main'>
+      Explore Blog
+      <svg fill='none' stroke='currentColor' stroke-width='2.5' viewBox='0 0 24 24'><path d='M12 5v14M5 12l7 7 7-7'/></svg>
+    </a>
+  </div>
+  <div class='lx-scroll-hint'>
+    <div class='lx-scroll-line'/>
+    <span>Scroll</span>
+  </div>
+</section>
+</b:if>
+
+<!-- ============ SINGLE POST HEADER ============ -->
+<b:if cond='data:blog.pageType == &quot;item&quot;'>
+  <b:loop values='data:posts' var='post'>
+    <div class='lx-post-header'>
+      <b:if cond='data:post.labels'>
+        <b:loop values='data:post.labels' var='label'>
+          <a class='lx-post-label' expr:href='data:label.url'><data:label.name/></a>
+        </b:loop>
+      </b:if>
+      <h1><data:post.title/></h1>
+      <div class='lx-post-info'>
+        <span>
+          <svg fill='none' height='14' stroke='currentColor' stroke-width='2' viewBox='0 0 24 24' width='14'><rect height='18' rx='2' ry='2' width='18' x='3' y='4'/><line x1='16' x2='16' y1='2' y2='6'/><line x1='8' x2='8' y1='2' y2='6'/><line x1='3' x2='21' y1='10' y2='10'/></svg>
+          <data:post.date/>
+        </span>
+        <span>
+          <svg fill='none' height='14' stroke='currentColor' stroke-width='2' viewBox='0 0 24 24' width='14'><path d='M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2'/><circle cx='12' cy='7' r='4'/></svg>
+          <data:post.author/>
+        </span>
+      </div>
+    </div>
+    <b:if cond='data:post.featuredImage'>
+      <div class='lx-featured-image'>
+        <img expr:alt='data:post.title' expr:src='data:post.featuredImage'/>
+      </div>
+    </b:if>
+  </b:loop>
+</b:if>
+
+<!-- ============ STATIC PAGE HEADER ============ -->
+<b:if cond='data:blog.pageType == &quot;static_page&quot;'>
+  <b:loop values='data:posts' var='post'>
+    <div class='lx-page-header'>
+      <h1><data:post.title/></h1>
+    </div>
+  </b:loop>
+</b:if>
+
+<!-- ============ MAIN CONTENT ============ -->
+<b:if cond='data:blog.pageType != &quot;item&quot; and data:blog.pageType != &quot;static_page&quot;'>
+<main id='lx-main'>
+
+  <!-- Blog Feed -->
+  <div id='lx-content'>
+    <div class='lx-section-heading'>
+      <span class='lx-section-dot'/>
+      <h2>Latest Posts</h2>
+      <div class='lx-section-line'/>
+    </div>
+
+    <div class='lx-posts-grid'>
+      <b:loop values='data:posts' var='post'>
+        <article class='lx-post-card'>
+          <b:if cond='data:post.featuredImage'>
+            <div class='lx-post-thumb-wrap'>
+              <img class='lx-post-thumb' expr:alt='data:post.title' expr:src='data:post.featuredImage'/>
+            </div>
+          <b:else/>
+            <div class='lx-post-thumb-placeholder'>
+              <svg fill='none' stroke='currentColor' stroke-width='1.5' viewBox='0 0 24 24'><rect height='18' rx='2' ry='2' width='18' x='3' y='3'/><circle cx='8.5' cy='8.5' r='1.5'/><polyline points='21 15 16 10 5 21'/></svg>
+            </div>
+          </b:if>
+          <div class='lx-post-body'>
+            <b:if cond='data:post.labels'>
+              <b:loop values='data:post.labels' var='label'>
+                <a class='lx-post-label' expr:href='data:label.url'><data:label.name/></a>
+              </b:loop>
+            </b:if>
+            <h2 class='lx-post-title'>
+              <a expr:href='data:post.url'><data:post.title/></a>
+            </h2>
+            <p class='lx-post-snippet'><data:post.snippet/></p>
+            <div class='lx-post-meta'>
+              <div class='lx-post-meta-left'>
+                <span class='lx-post-date'>
+                  <svg fill='none' height='13' stroke='currentColor' stroke-width='2' viewBox='0 0 24 24' width='13'><rect height='18' rx='2' ry='2' width='18' x='3' y='4'/><line x1='3' x2='21' y1='10' y2='10'/></svg>
+                  <data:post.date/>
+                </span>
+              </div>
+              <a class='lx-read-more' expr:href='data:post.url'>
+                Read
+                <svg fill='none' height='12' stroke='currentColor' stroke-width='2.5' viewBox='0 0 24 24' width='12'><line x1='5' x2='19' y1='12' y2='12'/><polyline points='12 5 19 12 12 19'/></svg>
+              </a>
+            </div>
+          </div>
+        </article>
+      </b:loop>
+    </div>
+
+    <!-- Pagination -->
+    <div id='blog-pager'>
+      <b:include name='nextprev'/>
+    </div>
+
+  </div>
+
+  <!-- Sidebar -->
+  <aside id='lx-sidebar'>
+
+    <!-- Search Widget -->
+    <div class='lx-widget'>
+      <div class='lx-widget-title'>Search</div>
+      <div class='lx-search-widget'>
+        <b:include name='quick-edit-page'/>
+        <input id='lx-sidebar-search' placeholder='Search posts...' type='text'/>
+        <button aria-label='Search' type='button'>
+          <svg fill='none' height='16' stroke='currentColor' stroke-width='2' viewBox='0 0 24 24' width='16'><circle cx='11' cy='11' r='8'/><path d='m21 21-4.35-4.35'/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- About Widget -->
+    <div class='lx-widget lx-about-widget'>
+      <div class='lx-widget-title'>About</div>
+      <img alt='Lightrux' class='lx-about-logo' src='https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiZ6sqk5bCXJe0ztQ98ZABJYXsLLEM1J9qmm-9lNaiP50lSuehL_CBoIPsFC7mwhUdrqZipJk_ut1cBCjAOpo4-7THvlrBteHu5sxaWrb4XLtj6ZkrH_JvguJUJmhsbePox499y63xIDlXuy6ud5GaxLldOJelEtoo8mInkQ8b9rDgF9M4/s1600/1000042198.jpg'/>
+      <div class='lx-about-name'>Lightrux</div>
+      <p class='lx-about-desc'>SEO strategies, blogging tips, AdSense guides, and digital tools to help creators grow online.</p>
+    </div>
+
+    <!-- Social Widget -->
+    <div class='lx-widget'>
+      <div class='lx-widget-title'>Follow Us</div>
+      <div class='lx-social-grid'>
+        <!-- Update href links with your actual social URLs -->
+        <a class='lx-social-link' href='#' rel='noopener' target='_blank'>
+          <svg fill='currentColor' viewBox='0 0 24 24'><path d='M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z'/></svg>
+          Facebook
+        </a>
+        <a class='lx-social-link' href='#' rel='noopener' target='_blank'>
+          <svg fill='currentColor' viewBox='0 0 24 24'><path d='M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z'/><polygon fill='#000' points='9.75 15.02 15.5 12 9.75 8.98 9.75 15.02'/></svg>
+          YouTube
+        </a>
+        <a class='lx-social-link' href='#' rel='noopener' target='_blank'>
+          <svg fill='currentColor' viewBox='0 0 24 24'><path d='M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.15 8.15 0 0 0 4.77 1.52V6.76a4.85 4.85 0 0 1-1-.07z'/></svg>
+          TikTok
+        </a>
+        <a class='lx-social-link' href='#' rel='noopener' target='_blank'>
+          <svg fill='none' stroke='currentColor' stroke-width='2' viewBox='0 0 24 24'><rect height='20' rx='5' ry='5' width='20' x='2' y='2'/><path d='M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z'/><line x1='17.5' x2='17.51' y1='6.5' y2='6.5'/></svg>
+          Instagram
+        </a>
+        <a class='lx-social-link' href='#' rel='noopener' target='_blank'>
+          <svg fill='currentColor' viewBox='0 0 24 24'><path d='M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.736-8.84L2.25 2.25h6.838l4.259 5.631zm-1.161 17.52h1.833L7.084 4.126H5.117z'/></svg>
+          Twitter
+        </a>
+        <a class='lx-social-link' href='#' rel='noopener' target='_blank'>
+          <svg fill='currentColor' viewBox='0 0 24 24'><path d='M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z'/><rect height='12' width='4' x='2' y='9'/><circle cx='4' cy='4' r='2'/></svg>
+          LinkedIn
+        </a>
+      </div>
+    </div>
+
+    <!-- Categories Widget -->
+    <div class='lx-widget'>
+      <div class='lx-widget-title'>Categories</div>
+      <div class='lx-category-list'>
+        <b:section class='lx-label-widget' id='label-section' maxwidgets='1' showaddelement='yes'>
+          <b:widget id='Label1' locked='false' title='Labels' type='Label' visible='true'>
+            <b:widget-settings>
+              <b:widget-setting name='sorting'>ALPHA</b:widget-setting>
+              <b:widget-setting name='display'>LIST</b:widget-setting>
+              <b:widget-setting name='showType'>ALL</b:widget-setting>
+              <b:widget-setting name='showFreqNumbers'>true</b:widget-setting>
+            </b:widget-settings>
+            <b:includable id='main'>
+              <b:loop values='data:labels' var='label'>
+                <a expr:href='data:label.url'>
+                  <data:label.name/>
+                  <span class='lx-category-count'><data:label.count/></span>
+                </a>
+              </b:loop>
+            </b:includable>
+          </b:widget>
+        </b:section>
+      </div>
+    </div>
+
+    <!-- Popular Posts Widget -->
+    <div class='lx-widget'>
+      <div class='lx-widget-title'>Popular Posts</div>
+      <b:section id='popular-section' maxwidgets='1' showaddelement='yes'>
+        <b:widget id='PopularPosts1' locked='false' title='Popular Posts' type='PopularPosts' visible='true'>
+          <b:widget-settings>
+            <b:widget-setting name='numItemsToShow'>5</b:widget-setting>
+            <b:widget-setting name='showThumbnails'>false</b:widget-setting>
+            <b:widget-setting name='showSnippets'>false</b:widget-setting>
+            <b:widget-setting name='timeRange'>ALL_TIME</b:widget-setting>
+          </b:widget-settings>
+          <b:includable id='main'>
+            <div class='lx-popular-list'>
+              <b:loop index='i' values='data:posts' var='post'>
+                <div class='lx-popular-item'>
+                  <span class='lx-popular-num'>0<b:eval expr='data:i + 1'/></span>
+                  <a class='lx-popular-title' expr:href='data:post.href'><data:post.title/></a>
+                </div>
+              </b:loop>
+            </div>
+          </b:includable>
+        </b:widget>
+      </b:section>
+    </div>
+
+  </aside>
+</main>
+</b:if>
+
+<!-- ============ SINGLE POST CONTENT ============ -->
+<b:if cond='data:blog.pageType == &quot;item&quot;'>
+  <b:loop values='data:posts' var='post'>
+    <article class='lx-post-content'>
+      <data:post.body/>
+    </article>
+
+    <!-- Tags -->
+    <b:if cond='data:post.labels'>
+      <div class='lx-post-tags'>
+        <b:loop values='data:post.labels' var='label'>
+          <a expr:href='data:label.url'>#<data:label.name/></a>
+        </b:loop>
+      </div>
+    </b:if>
+
+    <!-- Share -->
+    <div class='lx-share'>
+      <span class='lx-share-label'>Share</span>
+      <a expr:href='&quot;https://www.facebook.com/sharer/sharer.php?u=&quot; + data:post.url' rel='noopener' target='_blank'>
+        <svg fill='currentColor' height='14' viewBox='0 0 24 24' width='14'><path d='M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z'/></svg>
+        Facebook
+      </a>
+      <a expr:href='&quot;https://twitter.com/intent/tweet?url=&quot; + data:post.url + &quot;&amp;text=&quot; + data:post.title' rel='noopener' target='_blank'>
+        <svg fill='currentColor' height='14' viewBox='0 0 24 24' width='14'><path d='M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.736-8.84L2.25 2.25h6.838l4.259 5.631zm-1.161 17.52h1.833L7.084 4.126H5.117z'/></svg>
+        Twitter
+      </a>
+      <a expr:href='&quot;https://wa.me/?text=&quot; + data:post.title + &quot; &quot; + data:post.url' rel='noopener' target='_blank'>
+        <svg fill='currentColor' height='14' viewBox='0 0 24 24' width='14'><path d='M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z'/></svg>
+        WhatsApp
+      </a>
+    </div>
+
+    <!-- Comments -->
+    <div class='lx-comments'>
+      <b:if cond='data:post.allowComments'>
+        <h3>Comments</h3>
+        <b:include data='post' name='comment-form'/>
+      </b:if>
+    </div>
+  </b:loop>
+</b:if>
+
+<!-- ============ STATIC PAGE CONTENT ============ -->
+<b:if cond='data:blog.pageType == &quot;static_page&quot;'>
+  <b:loop values='data:posts' var='post'>
+    <div class='lx-page-content'>
+      <data:post.body/>
+    </div>
+  </b:loop>
+</b:if>
+
+<!-- ============ FOOTER ============ -->
+<footer id='lx-footer'>
+  <div class='lx-footer-top'>
+
+    <!-- Brand col -->
+    <div class='lx-footer-brand'>
+      <a class='lx-logo' expr:href='data:blog.homepageUrl'>
+        <img alt='Lightrux' src='https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiZ6sqk5bCXJe0ztQ98ZABJYXsLLEM1J9qmm-9lNaiP50lSuehL_CBoIPsFC7mwhUdrqZipJk_ut1cBCjAOpo4-7THvlrBteHu5sxaWrb4XLtj6ZkrH_JvguJUJmhsbePox499y63xIDlXuy6ud5GaxLldOJelEtoo8mInkQ8b9rDgF9M4/s1600/1000042198.jpg'/>
+        <span class='lx-logo-text'>Light<span>rux</span></span>
+      </a>
+      <p>Your hub for SEO, blogging strategies, AdSense tips, and digital tools for creators.</p>
+      <div class='lx-footer-social'>
+        <a href='#' rel='noopener' target='_blank' title='Facebook'><svg fill='currentColor' height='15' viewBox='0 0 24 24' width='15'><path d='M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z'/></svg></a>
+        <a href='#' rel='noopener' target='_blank' title='YouTube'><svg fill='currentColor' height='15' viewBox='0 0 24 24' width='15'><path d='M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 0 0-1.95 1.96A29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z'/><polygon fill='#000' points='9.75 15.02 15.5 12 9.75 8.98 9.75 15.02'/></svg></a>
+        <a href='#' rel='noopener' target='_blank' title='TikTok'><svg fill='currentColor' height='15' viewBox='0 0 24 24' width='15'><path d='M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.15 8.15 0 0 0 4.77 1.52V6.76a4.85 4.85 0 0 1-1-.07z'/></svg></a>
+        <a href='#' rel='noopener' target='_blank' title='Instagram'><svg fill='none' height='15' stroke='currentColor' stroke-width='2' viewBox='0 0 24 24' width='15'><rect height='20' rx='5' ry='5' width='20' x='2' y='2'/><path d='M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z'/><line x1='17.5' x2='17.51' y1='6.5' y2='6.5'/></svg></a>
+        <a href='#' rel='noopener' target='_blank' title='Twitter/X'><svg fill='currentColor' height='15' viewBox='0 0 24 24' width='15'><path d='M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.742l7.736-8.84L2.25 2.25h6.838l4.259 5.631zm-1.161 17.52h1.833L7.084 4.126H5.117z'/></svg></a>
+        <a href='#' rel='noopener' target='_blank' title='LinkedIn'><svg fill='currentColor' height='15' viewBox='0 0 24 24' width='15'><path d='M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z'/><rect height='12' width='4' x='2' y='9'/><circle cx='4' cy='4' r='2'/></svg></a>
+      </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div class='lx-footer-col'>
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a expr:href='data:blog.homepageUrl'>Home</a></li>
+        <li><a href='/p/about-us.html'>About Us</a></li>
+        <li><a href='/p/contact-us.html'>Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Categories -->
+    <div class='lx-footer-col'>
+      <h4>Categories</h4>
+      <ul>
+        <li><a href='/search/label/SEO'>SEO</a></li>
+        <li><a href='/search/label/Blogging'>Blogging</a></li>
+        <li><a href='/search/label/AdSense'>AdSense</a></li>
+      </ul>
+    </div>
+
+    <!-- Legal -->
+    <div class='lx-footer-col'>
+      <h4>Legal</h4>
+      <ul>
+        <li><a href='/p/privacy-policy.html'>Privacy Policy</a></li>
+        <li><a href='/p/terms-conditions.html'>Terms &amp; Conditions</a></li>
+        <li><a href='/p/disclaimer.html'>Disclaimer</a></li>
+        <li><a href='/p/dcma-policy.html'>DMCA</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class='lx-footer-bottom'>
+    <div class='lx-footer-bottom-inner'>
+      <p>&#169; <span>Lightrux</span>. All Rights Reserved.</p>
+      <p>Built with &#10024; for creators everywhere</p>
+    </div>
+  </div>
+</footer>
+
+<!-- Back to Top -->
+<button aria-label='Back to top' class='lx-back-top' id='lx-back-top' type='button'>
+  <svg fill='none' height='18' stroke='currentColor' stroke-width='2.5' viewBox='0 0 24 24' width='18'><polyline points='18 15 12 9 6 15'/></svg>
+</button>
+
+<!-- ============ JAVASCRIPT ============ -->
+<script>
+//<![CDATA[
+(function() {
+  'use strict';
+
+  // Sticky header
+  var header = document.getElementById('lx-header');
+  window.addEventListener('scroll', function() {
+    if (window.scrollY > 40) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  });
+
+  // Hamburger menu
+  var hamburger = document.getElementById('lx-hamburger');
+  var mobileMenu = document.getElementById('lx-mobile-menu');
+  if (hamburger && mobileMenu) {
+    hamburger.addEventListener('click', function() {
+      hamburger.classList.toggle('open');
+      mobileMenu.classList.toggle('open');
+    });
+  }
+
+  // Search overlay
+  var searchOpen = document.getElementById('lx-search-open');
+  var searchOverlay = document.getElementById('lx-search-overlay');
+  var searchClose = document.getElementById('lx-search-close');
+  var searchInput = document.getElementById('lx-search-input');
+
+  if (searchOpen && searchOverlay) {
+    searchOpen.addEventListener('click', function() {
+      searchOverlay.classList.add('open');
+      if (searchInput) setTimeout(function() { searchInput.focus(); }, 100);
+    });
+  }
+
+  if (searchClose && searchOverlay) {
+    searchClose.addEventListener('click', function() {
+      searchOverlay.classList.remove('open');
+    });
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && searchOverlay) {
+      searchOverlay.classList.remove('open');
+    }
+  });
+
+  // Search functionality
+  function doSearch(query) {
+    if (query && query.trim()) {
+      window.location.href = '/search?q=' + encodeURIComponent(query.trim());
+    }
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') doSearch(this.value);
+    });
+  }
+
+  var sidebarSearch = document.getElementById('lx-sidebar-search');
+  if (sidebarSearch) {
+    sidebarSearch.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') doSearch(this.value);
+    });
+    var sidebarBtn = sidebarSearch.nextElementSibling;
+    if (sidebarBtn) {
+      sidebarBtn.addEventListener('click', function() {
+        doSearch(sidebarSearch.value);
+      });
+    }
+  }
+
+  // Back to top
+  var backTop = document.getElementById('lx-back-top');
+  if (backTop) {
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 400) {
+        backTop.classList.add('visible');
+      } else {
+        backTop.classList.remove('visible');
+      }
+    });
+    backTop.addEventListener('click', function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  }
+
+  // Highlight active nav link
+  var currentUrl = window.location.href;
+  var navLinks = document.querySelectorAll('.lx-nav-menu a');
+  navLinks.forEach(function(link) {
+    if (link.href === currentUrl || (link.href !== window.location.origin + '/' && currentUrl.indexOf(link.href) === 0)) {
+      link.classList.add('active');
+    }
+  });
+
+  // Hero CTA smooth scroll
+  var heroCta = document.querySelector('.lx-hero-cta');
+  if (heroCta) {
+    heroCta.addEventListener('click', function(e) {
+      e.preventDefault();
+      var target = document.getElementById('lx-main');
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  }
+
+  // Fade-in posts on scroll
+  var cards = document.querySelectorAll('.lx-post-card');
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    cards.forEach(function(card, i) {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(20px)';
+      card.style.transition = 'opacity 0.5s ease ' + (i * 0.08) + 's, transform 0.5s ease ' + (i * 0.08) + 's, border-color 0.3s, box-shadow 0.3s, background 0.3s';
+      observer.observe(card);
+    });
+  }
+
+})();
+//]]>
+</script>
+
+</body>
+</html>
