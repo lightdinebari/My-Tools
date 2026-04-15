@@ -1,0 +1,1361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AdSense Earnings Calculator — Lightrux Tools</title>
+<meta name="description" content="Calculate your Google AdSense earnings instantly. Estimate daily, monthly and yearly revenue based on your pageviews, CTR and CPC. Free AdSense calculator by Lightrux.">
+<meta name="keywords" content="adsense calculator, adsense earnings calculator, google adsense revenue calculator, blog earnings calculator, RPM calculator">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="AdSense Earnings Calculator — Lightrux Tools">
+<meta property="og:description" content="Estimate your Google AdSense revenue instantly. Enter your pageviews, CTR and CPC to calculate daily, monthly and yearly earnings.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #06101f;
+  --surface: #0b1828;
+  --surface2: #0f2035;
+  --surface3: #152540;
+  --border: #1a3055;
+  --border2: #1e3a6a;
+  --blue: #1a72ff;
+  --blue-dim: rgba(26,114,255,0.12);
+  --blue-glow: rgba(26,114,255,0.25);
+  --blue-light: #5599ff;
+  --orange: #ff6220;
+  --orange-dim: rgba(255,98,32,0.11);
+  --orange-light: #ff8550;
+  --text: #ddeaf8;
+  --text2: #9ab5d0;
+  --muted: #4e6e90;
+  --success: #1fc97a;
+  --success-dim: rgba(31,201,122,0.1);
+  --gold: #f5c842;
+  --gold-dim: rgba(245,200,66,0.1);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --radius-xs: 6px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 15px;
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* BG */
+.bg-fx {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(26,114,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26,114,255,0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+}
+
+.bg-orb1 {
+  position: absolute;
+  top: -25%; left: -20%;
+  width: 800px; height: 800px;
+  background: radial-gradient(circle, rgba(26,114,255,0.065) 0%, transparent 60%);
+  border-radius: 50%;
+}
+
+.bg-orb2 {
+  position: absolute;
+  bottom: -20%; right: -15%;
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(255,98,32,0.055) 0%, transparent 60%);
+  border-radius: 50%;
+}
+
+.bg-orb3 {
+  position: absolute;
+  top: 40%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(245,200,66,0.025) 0%, transparent 60%);
+  border-radius: 50%;
+}
+
+/* NAV */
+nav {
+  position: sticky;
+  top: 0; z-index: 200;
+  height: 62px;
+  background: rgba(6,16,31,0.9);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+.logo-mark {
+  width: 34px; height: 34px;
+  background: linear-gradient(135deg, var(--blue), var(--orange));
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Syne', sans-serif;
+  font-weight: 800;
+  font-size: 13px;
+  color: #fff;
+  flex-shrink: 0;
+  box-shadow: 0 4px 14px rgba(26,114,255,0.3);
+}
+
+.logo-name {
+  font-family: 'Syne', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--text);
+  letter-spacing: -0.3px;
+}
+
+.logo-name em { font-style: normal; color: var(--orange); }
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-pill {
+  background: var(--blue-dim);
+  border: 1px solid rgba(26,114,255,0.2);
+  color: var(--blue-light);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 20px;
+}
+
+/* WRAPPER */
+.wrapper {
+  position: relative;
+  z-index: 1;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 56px 16px 80px;
+}
+
+/* HERO */
+.hero {
+  text-align: center;
+  margin-bottom: 48px;
+  animation: fadeUp 0.55s ease both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--gold-dim);
+  border: 1px solid rgba(245,200,66,0.2);
+  color: var(--gold);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 14px 5px 10px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+  letter-spacing: 0.3px;
+}
+
+.badge-dot {
+  width: 7px; height: 7px;
+  background: var(--gold);
+  border-radius: 50%;
+  animation: pulse 2.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,100% { opacity:1; transform:scale(1); }
+  50% { opacity:0.4; transform:scale(1.6); }
+}
+
+h1 {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(30px, 5.5vw, 52px);
+  font-weight: 800;
+  line-height: 1.08;
+  letter-spacing: -1.5px;
+  margin-bottom: 14px;
+}
+
+h1 .c1 { color: var(--gold); }
+h1 .c2 { color: var(--blue-light); }
+
+.hero-desc {
+  color: var(--text2);
+  font-size: 15px;
+  max-width: 500px;
+  margin: 0 auto 26px;
+  line-height: 1.65;
+}
+
+.hero-chips {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.chip {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  color: var(--text2);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px 12px;
+  border-radius: 20px;
+}
+
+/* MAIN LAYOUT */
+.main-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+  animation: fadeUp 0.55s 0.1s ease both;
+}
+
+@media (max-width: 640px) {
+  .main-grid { grid-template-columns: 1fr; }
+}
+
+/* CARD */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.card-header {
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card-icon {
+  width: 30px; height: 30px;
+  border-radius: 7px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.icon-blue { background: var(--blue-dim); }
+.icon-orange { background: var(--orange-dim); }
+.icon-gold { background: var(--gold-dim); }
+.icon-green { background: var(--success-dim); }
+
+.card-title {
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.card-body { padding: 20px; }
+
+/* INPUT GROUPS */
+.input-group {
+  margin-bottom: 16px;
+}
+
+.input-group:last-child { margin-bottom: 0; }
+
+.input-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 7px;
+}
+
+.label-text {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text2);
+}
+
+.label-hint {
+  font-size: 11px;
+  color: var(--muted);
+  font-style: italic;
+}
+
+.input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-prefix, .input-suffix {
+  position: absolute;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.input-prefix { left: 13px; }
+.input-suffix { right: 13px; }
+
+input[type="number"] {
+  width: 100%;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 11px 14px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; }
+
+input[type="number"]:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(26,114,255,0.1);
+}
+
+.has-prefix input { padding-left: 28px; }
+.has-suffix input { padding-right: 36px; }
+
+/* SLIDER */
+.slider-wrap {
+  margin-top: 8px;
+}
+
+input[type="range"] {
+  width: 100%;
+  height: 4px;
+  background: var(--border2);
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 18px; height: 18px;
+  background: var(--blue);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(26,114,255,0.4);
+  transition: transform 0.15s;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.2); }
+input[type="range"]::-moz-range-thumb {
+  width: 18px; height: 18px;
+  background: var(--blue);
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+}
+
+.slider-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+/* CURRENCY SELECT */
+.select-wrap {
+  position: relative;
+}
+
+select {
+  width: 100%;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 14px;
+  padding: 11px 36px 11px 14px;
+  outline: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: border-color 0.2s;
+}
+
+select:focus { border-color: var(--blue); }
+
+.select-arrow {
+  position: absolute;
+  right: 13px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  pointer-events: none;
+  font-size: 10px;
+}
+
+/* CALCULATE BUTTON */
+.calc-row {
+  margin-top: 16px;
+  animation: fadeUp 0.55s 0.15s ease both;
+}
+
+.btn-calc {
+  width: 100%;
+  background: linear-gradient(135deg, var(--blue) 0%, #0a46c0 100%);
+  border: none;
+  border-radius: var(--radius-sm);
+  color: white;
+  font-family: 'Syne', sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  padding: 15px 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: all 0.2s;
+  box-shadow: 0 6px 24px rgba(26,114,255,0.32);
+  letter-spacing: 0.2px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-calc:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 32px rgba(26,114,255,0.42);
+}
+
+.btn-calc:active { transform: translateY(0); }
+
+.btn-icon { font-size: 18px; }
+
+/* RESULTS SECTION */
+.results-section {
+  display: none;
+  animation: fadeUp 0.45s ease both;
+  margin-top: 16px;
+}
+
+.results-section.active { display: block; }
+
+/* EARNINGS CARDS */
+.earnings-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 540px) {
+  .earnings-grid { grid-template-columns: 1fr; }
+}
+
+.earn-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 18px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.earn-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+}
+
+.earn-card.daily::before { background: linear-gradient(90deg, var(--blue), var(--blue-light)); }
+.earn-card.monthly::before { background: linear-gradient(90deg, var(--orange), var(--orange-light)); }
+.earn-card.yearly::before { background: linear-gradient(90deg, var(--gold), #ffdf70); }
+
+.earn-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.25); }
+
+.earn-period {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.daily .earn-period { color: var(--blue-light); }
+.monthly .earn-period { color: var(--orange-light); }
+.yearly .earn-period { color: var(--gold); }
+
+.earn-amount {
+  font-family: 'Syne', sans-serif;
+  font-size: clamp(22px, 4vw, 30px);
+  font-weight: 800;
+  line-height: 1;
+  margin-bottom: 4px;
+  letter-spacing: -0.5px;
+}
+
+.daily .earn-amount { color: var(--blue-light); }
+.monthly .earn-amount { color: var(--orange-light); }
+.yearly .earn-amount { color: var(--gold); }
+
+.earn-ngn {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.earn-label {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+/* METRICS ROW */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 600px) {
+  .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+.metric-box {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px 14px;
+  text-align: center;
+}
+
+.metric-val {
+  font-family: 'Syne', sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 3px;
+}
+
+.metric-label {
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.3px;
+}
+
+/* TARGET SECTION */
+.target-section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 16px;
+  animation: fadeUp 0.55s 0.2s ease both;
+}
+
+/* BREAKDOWN TABLE */
+.breakdown-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.breakdown-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.breakdown-table th {
+  background: var(--surface2);
+  padding: 12px 16px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border);
+}
+
+.breakdown-table td {
+  padding: 13px 16px;
+  font-size: 13px;
+  color: var(--text2);
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+
+.breakdown-table tr:last-child td { border-bottom: none; }
+.breakdown-table tr:hover td { background: rgba(26,114,255,0.04); }
+
+.breakdown-table td:last-child {
+  text-align: right;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* TIPS */
+.tips-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.tips-list {
+  padding: 16px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.tip-item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 12px 14px;
+  border-radius: var(--radius-xs);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+.tip-item.blue { background: var(--blue-dim); border: 1px solid rgba(26,114,255,0.12); color: var(--text2); }
+.tip-item.orange { background: var(--orange-dim); border: 1px solid rgba(255,98,32,0.12); color: var(--text2); }
+.tip-item.gold { background: var(--gold-dim); border: 1px solid rgba(245,200,66,0.12); color: var(--text2); }
+.tip-item.green { background: var(--success-dim); border: 1px solid rgba(31,201,122,0.12); color: var(--text2); }
+
+.tip-emoji { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+
+/* RESET BTN */
+.btn-reset {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text2);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-reset:hover {
+  border-color: var(--orange);
+  color: var(--orange-light);
+}
+
+.result-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.btn-copy {
+  background: var(--blue-dim);
+  border: 1px solid rgba(26,114,255,0.2);
+  color: var(--blue-light);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.btn-copy:hover { background: rgba(26,114,255,0.22); }
+
+/* SEO CONTENT */
+.seo-section {
+  margin-top: 52px;
+  animation: fadeUp 0.55s 0.25s ease both;
+}
+
+.seo-section h2 {
+  font-family: 'Syne', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 14px;
+  color: var(--text);
+}
+
+.seo-section p {
+  font-size: 14px;
+  color: var(--text2);
+  line-height: 1.75;
+  margin-bottom: 12px;
+}
+
+.faq { margin-top: 28px; }
+
+.faq-item {
+  border-bottom: 1px solid var(--border);
+  padding: 16px 0;
+}
+
+.faq-q {
+  font-family: 'Syne', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.faq-a {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.65;
+}
+
+/* FOOTER */
+footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 24px 16px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 20px;
+}
+
+footer a { color: var(--blue-light); text-decoration: none; }
+footer a:hover { text-decoration: underline; }
+
+/* MOBILE FIXES */
+@media (max-width: 480px) {
+  nav { padding: 0 14px; }
+  .wrapper { padding: 36px 12px 60px; }
+  h1 { letter-spacing: -0.8px; }
+  .result-actions { flex-direction: column; }
+  .result-actions .btn-reset,
+  .result-actions .btn-copy { width: 100%; justify-content: center; }
+  .breakdown-table th,
+  .breakdown-table td { padding: 10px 12px; font-size: 12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-fx">
+  <div class="bg-grid"></div>
+  <div class="bg-orb1"></div>
+  <div class="bg-orb2"></div>
+  <div class="bg-orb3"></div>
+</div>
+
+<nav>
+  <a href="#" class="logo">
+    <div class="logo-mark">Lx</div>
+    <span class="logo-name">Light<em>rux</em></span>
+  </a>
+  <div class="nav-right">
+    <span class="nav-pill">Tools</span>
+  </div>
+</nav>
+
+<div class="wrapper">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      Free AdSense Calculator
+    </div>
+    <h1><span class="c1">AdSense</span> Earnings<br><span class="c2">Calculator</span></h1>
+    <p class="hero-desc">Enter your pageviews, CTR and CPC to instantly estimate your Google AdSense daily, monthly and yearly revenue.</p>
+    <div class="hero-chips">
+      <span class="chip">💰 Earnings Estimate</span>
+      <span class="chip">📊 RPM Calculator</span>
+      <span class="chip">🎯 Goal Planner</span>
+      <span class="chip">₦ NGN Converter</span>
+    </div>
+  </div>
+
+  <!-- INPUT GRID -->
+  <div class="main-grid">
+
+    <!-- LEFT: Traffic -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon icon-blue">📈</div>
+        <span class="card-title">Traffic & Performance</span>
+      </div>
+      <div class="card-body">
+
+        <div class="input-group">
+          <div class="input-label">
+            <span class="label-text">Daily Pageviews</span>
+            <span class="label-hint">visits/day</span>
+          </div>
+          <input type="number" id="pageviews" value="1000" min="1" max="10000000" placeholder="1000">
+          <div class="slider-wrap">
+            <input type="range" id="pageviewsSlider" min="100" max="100000" step="100" value="1000">
+            <div class="slider-labels"><span>100</span><span>100K</span></div>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <div class="input-label">
+            <span class="label-text">Click Through Rate (CTR)</span>
+            <span class="label-hint">avg: 1–3%</span>
+          </div>
+          <div class="input-wrap has-suffix">
+            <input type="number" id="ctr" value="1.5" min="0.1" max="30" step="0.1" placeholder="1.5">
+            <span class="input-suffix">%</span>
+          </div>
+          <div class="slider-wrap">
+            <input type="range" id="ctrSlider" min="0.1" max="15" step="0.1" value="1.5">
+            <div class="slider-labels"><span>0.1%</span><span>15%</span></div>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <div class="input-label">
+            <span class="label-text">Cost Per Click (CPC)</span>
+            <span class="label-hint">avg: $0.10–$1.00</span>
+          </div>
+          <div class="input-wrap has-prefix">
+            <span class="input-prefix">$</span>
+            <input type="number" id="cpc" value="0.25" min="0.01" max="100" step="0.01" placeholder="0.25">
+          </div>
+          <div class="slider-wrap">
+            <input type="range" id="cpcSlider" min="0.01" max="5" step="0.01" value="0.25">
+            <div class="slider-labels"><span>$0.01</span><span>$5.00</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- RIGHT: Settings -->
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon icon-orange">⚙️</div>
+        <span class="card-title">Settings & Goals</span>
+      </div>
+      <div class="card-body">
+
+        <div class="input-group">
+          <div class="input-label">
+            <span class="label-text">Currency</span>
+          </div>
+          <div class="select-wrap">
+            <select id="currency">
+              <option value="USD">🇺🇸 USD — US Dollar</option>
+              <option value="NGN" selected>🇳🇬 NGN — Nigerian Naira</option>
+              <option value="GBP">🇬🇧 GBP — British Pound</option>
+              <option value="EUR">🇪🇺 EUR — Euro</option>
+              <option value="KES">🇰🇪 KES — Kenyan Shilling</option>
+              <option value="GHS">🇬🇭 GHS — Ghanaian Cedi</option>
+              <option value="ZAR">🇿🇦 ZAR — South African Rand</option>
+            </select>
+            <span class="select-arrow">▼</span>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <div class="input-label">
+            <span class="label-text">AdSense Revenue Share</span>
+            <span class="label-hint">Google takes 32%</span>
+          </div>
+          <div class="input-wrap has-suffix">
+            <input type="number" id="revShare" value="68" min="1" max="100" placeholder="68">
+            <span class="input-suffix">%</span>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <div class="input-label">
+            <span class="label-text">Monthly Income Target</span>
+            <span class="label-hint">in USD</span>
+          </div>
+          <div class="input-wrap has-prefix">
+            <span class="input-prefix">$</span>
+            <input type="number" id="targetIncome" value="500" min="1" placeholder="500">
+          </div>
+        </div>
+
+        <div class="input-group">
+          <div class="input-label">
+            <span class="label-text">USD Exchange Rate</span>
+            <span class="label-hint">to selected currency</span>
+          </div>
+          <div class="input-wrap">
+            <input type="number" id="exchangeRate" value="1600" min="1" step="1" placeholder="1600">
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CALCULATE BUTTON -->
+  <div class="calc-row">
+    <button class="btn-calc" onclick="calculate()">
+      <span class="btn-icon">⚡</span>
+      Calculate My AdSense Earnings
+    </button>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results-section" id="results">
+
+    <!-- EARNINGS -->
+    <div class="earnings-grid" style="margin-top:20px;">
+      <div class="earn-card daily">
+        <div class="earn-period">Daily</div>
+        <div class="earn-amount" id="earnDaily">$0.00</div>
+        <div class="earn-ngn" id="earnDailyLocal">—</div>
+        <div class="earn-label">Est. earnings</div>
+      </div>
+      <div class="earn-card monthly">
+        <div class="earn-period">Monthly</div>
+        <div class="earn-amount" id="earnMonthly">$0.00</div>
+        <div class="earn-ngn" id="earnMonthlyLocal">—</div>
+        <div class="earn-label">Est. earnings</div>
+      </div>
+      <div class="earn-card yearly">
+        <div class="earn-period">Yearly</div>
+        <div class="earn-amount" id="earnYearly">$0.00</div>
+        <div class="earn-ngn" id="earnYearlyLocal">—</div>
+        <div class="earn-label">Est. earnings</div>
+      </div>
+    </div>
+
+    <!-- METRICS -->
+    <div class="metrics-grid">
+      <div class="metric-box">
+        <div class="metric-val" id="metRPM">$0.00</div>
+        <div class="metric-label">RPM</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-val" id="metClicks">0</div>
+        <div class="metric-label">Daily Clicks</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-val" id="metMonthPV">0</div>
+        <div class="metric-label">Monthly PV</div>
+      </div>
+      <div class="metric-box">
+        <div class="metric-val" id="metTargetPV">0</div>
+        <div class="metric-label">PV for Target</div>
+      </div>
+    </div>
+
+    <!-- BREAKDOWN TABLE -->
+    <div class="breakdown-card">
+      <div class="card-header">
+        <div class="card-icon icon-gold">📋</div>
+        <span class="card-title">Earnings Breakdown</span>
+      </div>
+      <table class="breakdown-table">
+        <thead>
+          <tr>
+            <th>Period</th>
+            <th>Pageviews</th>
+            <th>Clicks</th>
+            <th>Gross ($)</th>
+            <th>Net (After Share)</th>
+          </tr>
+        </thead>
+        <tbody id="breakdownBody"></tbody>
+      </table>
+    </div>
+
+    <!-- TARGET SECTION -->
+    <div class="target-section">
+      <div class="card-header">
+        <div class="card-icon icon-green">🎯</div>
+        <span class="card-title">Goal Analysis</span>
+      </div>
+      <div class="card-body">
+        <div id="targetAnalysis" style="font-size:14px;line-height:1.7;color:var(--text2);"></div>
+      </div>
+    </div>
+
+    <!-- TIPS -->
+    <div class="tips-card">
+      <div class="card-header">
+        <div class="card-icon icon-blue">💡</div>
+        <span class="card-title">Tips to Boost Your AdSense Earnings</span>
+      </div>
+      <div class="tips-list">
+        <div class="tip-item blue">
+          <span class="tip-emoji">📍</span>
+          <span><strong>Target high-CPC niches.</strong> Finance, insurance, legal and tech content attract advertisers who pay more per click — often $1–$5+ CPC compared to $0.05–$0.20 for entertainment.</span>
+        </div>
+        <div class="tip-item orange">
+          <span class="tip-emoji">🌍</span>
+          <span><strong>Drive traffic from Tier 1 countries.</strong> US, UK, Canada and Australian visitors generate significantly higher CPC than Nigerian or Indian traffic, even on the same content.</span>
+        </div>
+        <div class="tip-item gold">
+          <span class="tip-emoji">📐</span>
+          <span><strong>Optimise ad placement.</strong> Ads placed within content (in-article) and above the fold consistently outperform sidebar or footer placements in both CTR and revenue.</span>
+        </div>
+        <div class="tip-item green">
+          <span class="tip-emoji">⚡</span>
+          <span><strong>Improve page speed.</strong> Faster pages reduce bounce rate, increase pages per session, and mean more ad impressions per visitor — directly boosting your RPM.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ACTIONS -->
+    <div class="result-actions">
+      <button class="btn-copy" onclick="copyResults()">📋 Copy Results</button>
+      <button class="btn-reset" onclick="resetAll()">🔄 Reset Calculator</button>
+    </div>
+
+  </div>
+
+  <!-- SEO CONTENT -->
+  <div class="seo-section">
+    <h2>How to Use the AdSense Earnings Calculator</h2>
+    <p>This free AdSense calculator helps bloggers and website owners estimate their Google AdSense revenue before or after monetisation. Simply enter your daily pageviews, your estimated CTR (click-through rate), and your average CPC (cost per click) to see projected earnings.</p>
+    <p>The calculator accounts for Google's 32% revenue share, leaving you with 68% of gross ad revenue. You can also set an income target and see exactly how many pageviews you need to reach it.</p>
+
+    <div class="faq">
+      <div class="faq-item">
+        <div class="faq-q">What is a good CTR for AdSense?</div>
+        <div class="faq-a">A typical AdSense CTR ranges between 0.5% and 3%. Most blogs average around 1–2%. Higher CTR usually comes from well-placed ads, relevant content, and engaged audiences. Above 10% can trigger a Google policy review.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What is RPM in AdSense?</div>
+        <div class="faq-a">RPM (Revenue Per Mille) is your estimated earnings for every 1,000 pageviews. It is calculated as: (Estimated Earnings ÷ Pageviews) × 1000. A typical RPM ranges from $0.50 to $5.00 depending on your niche and traffic source.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How much does AdSense pay per 1000 views in Nigeria?</div>
+        <div class="faq-a">For Nigerian traffic, AdSense RPM typically ranges from $0.10 to $0.80 per 1,000 views. Earning more requires targeting international audiences or high-CPC niches like finance and technology.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">How many pageviews do I need to make $500/month?</div>
+        <div class="faq-a">It depends on your RPM. At an RPM of $1.00, you need 500,000 pageviews per month. At $2.00 RPM, you need 250,000. Use the calculator above with your target income to get your specific number.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Is this AdSense calculator accurate?</div>
+        <div class="faq-a">This calculator provides estimates based on the values you enter. Actual AdSense earnings vary based on advertiser competition, seasonality, content niche, and user geography. Use it as a planning guide, not a guarantee.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2025 <a href="#">Lightrux</a> · Free SEO & Blogging Tools · Built for Nigerian Bloggers</p>
+</footer>
+
+<script>
+// =====================
+// CURRENCY CONFIG
+// =====================
+const CURRENCY_SYMBOLS = {
+  USD: '$', NGN: '₦', GBP: '£', EUR: '€',
+  KES: 'KSh', GHS: 'GH₵', ZAR: 'R'
+};
+
+const DEFAULT_RATES = {
+  USD: 1, NGN: 1600, GBP: 0.79, EUR: 0.92,
+  KES: 130, GHS: 12, ZAR: 18.5
+};
+
+// =====================
+// SLIDER SYNC
+// =====================
+function syncSlider(inputId, sliderId) {
+  const input = document.getElementById(inputId);
+  const slider = document.getElementById(sliderId);
+  if (!slider) return;
+
+  input.addEventListener('input', () => {
+    const val = parseFloat(input.value);
+    if (!isNaN(val)) {
+      slider.value = Math.min(Math.max(val, parseFloat(slider.min)), parseFloat(slider.max));
+    }
+  });
+
+  slider.addEventListener('input', () => {
+    input.value = slider.value;
+  });
+}
+
+syncSlider('pageviews', 'pageviewsSlider');
+syncSlider('ctr', 'ctrSlider');
+syncSlider('cpc', 'cpcSlider');
+
+// Update exchange rate hint when currency changes
+document.getElementById('currency').addEventListener('change', function() {
+  const rate = DEFAULT_RATES[this.value] || 1;
+  if (this.value !== 'USD') {
+    document.getElementById('exchangeRate').value = rate;
+  } else {
+    document.getElementById('exchangeRate').value = 1;
+  }
+});
+
+// =====================
+// FORMAT NUMBER
+// =====================
+function fmt(n, decimals = 2) {
+  if (n >= 1000000) return (n / 1000000).toFixed(1) + 'M';
+  if (n >= 1000) return (n / 1000).toFixed(1) + 'K';
+  return n.toFixed(decimals);
+}
+
+function fmtFull(n, decimals = 2) {
+  return n.toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+}
+
+function fmtMoney(n, symbol) {
+  if (n >= 1000000) return symbol + (n / 1000000).toFixed(2) + 'M';
+  if (n >= 1000) return symbol + (n / 1000).toFixed(1) + 'K';
+  return symbol + fmtFull(n);
+}
+
+// =====================
+// CALCULATE
+// =====================
+function calculate() {
+  const pageviews = parseFloat(document.getElementById('pageviews').value) || 0;
+  const ctr = parseFloat(document.getElementById('ctr').value) || 0;
+  const cpc = parseFloat(document.getElementById('cpc').value) || 0;
+  const revShare = parseFloat(document.getElementById('revShare').value) || 68;
+  const targetIncome = parseFloat(document.getElementById('targetIncome').value) || 500;
+  const currency = document.getElementById('currency').value;
+  const exchangeRate = parseFloat(document.getElementById('exchangeRate').value) || 1;
+  const symbol = CURRENCY_SYMBOLS[currency] || '$';
+
+  // Validate
+  if (pageviews <= 0 || ctr <= 0 || cpc <= 0) {
+    alert('Please enter valid values for Pageviews, CTR and CPC.');
+    return;
+  }
+
+  // Core calculations
+  const dailyClicks = pageviews * (ctr / 100);
+  const grossDaily = dailyClicks * cpc;
+  const netDaily = grossDaily * (revShare / 100);
+  const netMonthly = netDaily * 30;
+  const netYearly = netDaily * 365;
+
+  const rpm = (netDaily / pageviews) * 1000;
+
+  // Local currency
+  const localDaily = netDaily * exchangeRate;
+  const localMonthly = netMonthly * exchangeRate;
+  const localYearly = netYearly * exchangeRate;
+
+  const showLocal = currency !== 'USD';
+
+  // Target pageviews
+  const dailyEarningPerPV = pageviews > 0 ? netDaily / pageviews : 0;
+  const targetDailyIncome = targetIncome / 30;
+  const targetPVDaily = dailyEarningPerPV > 0 ? Math.ceil(targetDailyIncome / dailyEarningPerPV) : 0;
+  const targetPVMonthly = targetPVDaily * 30;
+
+  // ---- UPDATE UI ----
+
+  // Earnings cards
+  document.getElementById('earnDaily').textContent = '$' + fmtFull(netDaily);
+  document.getElementById('earnMonthly').textContent = '$' + fmtFull(netMonthly);
+  document.getElementById('earnYearly').textContent = '$' + fmtFull(netYearly);
+
+  document.getElementById('earnDailyLocal').textContent = showLocal ? symbol + fmtFull(localDaily) : '';
+  document.getElementById('earnMonthlyLocal').textContent = showLocal ? symbol + fmtFull(localMonthly) : '';
+  document.getElementById('earnYearlyLocal').textContent = showLocal ? symbol + fmtFull(localYearly) : '';
+
+  // Metrics
+  document.getElementById('metRPM').textContent = '$' + fmtFull(rpm);
+  document.getElementById('metClicks').textContent = fmt(dailyClicks, 0);
+  document.getElementById('metMonthPV').textContent = fmt(pageviews * 30, 0);
+  document.getElementById('metTargetPV').textContent = fmt(targetPVMonthly, 0);
+
+  // Breakdown table
+  const periods = [
+    { label: 'Daily', pv: pageviews, days: 1 },
+    { label: 'Weekly', pv: pageviews * 7, days: 7 },
+    { label: 'Monthly', pv: pageviews * 30, days: 30 },
+    { label: 'Quarterly', pv: pageviews * 90, days: 90 },
+    { label: 'Yearly', pv: pageviews * 365, days: 365 },
+  ];
+
+  const tbody = document.getElementById('breakdownBody');
+  tbody.innerHTML = periods.map(p => {
+    const clicks = p.pv * (ctr / 100);
+    const gross = clicks * cpc;
+    const net = gross * (revShare / 100);
+    return `<tr>
+      <td><strong>${p.label}</strong></td>
+      <td>${fmtFull(p.pv, 0)}</td>
+      <td>${fmtFull(clicks, 0)}</td>
+      <td>$${fmtFull(gross)}</td>
+      <td style="color:var(--success)">$${fmtFull(net)}</td>
+    </tr>`;
+  }).join('');
+
+  // Target analysis
+  const onTarget = netMonthly >= targetIncome;
+  const gap = targetIncome - netMonthly;
+  const gapPct = ((gap / targetIncome) * 100).toFixed(0);
+
+  let targetHTML = '';
+  if (onTarget) {
+    targetHTML = `<span style="color:var(--success);font-weight:700;">🎉 You are on track!</span> Your estimated monthly earnings of <strong>$${fmtFull(netMonthly)}</strong> already meet your $${fmtFull(targetIncome)} target.`;
+  } else {
+    targetHTML = `You need <strong>$${fmtFull(gap)}</strong> more per month to hit your $${fmtFull(targetIncome, 0)} target — that's ${gapPct}% away.<br><br>
+    To reach your goal, you could:<br>
+    • Increase daily pageviews to <strong>${fmtFull(targetPVDaily, 0)}</strong> (currently ${fmtFull(pageviews, 0)})<br>
+    • Improve your CTR from ${ctr}% to <strong>${Math.min(15, (ctr * (targetIncome / netMonthly)).toFixed(1))}%</strong><br>
+    • Increase your average CPC from $${cpc} to <strong>$${(cpc * (targetIncome / netMonthly)).toFixed(2)}</strong>`;
+  }
+
+  if (showLocal) {
+    targetHTML += `<br><br>Monthly target in ${currency}: <strong>${symbol}${fmtFull(targetIncome * exchangeRate)}</strong>`;
+  }
+
+  document.getElementById('targetAnalysis').innerHTML = targetHTML;
+
+  // Store for copy
+  window._lastResult = {
+    pageviews, ctr, cpc, netDaily, netMonthly, netYearly,
+    rpm, currency, symbol, localMonthly, showLocal,
+    targetIncome, onTarget
+  };
+
+  // Show results
+  document.getElementById('results').classList.add('active');
+  document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// =====================
+// COPY RESULTS
+// =====================
+function copyResults() {
+  if (!window._lastResult) return;
+  const r = window._lastResult;
+  const lines = [
+    '=== LIGHTRUX ADSENSE EARNINGS REPORT ===',
+    '',
+    `Daily Pageviews: ${r.pageviews.toLocaleString()}`,
+    `CTR: ${r.ctr}%`,
+    `CPC: $${r.cpc}`,
+    '',
+    `Daily Earnings: $${fmtFull(r.netDaily)}`,
+    `Monthly Earnings: $${fmtFull(r.netMonthly)}`,
+    `Yearly Earnings: $${fmtFull(r.netYearly)}`,
+    `RPM: $${fmtFull(r.rpm)}`,
+    '',
+    r.showLocal ? `Monthly in ${r.currency}: ${r.symbol}${fmtFull(r.localMonthly)}` : '',
+    '',
+    `Monthly Target: $${fmtFull(r.targetIncome)}`,
+    r.onTarget ? '✅ On track to meet target!' : '⚠️ Below target — increase traffic or CPC.',
+    '',
+    '— Calculated with Lightrux AdSense Calculator —',
+  ].filter(l => l !== null).join('\n');
+
+  navigator.clipboard.writeText(lines).then(() => {
+    const btn = document.querySelector('.btn-copy');
+    btn.textContent = '✓ Copied!';
+    setTimeout(() => { btn.innerHTML = '📋 Copy Results'; }, 2000);
+  }).catch(() => {
+    const ta = document.createElement('textarea');
+    ta.value = lines;
+    ta.style.cssText = 'position:fixed;opacity:0;';
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+  });
+}
+
+// =====================
+// RESET
+// =====================
+function resetAll() {
+  document.getElementById('pageviews').value = 1000;
+  document.getElementById('pageviewsSlider').value = 1000;
+  document.getElementById('ctr').value = 1.5;
+  document.getElementById('ctrSlider').value = 1.5;
+  document.getElementById('cpc').value = 0.25;
+  document.getElementById('cpcSlider').value = 0.25;
+  document.getElementById('revShare').value = 68;
+  document.getElementById('targetIncome').value = 500;
+  document.getElementById('currency').value = 'NGN';
+  document.getElementById('exchangeRate').value = 1600;
+  document.getElementById('results').classList.remove('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Allow Enter key to calculate
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') calculate();
+});
+</script>
+
+</body>
+</html>
