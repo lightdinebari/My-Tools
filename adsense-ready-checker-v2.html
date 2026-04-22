@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AdSense Ready Checker – Test If Your Website Qualifies for Google AdSense | Lightrux</title>
+<meta name="description" content="Answer 10 quick questions to find out if your blog or website is ready for Google AdSense approval. Free instant score with actionable tips — no signup needed.">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="AdSense Ready Checker – Test If Your Website Qualifies for Google AdSense">
+<meta property="og:description" content="Free AdSense readiness quiz for bloggers. Answer 10 questions, get your score and fix what's missing before applying.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --navy:      #08152A;
+  --navy-mid:  #0D1F3C;
+  --navy-card: #101E38;
+  --navy-card2:#132040;
+  --border:    #1C3158;
+  --blue:      #4DB8FF;
+  --blue-soft: #3AA0E8;
+  --blue-glow: rgba(77,184,255,0.12);
+  --blue-glow2:rgba(77,184,255,0.22);
+  --orange:    #FF7A2F;
+  --orange2:   #E86820;
+  --white:     #EEF4FF;
+  --muted:     #6E93BC;
+  --muted2:    #4A6B8A;
+  --success:   #22C55E;
+  --danger:    #EF4444;
+  --warning:   #F59E0B;
+  --r:         12px;
+  --r-sm:      8px;
+}
+
+html{scroll-behavior:smooth}
+
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--navy);
+  color:var(--white);
+  min-height:100vh;
+  overflow-x:hidden;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* BG */
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background:
+    radial-gradient(ellipse 70% 45% at 15% 5%, rgba(77,184,255,0.06) 0%,transparent 70%),
+    radial-gradient(ellipse 55% 40% at 85% 90%, rgba(255,122,47,0.05) 0%,transparent 65%),
+    radial-gradient(ellipse 40% 30% at 60% 40%, rgba(77,184,255,0.03) 0%,transparent 60%);
+  pointer-events:none;z-index:0;
+}
+
+/* NAV */
+nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(8,21,42,0.93);
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  height:56px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 20px;
+}
+
+.brand{
+  font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem;
+  color:var(--white);text-decoration:none;letter-spacing:-0.4px;
+}
+.brand span{color:var(--blue)}
+
+.nav-pill{
+  font-size:0.68rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  border:1px solid var(--border);color:var(--muted);
+  padding:4px 12px;border-radius:20px;
+}
+
+/* WRAPPER */
+.wrap{
+  position:relative;z-index:1;
+  max-width:680px;margin:0 auto;
+  padding:0 16px 80px;
+}
+
+/* HERO */
+.hero{
+  text-align:center;
+  padding:52px 0 36px;
+  animation:fadeDown 0.6s ease both;
+}
+
+@keyframes fadeDown{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+.eyebrow{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:0.72rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;
+  color:var(--orange);margin-bottom:18px;
+}
+.eyebrow::before,.eyebrow::after{content:'';width:24px;height:1px;background:var(--orange);opacity:0.45}
+
+h1{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(1.75rem,5vw,2.6rem);
+  font-weight:800;line-height:1.13;letter-spacing:-0.8px;
+  margin-bottom:14px;
+}
+h1 em{font-style:normal;color:var(--blue)}
+
+.hero-sub{
+  font-size:0.95rem;color:var(--muted);
+  max-width:480px;margin:0 auto 32px;line-height:1.7;
+}
+
+/* PROGRESS BAR */
+.progress-wrap{
+  margin-bottom:28px;
+  animation:fadeUp 0.5s 0.15s ease both;
+}
+
+.progress-meta{
+  display:flex;justify-content:space-between;align-items:center;
+  margin-bottom:8px;
+}
+
+.progress-label{
+  font-size:0.78rem;font-weight:600;color:var(--muted);
+  text-transform:uppercase;letter-spacing:0.6px;
+}
+
+.progress-counter{
+  font-family:'Syne',sans-serif;font-size:0.82rem;font-weight:700;color:var(--blue);
+}
+
+.progress-track{
+  height:4px;background:var(--border);border-radius:4px;overflow:hidden;
+}
+
+.progress-fill{
+  height:100%;background:linear-gradient(90deg,var(--blue-soft),var(--blue));
+  border-radius:4px;transition:width 0.5s cubic-bezier(.4,0,.2,1);
+  width:0%;
+}
+
+/* QUESTION CARD */
+.q-card{
+  background:var(--navy-card);
+  border:1px solid var(--border);
+  border-radius:var(--r);
+  padding:28px 24px;
+  margin-bottom:16px;
+  animation:fadeUp 0.4s ease both;
+  display:none;
+}
+.q-card.active{display:block}
+
+.q-number{
+  font-size:0.7rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  color:var(--blue);margin-bottom:12px;
+  display:flex;align-items:center;gap:8px;
+}
+.q-number::before{
+  content:'';width:20px;height:2px;
+  background:var(--blue);border-radius:2px;
+}
+
+.q-text{
+  font-family:'Syne',sans-serif;
+  font-size:1.08rem;font-weight:700;
+  line-height:1.4;margin-bottom:20px;color:var(--white);
+}
+
+.q-hint{
+  font-size:0.78rem;color:var(--muted);
+  background:var(--blue-glow);border:1px solid rgba(77,184,255,0.12);
+  border-radius:var(--r-sm);padding:10px 14px;
+  margin-bottom:20px;line-height:1.55;
+}
+.q-hint::before{content:'💡 '}
+
+/* OPTIONS */
+.options{display:flex;flex-direction:column;gap:10px}
+
+.opt{
+  display:flex;align-items:center;gap:14px;
+  background:var(--navy-mid);
+  border:1.5px solid var(--border);
+  border-radius:var(--r-sm);
+  padding:14px 16px;
+  cursor:pointer;
+  transition:border-color 0.18s,background 0.18s,transform 0.12s;
+  user-select:none;
+  -webkit-tap-highlight-color:transparent;
+}
+
+.opt:hover{border-color:var(--blue-soft);background:rgba(77,184,255,0.05)}
+.opt:active{transform:scale(0.99)}
+
+.opt.selected-yes{
+  border-color:var(--success);
+  background:rgba(34,197,94,0.07);
+}
+.opt.selected-no{
+  border-color:var(--danger);
+  background:rgba(239,68,68,0.07);
+}
+.opt.selected-unsure{
+  border-color:var(--warning);
+  background:rgba(245,158,11,0.07);
+}
+
+.opt-radio{
+  width:20px;height:20px;border-radius:50%;
+  border:2px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;transition:border-color 0.18s,background 0.18s;
+}
+.opt-radio-inner{width:8px;height:8px;border-radius:50%;opacity:0;transition:opacity 0.18s}
+
+.opt.selected-yes .opt-radio{border-color:var(--success);background:rgba(34,197,94,0.15)}
+.opt.selected-yes .opt-radio-inner{background:var(--success);opacity:1}
+.opt.selected-no .opt-radio{border-color:var(--danger);background:rgba(239,68,68,0.15)}
+.opt.selected-no .opt-radio-inner{background:var(--danger);opacity:1}
+.opt.selected-unsure .opt-radio{border-color:var(--warning);background:rgba(245,158,11,0.15)}
+.opt.selected-unsure .opt-radio-inner{background:var(--warning);opacity:1}
+
+.opt-label{font-size:0.92rem;font-weight:500;color:var(--white)}
+.opt-sub{font-size:0.75rem;color:var(--muted);margin-top:1px}
+
+/* NAV BUTTONS */
+.nav-btns{
+  display:flex;gap:10px;
+  margin-top:20px;
+}
+
+.btn-back{
+  background:transparent;
+  border:1.5px solid var(--border);
+  color:var(--muted);
+  font-family:'Syne',sans-serif;font-weight:700;font-size:0.88rem;
+  border-radius:var(--r-sm);padding:12px 20px;
+  cursor:pointer;transition:border-color 0.15s,color 0.15s;
+  min-width:80px;
+}
+.btn-back:hover{border-color:var(--muted);color:var(--white)}
+.btn-back:disabled{opacity:0.3;cursor:not-allowed}
+
+.btn-next{
+  flex:1;
+  background:linear-gradient(135deg,var(--orange),var(--orange2));
+  color:#fff;
+  font-family:'Syne',sans-serif;font-weight:700;font-size:0.95rem;
+  border:none;border-radius:var(--r-sm);padding:13px 24px;
+  cursor:pointer;transition:transform 0.15s,box-shadow 0.15s,opacity 0.15s;
+  letter-spacing:0.2px;
+}
+.btn-next:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(255,122,47,0.3)}
+.btn-next:active{transform:translateY(0)}
+.btn-next:disabled{opacity:0.4;cursor:not-allowed;transform:none;box-shadow:none}
+
+/* RESULTS */
+#results{display:none}
+#results.show{display:block;animation:fadeUp 0.5s ease both}
+
+/* Score hero */
+.score-hero{
+  background:var(--navy-card);
+  border:1px solid var(--border);
+  border-radius:var(--r);
+  padding:32px 24px;
+  margin-bottom:20px;
+  text-align:center;
+}
+
+.score-ring-wrap{
+  position:relative;width:140px;height:140px;
+  margin:0 auto 20px;
+}
+.score-ring-wrap svg{width:140px;height:140px;transform:rotate(-90deg)}
+.ring-bg{fill:none;stroke:var(--border);stroke-width:11}
+.ring-fill{
+  fill:none;stroke-width:11;stroke-linecap:round;
+  stroke-dasharray:376;stroke-dashoffset:376;
+  transition:stroke-dashoffset 1.4s cubic-bezier(.4,0,.2,1),stroke 0.3s;
+}
+.score-center{
+  position:absolute;inset:0;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+}
+.score-num{
+  font-family:'Syne',sans-serif;font-size:2.6rem;font-weight:800;line-height:1;
+}
+.score-denom{font-size:0.75rem;color:var(--muted);font-weight:500}
+
+.verdict-label{
+  font-family:'Syne',sans-serif;font-size:1.3rem;font-weight:800;
+  margin-bottom:8px;
+}
+.verdict-desc{font-size:0.9rem;color:var(--muted);line-height:1.65;max-width:420px;margin:0 auto}
+
+/* summary pills */
+.summary-pills{
+  display:flex;justify-content:center;gap:12px;flex-wrap:wrap;
+  margin-top:20px;
+}
+.pill{
+  font-size:0.78rem;font-weight:600;
+  border-radius:20px;padding:5px 14px;
+  display:flex;align-items:center;gap:6px;
+}
+.pill-pass{background:rgba(34,197,94,0.12);color:var(--success);border:1px solid rgba(34,197,94,0.25)}
+.pill-fail{background:rgba(239,68,68,0.12);color:var(--danger);border:1px solid rgba(239,68,68,0.25)}
+.pill-warn{background:rgba(245,158,11,0.12);color:var(--warning);border:1px solid rgba(245,158,11,0.25)}
+
+/* Breakdown */
+.section-title{
+  font-family:'Syne',sans-serif;font-size:0.95rem;font-weight:700;
+  color:var(--white);margin-bottom:14px;
+  display:flex;align-items:center;gap:10px;
+}
+.section-title::after{content:'';flex:1;height:1px;background:var(--border)}
+
+.breakdown{display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+
+.bd-item{
+  background:var(--navy-card);
+  border:1px solid var(--border);
+  border-radius:var(--r-sm);
+  padding:14px 16px;
+  display:flex;align-items:flex-start;gap:12px;
+  opacity:0;transform:translateY(6px);
+  animation:fadeUp 0.35s forwards;
+}
+.bd-item.pass{border-left:3px solid var(--success)}
+.bd-item.fail{border-left:3px solid var(--danger)}
+.bd-item.warn{border-left:3px solid var(--warning)}
+
+.bd-icon{
+  width:24px;height:24px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:0.78rem;font-weight:700;flex-shrink:0;margin-top:1px;
+}
+.bd-icon.pass{background:rgba(34,197,94,0.15);color:var(--success)}
+.bd-icon.fail{background:rgba(239,68,68,0.15);color:var(--danger)}
+.bd-icon.warn{background:rgba(245,158,11,0.15);color:var(--warning)}
+
+.bd-body{flex:1;min-width:0}
+.bd-name{font-size:0.88rem;font-weight:600;color:var(--white);margin-bottom:3px}
+.bd-detail{font-size:0.78rem;color:var(--muted);line-height:1.5}
+
+/* Tips */
+.tips-box{
+  background:rgba(77,184,255,0.05);
+  border:1px solid rgba(77,184,255,0.18);
+  border-radius:var(--r);
+  padding:20px;margin-bottom:24px;
+}
+.tips-box h3{
+  font-family:'Syne',sans-serif;font-size:0.9rem;font-weight:700;
+  color:var(--blue);margin-bottom:14px;
+  display:flex;align-items:center;gap:8px;
+}
+.tips-list{list-style:none;display:flex;flex-direction:column;gap:9px}
+.tips-list li{
+  font-size:0.83rem;color:var(--muted);
+  display:flex;align-items:flex-start;gap:10px;line-height:1.55;
+}
+.tips-list li .tip-arrow{color:var(--blue);font-weight:700;flex-shrink:0;margin-top:1px}
+
+/* Action buttons */
+.action-row{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:32px}
+
+.btn-retake{
+  flex:1;min-width:140px;
+  background:transparent;
+  border:1.5px solid var(--blue);color:var(--blue);
+  font-family:'Syne',sans-serif;font-weight:700;font-size:0.88rem;
+  border-radius:var(--r-sm);padding:12px 20px;
+  cursor:pointer;transition:background 0.15s,transform 0.15s;
+  text-align:center;
+}
+.btn-retake:hover{background:var(--blue-glow);transform:translateY(-1px)}
+
+.btn-copy{
+  flex:1;min-width:140px;
+  background:transparent;
+  border:1.5px solid var(--border);color:var(--muted);
+  font-family:'Syne',sans-serif;font-weight:700;font-size:0.88rem;
+  border-radius:var(--r-sm);padding:12px 20px;
+  cursor:pointer;transition:border-color 0.15s,color 0.15s,transform 0.15s;
+  text-align:center;
+}
+.btn-copy:hover{border-color:var(--muted);color:var(--white);transform:translateY(-1px)}
+
+/* INFO SEO */
+.info{margin-top:56px}
+.info h2{
+  font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:700;
+  color:var(--white);margin-bottom:14px;margin-top:32px;
+}
+.info h2:first-child{margin-top:0}
+.info p,.info li{font-size:0.9rem;color:var(--muted);line-height:1.75;margin-bottom:10px}
+.info ul{padding-left:18px;margin-bottom:14px}
+
+/* FAQ */
+.faq-item{border-bottom:1px solid var(--border);padding:16px 0}
+.faq-item:first-child{border-top:1px solid var(--border)}
+.faq-q{
+  font-family:'Syne',sans-serif;font-size:0.92rem;font-weight:700;
+  color:var(--white);cursor:pointer;
+  display:flex;justify-content:space-between;align-items:center;gap:12px;
+  user-select:none;-webkit-tap-highlight-color:transparent;
+}
+.faq-arr{color:var(--blue);font-size:1rem;transition:transform 0.25s;flex-shrink:0}
+.faq-q.open .faq-arr{transform:rotate(180deg)}
+.faq-a{font-size:0.85rem;color:var(--muted);line-height:1.7;max-height:0;overflow:hidden;transition:max-height 0.35s ease,padding 0.25s}
+.faq-a.open{max-height:260px;padding-top:12px}
+
+/* FOOTER */
+footer{
+  margin-top:56px;border-top:1px solid var(--border);
+  padding-top:24px;text-align:center;
+}
+footer p{font-size:0.78rem;color:var(--muted);opacity:0.65}
+footer a{color:var(--blue);text-decoration:none}
+footer a:hover{text-decoration:underline}
+
+/* TOAST */
+.toast{
+  position:fixed;bottom:20px;left:50%;
+  transform:translateX(-50%) translateY(70px);
+  background:var(--navy-card2);border:1px solid var(--blue);
+  color:var(--white);font-size:0.83rem;font-weight:500;
+  padding:11px 22px;border-radius:30px;z-index:999;
+  transition:transform 0.28s ease;white-space:nowrap;
+  pointer-events:none;
+}
+.toast.show{transform:translateX(-50%) translateY(0)}
+
+/* DISCLAIMER */
+.disclaimer{
+  background:rgba(245,158,11,0.05);
+  border:1px solid rgba(245,158,11,0.18);
+  border-radius:var(--r-sm);
+  padding:12px 16px;
+  font-size:0.77rem;color:var(--muted);line-height:1.6;
+  margin-bottom:24px;
+  display:flex;gap:10px;align-items:flex-start;
+}
+.disclaimer-icon{flex-shrink:0;margin-top:1px}
+
+/* MOBILE */
+@media(max-width:480px){
+  nav{padding:0 14px}
+  .hero{padding:36px 0 24px}
+  h1{font-size:1.65rem}
+  .q-card{padding:22px 16px}
+  .opt{padding:12px 14px}
+  .score-hero{padding:26px 16px}
+  .nav-btns{gap:8px}
+  .btn-back{padding:12px 14px;min-width:64px}
+  .action-row{flex-direction:column}
+  .btn-retake,.btn-copy{min-width:unset;width:100%}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="brand" href="#">Light<span>rux</span></a>
+  <span class="nav-pill">Free Tool</span>
+</nav>
+
+<div class="wrap">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="eyebrow">Free AdSense Quiz</div>
+    <h1>AdSense Ready Checker<br><em>Will Google Approve Your Site?</em></h1>
+    <p class="hero-sub">Answer 10 quick questions about your blog or website. Get an instant readiness score with clear tips on what to fix before applying.</p>
+  </header>
+
+  <!-- PROGRESS -->
+  <div class="progress-wrap" id="progressWrap">
+    <div class="progress-meta">
+      <span class="progress-label">Your Progress</span>
+      <span class="progress-counter" id="progressCounter">Question 1 of 10</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </div>
+
+  <!-- QUESTIONS -->
+  <div id="quizWrap"></div>
+
+  <!-- RESULTS -->
+  <div id="results">
+
+    <div class="score-hero">
+      <div class="score-ring-wrap">
+        <svg viewBox="0 0 140 140">
+          <circle class="ring-bg" cx="70" cy="70" r="60"/>
+          <circle class="ring-fill" id="ringFill" cx="70" cy="70" r="60"/>
+        </svg>
+        <div class="score-center">
+          <span class="score-num" id="scoreNum">0</span>
+          <span class="score-denom">/10</span>
+        </div>
+      </div>
+      <div class="verdict-label" id="verdictLabel">–</div>
+      <div class="verdict-desc" id="verdictDesc">–</div>
+      <div class="summary-pills" id="summaryPills"></div>
+    </div>
+
+    <div class="disclaimer">
+      <span class="disclaimer-icon">⚠️</span>
+      <span>This score is based on your answers. Final AdSense approval is always at Google's discretion and also considers content quality, traffic, and account history.</span>
+    </div>
+
+    <p class="section-title">Question Breakdown</p>
+    <div class="breakdown" id="breakdown"></div>
+
+    <div class="tips-box" id="tipsBox" style="display:none">
+      <h3>🔧 What To Fix Before Applying</h3>
+      <ul class="tips-list" id="tipsList"></ul>
+    </div>
+
+    <div class="action-row">
+      <button class="btn-retake" onclick="retake()">← Retake Quiz</button>
+      <button class="btn-copy" onclick="copyResult()">📋 Copy My Score</button>
+    </div>
+
+  </div>
+
+  <!-- SEO INFO -->
+  <section class="info">
+
+    <h2>What Is the AdSense Ready Checker?</h2>
+    <p>The <strong>Lightrux AdSense Ready Checker</strong> is a free quiz-style tool that helps bloggers and website owners quickly assess whether their site meets Google AdSense's key eligibility requirements — before they apply.</p>
+    <p>Instead of applying blindly and getting rejected, answer 10 targeted questions, see exactly where your site stands, and get clear action steps to improve your chances.</p>
+
+    <h2>What Does Google AdSense Actually Look For?</h2>
+    <p>Google evaluates multiple factors when reviewing AdSense applications. The most important ones include:</p>
+    <ul>
+      <li>A Privacy Policy page disclosing how user data is handled</li>
+      <li>An About page establishing your site's identity and purpose</li>
+      <li>A Contact page for user trust and transparency</li>
+      <li>HTTPS (secure connection) on your site</li>
+      <li>Original, high-quality content — not copied or AI-spun</li>
+      <li>At least 15–30 well-written posts before applying</li>
+      <li>A clear navigation structure that's easy to browse</li>
+      <li>Content that complies with AdSense programme policies</li>
+    </ul>
+    <p>Note: Both custom domains and subdomains (like blogspot.com) can be approved for AdSense. Content quality matters far more than your domain type.</p>
+
+    <h2>Frequently Asked Questions</h2>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="faq(this)">How accurate is this quiz? <span class="faq-arr">▾</span></div>
+      <div class="faq-a">This quiz is based on the real factors Google evaluates during AdSense review. Because you answer from your own knowledge of your site, the results are far more accurate than any automated URL scanner. Your honesty = your accuracy.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="faq(this)">Can a blogspot.com blog get AdSense approved? <span class="faq-arr">▾</span></div>
+      <div class="faq-a">Yes. Blogger (blogspot.com) is a Google product, and many blogspot subdomains are approved for AdSense every day. A custom domain can add professionalism, but it is not a requirement for approval. Focus on content quality first.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="faq(this)">My score is high — will I definitely get approved? <span class="faq-arr">▾</span></div>
+      <div class="faq-a">A high score means you meet the common structural and content requirements. However, Google also manually assesses content originality, user experience, and policy compliance. A high score significantly improves your chances but is not a guarantee.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="faq(this)">How many posts do I need before applying? <span class="faq-arr">▾</span></div>
+      <div class="faq-a">Google doesn't publish an official minimum, but most successful applicants have at least 15–30 quality posts. More importantly, each post should be original, helpful, and at least 500–800 words. Thin or copied content is the most common rejection reason.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="faq(this)">Is this tool completely free? <span class="faq-arr">▾</span></div>
+      <div class="faq-a">Yes, 100% free. No account, no email, no payment. Lightrux builds free tools for bloggers and creators worldwide. Use the AdSense Ready Checker as many times as you need.</div>
+    </div>
+
+  </section>
+
+  <footer>
+    <p>Built by <a href="#">Lightrux</a> · Free Tools for Bloggers &amp; Creators · <a href="#">Privacy Policy</a></p>
+  </footer>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── QUESTIONS ──────────────────────────────────────────────────
+const QUESTIONS = [
+  {
+    q: "Does your website or blog use HTTPS?",
+    hint: "Check your browser address bar. If it shows a padlock icon and your URL starts with https://, you're good.",
+    options: [
+      { label: "Yes, it uses HTTPS", sub: "Padlock icon visible in browser", value: "yes" },
+      { label: "No, it uses HTTP only", sub: "No padlock, or shows 'Not Secure'", value: "no" },
+      { label: "I'm not sure", sub: "", value: "unsure" }
+    ],
+    score: { yes: 1, no: 0, unsure: 0.5 },
+    result: {
+      yes:   { status: "pass", msg: "HTTPS detected — your site has a secure connection as required by AdSense." },
+      no:    { status: "fail", msg: "Your site is not using HTTPS. AdSense requires a secure connection." },
+      unsure:{ status: "warn", msg: "Uncertain about HTTPS. Check your URL in the browser — it must start with https://." }
+    },
+    tip: "Enable HTTPS via your hosting provider or domain settings. Blogger and most platforms offer free SSL."
+  },
+  {
+    q: "Does your site have a Privacy Policy page?",
+    hint: "AdSense requires you to disclose that you use cookies and collect data. A Privacy Policy page is mandatory.",
+    options: [
+      { label: "Yes, I have a Privacy Policy page", sub: "Linked in my menu or footer", value: "yes" },
+      { label: "No, I don't have one", sub: "", value: "no" },
+      { label: "I'm not sure", sub: "", value: "unsure" }
+    ],
+    score: { yes: 1, no: 0, unsure: 0.3 },
+    result: {
+      yes:   { status: "pass", msg: "Privacy Policy found — this is a mandatory requirement for AdSense." },
+      no:    { status: "fail", msg: "No Privacy Policy. This is one of the most common AdSense rejection reasons." },
+      unsure:{ status: "warn", msg: "Uncertain. Check your site footer and menu for a Privacy Policy link." }
+    },
+    tip: "Create a dedicated Privacy Policy page disclosing cookie usage, data collection, and AdSense ads. Link it in your footer."
+  },
+  {
+    q: "Does your site have an About page?",
+    hint: "An About page tells Google and your visitors who you are, what your site covers, and why they should trust you.",
+    options: [
+      { label: "Yes, I have an About page", sub: "Explains who I am and what my site is about", value: "yes" },
+      { label: "No, I don't have one", sub: "", value: "no" },
+      { label: "I'm not sure", sub: "", value: "unsure" }
+    ],
+    score: { yes: 1, no: 0, unsure: 0.3 },
+    result: {
+      yes:   { status: "pass", msg: "About page present — builds trust and E-E-A-T signals for Google." },
+      no:    { status: "fail", msg: "No About page. Google values knowing who is behind a site." },
+      unsure:{ status: "warn", msg: "Not sure if you have an About page. Check your navigation menu." }
+    },
+    tip: "Add an About page describing yourself, your expertise, and your site's mission. This builds credibility with Google reviewers."
+  },
+  {
+    q: "Does your site have a Contact page?",
+    hint: "A Contact page shows transparency and lets users (and Google) know they can reach the site owner.",
+    options: [
+      { label: "Yes, I have a Contact page", sub: "Email or contact form available", value: "yes" },
+      { label: "No, I don't have one", sub: "", value: "no" },
+      { label: "I'm not sure", sub: "", value: "unsure" }
+    ],
+    score: { yes: 1, no: 0, unsure: 0.3 },
+    result: {
+      yes:   { status: "pass", msg: "Contact page found — a key trust signal for AdSense reviewers." },
+      no:    { status: "fail", msg: "No Contact page. This is a basic trust requirement for AdSense approval." },
+      unsure:{ status: "warn", msg: "Check your navigation menu or footer for a Contact page link." }
+    },
+    tip: "Create a Contact page with an email address or a simple contact form. This is a basic requirement AdSense reviewers look for."
+  },
+  {
+    q: "Does your site have a clear navigation menu?",
+    hint: "A navigation menu helps Google crawl your site and helps visitors find content easily — both are important for AdSense.",
+    options: [
+      { label: "Yes, I have a navigation menu", sub: "Visitors can easily browse my site", value: "yes" },
+      { label: "No, my site has no menu", sub: "", value: "no" },
+      { label: "I have a basic menu", sub: "But it's minimal or incomplete", value: "unsure" }
+    ],
+    score: { yes: 1, no: 0, unsure: 0.6 },
+    result: {
+      yes:   { status: "pass", msg: "Navigation menu present — site structure is clear and crawlable." },
+      no:    { status: "fail", msg: "No navigation menu. Google needs to crawl and understand your site structure." },
+      unsure:{ status: "warn", msg: "Basic menu found. Consider expanding it to cover key sections of your site." }
+    },
+    tip: "Add a clear navigation menu with links to your main categories, About, Contact, and Privacy Policy pages."
+  },
+  {
+    q: "How many published posts does your site currently have?",
+    hint: "Google wants to see enough original content to evaluate your site's quality and consistency.",
+    options: [
+      { label: "20 or more posts", sub: "Strong content volume", value: "yes" },
+      { label: "10 to 19 posts", sub: "Getting there", value: "unsure" },
+      { label: "Fewer than 10 posts", sub: "May be too early to apply", value: "no" }
+    ],
+    score: { yes: 1, no: 0, unsure: 0.5 },
+    result: {
+      yes:   { status: "pass", msg: "Strong content volume — 20+ posts shows consistency to Google reviewers." },
+      no:    { status: "fail", msg: "Too few posts. Build up to at least 15–20 quality posts before applying." },
+      unsure:{ status: "warn", msg: "Decent content volume, but aim for 20+ posts before applying for best results." }
+    },
+    tip: "Publish at least 15–20 original, well-written posts before applying. Focus on quality over quantity — aim for 600+ words per post."
+  },
+  {
+    q: "Is the content on your site original — written by you?",
+    hint: "Copied, spun, or AI-generated content without human editing is a leading cause of AdSense rejection.",
+    options: [
+      { label: "Yes, all content is original", sub: "Written and edited by me personally", value: "yes" },
+      { label: "Most is original, some copied", sub: "Mixed content on my site", value: "unsure" },
+      { label: "Some or most is copied/spun", sub: "From other sites or AI generators", value: "no" }
+    ],
+    score: { yes: 1, no: 0, unsure: 0.4 },
+    result: {
+      yes:   { status: "pass", msg: "Original content — the single most important factor for AdSense approval." },
+      no:    { status: "fail", msg: "Copied or spun content will almost certainly get your application rejected." },
+      unsure:{ status: "warn", msg: "Mixed content is risky. Remove or rewrite any copied content before applying." }
+    },
+    tip: "Remove all copied or unedited AI content from your site. Every post must provide genuine value written in your own words."
+  },
+  {
+    q: "Are your posts generally 500 words or longer?",
+    hint: "Thin, short posts signal low-value content to Google. Longer, detailed posts show depth and expertise.",
+    options: [
+      { label: "Yes, most posts are 500+ words", sub: "Good content depth", value: "yes" },
+      { label: "Mixed — some are short, some long", sub: "", value: "unsure" },
+      { label: "No, most posts are very short", sub: "Under 300 words typically", value: "no" }
+    ],
+    score: { yes: 1, no: 0, unsure: 0.5 },
+    result: {
+      yes:   { status: "pass", msg: "Good post length — depth of content is a positive signal for AdSense." },
+      no:    { status: "fail", msg: "Thin content. Short posts are flagged as low-value by Google's review team." },
+      unsure:{ status: "warn", msg: "Inconsistent post length. Try to ensure most posts are at least 500–800 words." }
+    },
+    tip: "Aim for posts of at least 600–800 words. Cover topics thoroughly with real, helpful information your readers can't easily find elsewhere."
+  },
+  {
+    q: "Is your site free from policy-violating content?",
+    hint: "AdSense does not allow sites with adult content, gambling, hacking tools, copyright violations, or misleading content.",
+    options: [
+      { label: "Yes, my content is fully compliant", sub: "No adult, gambling, or prohibited content", value: "yes" },
+      { label: "I'm not 100% sure", sub: "Some content might be borderline", value: "unsure" },
+      { label: "My site has policy-sensitive content", sub: "", value: "no" }
+    ],
+    score: { yes: 1, no: 0, unsure: 0.4 },
+    result: {
+      yes:   { status: "pass", msg: "Content appears policy-compliant — no prohibited content detected." },
+      no:    { status: "fail", msg: "Policy-violating content will result in AdSense rejection or account termination." },
+      unsure:{ status: "warn", msg: "Review Google's AdSense programme policies and remove any borderline content before applying." }
+    },
+    tip: "Read Google's AdSense Programme Policies carefully. Remove any content related to adult material, gambling, hacking, or copyright infringement."
+  },
+  {
+    q: "Does your site have a professional, readable design?",
+    hint: "Google reviewers look at overall user experience. A messy, hard-to-read, or broken design hurts your chances.",
+    options: [
+      { label: "Yes, it looks clean and professional", sub: "Easy to read and navigate on all devices", value: "yes" },
+      { label: "It's basic but functional", sub: "Not very polished but works fine", value: "unsure" },
+      { label: "My site design needs a lot of work", sub: "Hard to read or navigate", value: "no" }
+    ],
+    score: { yes: 1, no: 0, unsure: 0.6 },
+    result: {
+      yes:   { status: "pass", msg: "Professional design — a positive user experience signal for AdSense reviewers." },
+      no:    { status: "fail", msg: "Poor design hurts approval chances. AdSense reviewers assess overall user experience." },
+      unsure:{ status: "warn", msg: "A basic design is acceptable, but ensure text is readable and the site works on mobile." }
+    },
+    tip: "Use a clean, responsive theme. Ensure your text is readable, images load correctly, and the site works well on mobile devices."
+  }
+];
+
+// ── STATE ───────────────────────────────────────────────────────
+let current = 0;
+const answers = new Array(QUESTIONS.length).fill(null);
+
+// ── BUILD QUESTIONS ─────────────────────────────────────────────
+function buildQuiz() {
+  const wrap = document.getElementById('quizWrap');
+  wrap.innerHTML = '';
+  QUESTIONS.forEach((q, i) => {
+    const card = document.createElement('div');
+    card.className = 'q-card' + (i === 0 ? ' active' : '');
+    card.id = 'q' + i;
+    card.innerHTML = `
+      <div class="q-number">Question ${i+1} of ${QUESTIONS.length}</div>
+      <div class="q-text">${q.q}</div>
+      ${q.hint ? `<div class="q-hint">${q.hint}</div>` : ''}
+      <div class="options" id="opts${i}">
+        ${q.options.map((o,j) => `
+          <div class="opt" onclick="selectOpt(${i},${j},'${o.value}')" id="opt-${i}-${j}">
+            <div class="opt-radio"><div class="opt-radio-inner"></div></div>
+            <div>
+              <div class="opt-label">${o.label}</div>
+              ${o.sub ? `<div class="opt-sub">${o.sub}</div>` : ''}
+            </div>
+          </div>
+        `).join('')}
+      </div>
+      <div class="nav-btns">
+        <button class="btn-back" id="back${i}" onclick="goBack()" ${i===0?'disabled':''}>← Back</button>
+        <button class="btn-next" id="next${i}" onclick="goNext()" disabled>
+          ${i === QUESTIONS.length-1 ? 'See My Score →' : 'Next Question →'}
+        </button>
+      </div>
+    `;
+    wrap.appendChild(card);
+  });
+  updateProgress();
+}
+
+function selectOpt(qi, oi, val) {
+  answers[qi] = val;
+  // Clear all
+  QUESTIONS[qi].options.forEach((_, j) => {
+    const el = document.getElementById(`opt-${qi}-${j}`);
+    el.className = 'opt';
+  });
+  // Mark selected
+  const selected = document.getElementById(`opt-${qi}-${oi}`);
+  const cls = val === 'yes' ? 'selected-yes' : val === 'no' ? 'selected-no' : 'selected-unsure';
+  selected.className = 'opt ' + cls;
+  // Enable next
+  document.getElementById('next' + qi).disabled = false;
+}
+
+function goNext() {
+  if (answers[current] === null) return;
+  if (current === QUESTIONS.length - 1) {
+    showResults();
+    return;
+  }
+  document.getElementById('q' + current).classList.remove('active');
+  current++;
+  document.getElementById('q' + current).classList.add('active');
+  updateProgress();
+  document.getElementById('q' + current).scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function goBack() {
+  if (current === 0) return;
+  document.getElementById('q' + current).classList.remove('active');
+  current--;
+  document.getElementById('q' + current).classList.add('active');
+  updateProgress();
+  document.getElementById('q' + current).scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function updateProgress() {
+  const pct = (current / QUESTIONS.length) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressCounter').textContent = `Question ${current + 1} of ${QUESTIONS.length}`;
+}
+
+// ── RESULTS ─────────────────────────────────────────────────────
+function showResults() {
+  // Hide quiz
+  document.getElementById('quizWrap').style.display = 'none';
+  document.getElementById('progressWrap').style.display = 'none';
+
+  // Calc score
+  let total = 0;
+  QUESTIONS.forEach((q, i) => {
+    const ans = answers[i] || 'no';
+    total += q.score[ans] || 0;
+  });
+  const score = Math.round(total);
+
+  // Verdict
+  let verdict, vdesc, vcolor;
+  if (score >= 9) {
+    verdict = '🎉 Excellent — You\'re AdSense Ready!';
+    vdesc = 'Your site meets all the major AdSense requirements. You\'re in a strong position to apply. Make sure you have at least 15–20 quality posts before submitting.';
+    vcolor = '#22C55E';
+  } else if (score >= 7) {
+    verdict = '✅ Good — Almost Ready';
+    vdesc = 'Strong foundation with a few gaps. Fix the flagged items below and you\'ll significantly improve your approval chances.';
+    vcolor = '#4DB8FF';
+  } else if (score >= 5) {
+    verdict = '⚠️ Fair — Needs Work';
+    vdesc = 'Your site has some basics in place but several key requirements are missing. Work through the tips below before applying.';
+    vcolor = '#F59E0B';
+  } else {
+    verdict = '❌ Not Ready Yet';
+    vdesc = 'Multiple critical requirements are missing. Follow the improvement tips below to prepare your site properly before applying for AdSense.';
+    vcolor = '#EF4444';
+  }
+
+  // Show results section
+  const resEl = document.getElementById('results');
+  resEl.style.display = 'block';
+  resEl.classList.add('show');
+
+  // Animate ring
+  const circumference = 376;
+  const offset = circumference - (score / 10) * circumference;
+  const ring = document.getElementById('ringFill');
+  ring.style.stroke = vcolor;
+  setTimeout(() => { ring.style.strokeDashoffset = offset; }, 100);
+
+  // Animate number
+  let cur = 0;
+  const numEl = document.getElementById('scoreNum');
+  numEl.style.color = vcolor;
+  const counter = setInterval(() => {
+    if (cur >= score) { clearInterval(counter); return; }
+    cur++;
+    numEl.textContent = cur;
+  }, 100);
+
+  document.getElementById('verdictLabel').textContent = verdict;
+  document.getElementById('verdictLabel').style.color = vcolor;
+  document.getElementById('verdictDesc').textContent = vdesc;
+
+  // Summary pills
+  const passed = answers.filter((a, i) => QUESTIONS[i].score[a||'no'] >= 1).length;
+  const warned = answers.filter((a, i) => { const s = QUESTIONS[i].score[a||'no']; return s > 0 && s < 1; }).length;
+  const failed = QUESTIONS.length - passed - warned;
+  document.getElementById('summaryPills').innerHTML = `
+    <span class="pill pill-pass">✓ ${passed} Passed</span>
+    ${warned > 0 ? `<span class="pill pill-warn">⚠ ${warned} Partial</span>` : ''}
+    ${failed > 0 ? `<span class="pill pill-fail">✕ ${failed} Failed</span>` : ''}
+  `;
+
+  // Breakdown
+  const bd = document.getElementById('breakdown');
+  bd.innerHTML = '';
+  QUESTIONS.forEach((q, i) => {
+    const ans = answers[i] || 'no';
+    const res = q.result[ans];
+    const el = document.createElement('div');
+    el.className = `bd-item ${res.status}`;
+    el.style.animationDelay = `${i * 0.055}s`;
+    const icon = res.status === 'pass' ? '✓' : res.status === 'fail' ? '✕' : '!';
+    el.innerHTML = `
+      <div class="bd-icon ${res.status}">${icon}</div>
+      <div class="bd-body">
+        <div class="bd-name">${q.q}</div>
+        <div class="bd-detail">${res.msg}</div>
+      </div>
+    `;
+    bd.appendChild(el);
+  });
+
+  // Tips for non-passing
+  const tips = QUESTIONS.filter((q, i) => {
+    const s = QUESTIONS[i].score[answers[i]||'no'];
+    return s < 1;
+  }).map(q => q.tip);
+
+  const tipsBox = document.getElementById('tipsBox');
+  if (tips.length > 0) {
+    document.getElementById('tipsList').innerHTML = tips.map(t =>
+      `<li><span class="tip-arrow">→</span> ${t}</li>`
+    ).join('');
+    tipsBox.style.display = 'block';
+  }
+
+  // Store for copy
+  window._result = { score, verdict, answers, passed, warned, failed };
+
+  resEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function retake() {
+  current = 0;
+  answers.fill(null);
+  document.getElementById('results').style.display = 'none';
+  document.getElementById('results').classList.remove('show');
+  document.getElementById('quizWrap').style.display = '';
+  document.getElementById('progressWrap').style.display = '';
+  buildQuiz();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function copyResult() {
+  if (!window._result) return;
+  const { score, verdict, passed, warned, failed } = window._result;
+  const lines = QUESTIONS.map((q, i) => {
+    const ans = answers[i] || 'no';
+    const s = q.score[ans];
+    const icon = s >= 1 ? '✅' : s > 0 ? '⚠️' : '❌';
+    return `${icon} ${q.q}`;
+  });
+  const text = `AdSense Ready Checker — Lightrux\n\nScore: ${score}/10 — ${verdict}\n✓ ${passed} Passed · ⚠ ${warned} Partial · ✕ ${failed} Failed\n\n${lines.join('\n')}\n\nCheck your site free at Lightrux.`;
+  navigator.clipboard.writeText(text).then(() => toast('Result copied to clipboard!'));
+}
+
+// ── FAQ ──────────────────────────────────────────────────────────
+function faq(el) {
+  const ans = el.nextElementSibling;
+  const isOpen = ans.classList.contains('open');
+  document.querySelectorAll('.faq-a.open').forEach(a => { a.classList.remove('open'); a.previousElementSibling.classList.remove('open'); });
+  if (!isOpen) { ans.classList.add('open'); el.classList.add('open'); }
+}
+
+// ── TOAST ────────────────────────────────────────────────────────
+function toast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2800);
+}
+
+// ── INIT ─────────────────────────────────────────────────────────
+buildQuiz();
+</script>
+</body>
+</html>
