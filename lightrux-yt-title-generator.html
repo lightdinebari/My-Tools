@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Free YouTube Title Generator by Lightrux. Generate catchy, SEO-optimized YouTube titles instantly. Boost your click-through rate with proven title formulas.">
+<title>YouTube Title Generator – Lightrux Free Tool</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0d1b2a;
+    --navy2: #112236;
+    --navy3: #1a3a5c;
+    --blue: #4fc3f7;
+    --blue2: #29b6f6;
+    --orange: #ff6d00;
+    --orange2: #ff9100;
+    --white: #ffffff;
+    --gray: #8fafc8;
+    --light: #f0f7ff;
+    --card-bg: #0f2035;
+    --border: rgba(79,195,247,0.15);
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--light);
+    color: var(--navy);
+    min-height: 100vh;
+  }
+
+  /* ── BRAND HEADER BAR ── */
+  .brand-bar {
+    background: var(--navy);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .brand-logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--white);
+    text-decoration: none;
+    letter-spacing: -0.5px;
+  }
+  .brand-logo span { color: var(--orange); }
+  .brand-badge {
+    background: transparent;
+    border: 1.5px solid var(--blue);
+    color: var(--blue);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    text-transform: uppercase;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--white);
+    padding: 36px 20px 28px;
+    text-align: center;
+    border-bottom: 1px solid rgba(79,195,247,0.12);
+  }
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: #fff8f0;
+    border: 1px solid rgba(255,109,0,0.2);
+    color: var(--orange);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+  }
+  .hero-tag::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--orange); display: inline-block; }
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.7rem, 5vw, 2.6rem);
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .hero h1 span.yt { color: var(--orange); }
+  .hero h1 span.blue { color: var(--blue2); }
+  .hero p {
+    color: var(--gray);
+    font-size: 0.95rem;
+    max-width: 480px;
+    margin: 0 auto 22px;
+    line-height: 1.6;
+  }
+
+  /* ── TABS ── */
+  .tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 0;
+  }
+  .tab-btn {
+    background: var(--navy);
+    color: var(--white);
+    border: none;
+    border-radius: 30px;
+    padding: 9px 18px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: background 0.2s, color 0.2s, transform 0.15s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .tab-btn:hover { background: var(--navy3); transform: translateY(-1px); }
+  .tab-btn.active { background: var(--orange); color: var(--white); }
+
+  /* ── TOOL CARD ── */
+  .tool-wrap {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 24px 16px 40px;
+  }
+
+  .tool-card {
+    background: var(--navy);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(13,27,42,0.18);
+  }
+
+  .tool-card-inner {
+    padding: 24px 20px;
+  }
+
+  /* ── SECTION LABEL ── */
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 18px;
+  }
+  .section-label-icon {
+    width: 30px; height: 30px;
+    background: rgba(79,195,247,0.12);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+  }
+  .section-label span {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--white);
+    letter-spacing: 0.3px;
+  }
+
+  /* ── FORM FIELDS ── */
+  .field { margin-bottom: 16px; }
+  .field label {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--gray);
+    letter-spacing: 0.5px;
+    margin-bottom: 7px;
+    text-transform: uppercase;
+  }
+  .field label span.hint {
+    color: var(--blue);
+    font-weight: 400;
+    text-transform: none;
+    font-size: 0.75rem;
+    letter-spacing: 0;
+  }
+  .field input, .field select, .field textarea {
+    width: 100%;
+    background: #112236;
+    border: 1.5px solid rgba(79,195,247,0.15);
+    border-radius: 10px;
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    padding: 13px 15px;
+    outline: none;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .field input::placeholder, .field textarea::placeholder { color: #3d6080; }
+  .field input:focus, .field select:focus, .field textarea:focus {
+    border-color: var(--blue2);
+  }
+  .field select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234fc3f7' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 40px;
+    cursor: pointer;
+  }
+  .field select option { background: var(--navy2); color: var(--white); }
+  .field textarea { resize: vertical; min-height: 80px; }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  @media (max-width: 480px) {
+    .field-row { grid-template-columns: 1fr; }
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    border: none;
+    border-top: 1px solid rgba(79,195,247,0.1);
+    margin: 20px 0;
+  }
+
+  /* ── GENERATE BUTTON ── */
+  .gen-btn {
+    width: 100%;
+    background: linear-gradient(135deg, var(--orange), var(--orange2));
+    color: var(--white);
+    border: none;
+    border-radius: 12px;
+    padding: 15px;
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: opacity 0.2s, transform 0.15s;
+    letter-spacing: 0.3px;
+    margin-top: 4px;
+  }
+  .gen-btn:hover { opacity: 0.92; transform: translateY(-1px); }
+  .gen-btn:active { transform: translateY(0); }
+  .gen-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+  /* ── LOADING ── */
+  .loading {
+    display: none;
+    text-align: center;
+    padding: 24px 0 8px;
+    color: var(--gray);
+    font-size: 0.88rem;
+  }
+  .loading.show { display: block; }
+  .spinner {
+    width: 32px; height: 32px;
+    border: 3px solid rgba(79,195,247,0.2);
+    border-top-color: var(--blue2);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin: 0 auto 10px;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── RESULTS ── */
+  .results-wrap {
+    display: none;
+    padding: 0 20px 24px;
+  }
+  .results-wrap.show { display: block; }
+
+  .results-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    padding-top: 4px;
+  }
+  .results-header span {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--blue);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .results-count {
+    background: rgba(79,195,247,0.12);
+    color: var(--blue);
+    border-radius: 20px;
+    padding: 3px 10px;
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  .title-item {
+    background: #112236;
+    border: 1px solid rgba(79,195,247,0.12);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    transition: border-color 0.2s, transform 0.15s;
+    animation: fadeUp 0.35s ease both;
+  }
+  .title-item:hover { border-color: rgba(79,195,247,0.3); transform: translateX(2px); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .title-num {
+    min-width: 26px; height: 26px;
+    background: rgba(255,109,0,0.15);
+    color: var(--orange2);
+    border-radius: 6px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .title-text {
+    flex: 1;
+    color: var(--white);
+    font-size: 0.92rem;
+    font-weight: 500;
+    line-height: 1.5;
+  }
+  .copy-btn {
+    background: rgba(79,195,247,0.1);
+    border: 1px solid rgba(79,195,247,0.2);
+    color: var(--blue);
+    border-radius: 7px;
+    padding: 5px 10px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.2s, color 0.2s;
+    font-family: 'DM Sans', sans-serif;
+    white-space: nowrap;
+  }
+  .copy-btn:hover { background: var(--blue2); color: var(--navy); }
+  .copy-btn.copied { background: #1a5c2a; border-color: #2e7d41; color: #4ade80; }
+
+  /* ── COPY ALL ── */
+  .copy-all-btn {
+    width: 100%;
+    background: transparent;
+    border: 1.5px solid rgba(79,195,247,0.25);
+    color: var(--blue);
+    border-radius: 10px;
+    padding: 11px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 6px;
+    transition: background 0.2s, border-color 0.2s;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .copy-all-btn:hover { background: rgba(79,195,247,0.08); border-color: var(--blue2); }
+
+  /* ── TIPS SECTION ── */
+  .tips-section {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 20px;
+    margin-top: 20px;
+    border: 1px solid rgba(79,195,247,0.12);
+  }
+  .tips-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 14px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .tip-item {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 11px;
+    align-items: flex-start;
+  }
+  .tip-dot {
+    min-width: 20px; height: 20px;
+    background: linear-gradient(135deg, var(--orange), var(--orange2));
+    border-radius: 5px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.65rem;
+    color: white;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .tip-item p { font-size: 0.83rem; color: #3d6080; line-height: 1.5; }
+  .tip-item p strong { color: var(--navy); }
+
+  /* ── FOOTER ── */
+  .tool-footer {
+    text-align: center;
+    margin-top: 28px;
+    color: var(--gray);
+    font-size: 0.78rem;
+  }
+  .tool-footer a { color: var(--blue2); text-decoration: none; }
+  .tool-footer a:hover { text-decoration: underline; }
+
+  /* ── CHAR COUNTER ── */
+  .char-counter {
+    text-align: right;
+    font-size: 0.72rem;
+    color: var(--gray);
+    margin-top: 4px;
+  }
+  .char-counter.warn { color: var(--orange2); }
+
+  /* ── TOAST ── */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(60px);
+    background: var(--navy);
+    color: var(--white);
+    border: 1px solid rgba(79,195,247,0.3);
+    border-radius: 10px;
+    padding: 11px 22px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    z-index: 9999;
+    transition: transform 0.3s ease;
+    white-space: nowrap;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 480px) {
+    .hero { padding: 28px 16px 22px; }
+    .tool-card-inner { padding: 18px 14px; }
+    .results-wrap { padding: 0 14px 20px; }
+    .title-item { padding: 12px 12px; gap: 9px; }
+    .title-text { font-size: 0.87rem; }
+    .copy-btn { font-size: 0.68rem; padding: 5px 8px; }
+    .tab-btn { padding: 8px 14px; font-size: 0.75rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- BRAND BAR -->
+<div class="brand-bar">
+  <a href="https://lightrux.name.ng" class="brand-logo">Light<span>rux</span></a>
+  <div class="brand-badge">Free Tool</div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">YouTube Title Generator</div>
+  <h1>Generate <span class="yt">YouTube</span> Titles<br><span class="blue">That Get Clicks</span></h1>
+  <p>Enter your topic, pick a style, and instantly get 10 catchy, SEO-friendly YouTube titles proven to boost views.</p>
+  <div class="tabs" id="styleTabs">
+    <button class="tab-btn active" data-style="viral" onclick="setStyle(this)">🔥 Viral</button>
+    <button class="tab-btn" data-style="howto" onclick="setStyle(this)">📖 How-To</button>
+    <button class="tab-btn" data-style="listicle" onclick="setStyle(this)">📋 Listicle</button>
+    <button class="tab-btn" data-style="question" onclick="setStyle(this)">❓ Question</button>
+    <button class="tab-btn" data-style="story" onclick="setStyle(this)">🎬 Story</button>
+    <button class="tab-btn" data-style="secret" onclick="setStyle(this)">🤫 Secret</button>
+  </div>
+</div>
+
+<!-- TOOL WRAP -->
+<div class="tool-wrap">
+  <div class="tool-card">
+    <div class="tool-card-inner">
+
+      <div class="section-label">
+        <div class="section-label-icon">🎯</div>
+        <span>Title Details</span>
+      </div>
+
+      <div class="field">
+        <label>Video Topic <span class="hint">— what is your video about?</span></label>
+        <input type="text" id="topicInput" placeholder="e.g. How to make money blogging" maxlength="120" oninput="updateChar()">
+        <div class="char-counter" id="charCount">0 / 120</div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label>Niche / Category</label>
+          <select id="nicheSelect">
+            <option value="general">General</option>
+            <option value="finance">Finance & Money</option>
+            <option value="tech">Tech & Gadgets</option>
+            <option value="fitness">Fitness & Health</option>
+            <option value="food">Food & Cooking</option>
+            <option value="travel">Travel & Lifestyle</option>
+            <option value="education">Education</option>
+            <option value="gaming">Gaming</option>
+            <option value="beauty">Beauty & Fashion</option>
+            <option value="business">Business & Marketing</option>
+            <option value="blogging">Blogging & SEO</option>
+            <option value="motivation">Motivation</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>Target Audience</label>
+          <select id="audienceSelect">
+            <option value="everyone">Everyone</option>
+            <option value="beginners">Beginners</option>
+            <option value="advanced">Advanced</option>
+            <option value="students">Students</option>
+            <option value="entrepreneurs">Entrepreneurs</option>
+            <option value="parents">Parents</option>
+            <option value="professionals">Professionals</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Keyword to Include <span class="hint">— optional</span></label>
+        <input type="text" id="keywordInput" placeholder="e.g. passive income, weight loss, SEO tips" maxlength="60">
+      </div>
+
+      <hr class="divider">
+
+      <button class="gen-btn" onclick="generateTitles()" id="genBtn">
+        <span>⚡</span> Generate 10 Titles
+      </button>
+
+      <div class="loading" id="loading">
+        <div class="spinner"></div>
+        Crafting your titles…
+      </div>
+
+    </div>
+
+    <!-- RESULTS -->
+    <div class="results-wrap" id="resultsWrap">
+      <hr class="divider" style="margin-top:0;">
+      <div class="results-header">
+        <span>✨ Generated Titles</span>
+        <div class="results-count" id="resultsCount">10 titles</div>
+      </div>
+      <div id="titlesList"></div>
+      <button class="copy-all-btn" onclick="copyAll()">
+        <span>📋</span> Copy All Titles
+      </button>
+    </div>
+
+  </div>
+
+  <!-- TIPS -->
+  <div class="tips-section">
+    <div class="tips-title">💡 YouTube Title Tips</div>
+    <div class="tip-item">
+      <div class="tip-dot">1</div>
+      <p><strong>Keep it under 60 characters</strong> — titles get cut off in search results beyond that.</p>
+    </div>
+    <div class="tip-item">
+      <div class="tip-dot">2</div>
+      <p><strong>Put your main keyword first</strong> — YouTube's algorithm weights the beginning of your title more.</p>
+    </div>
+    <div class="tip-item">
+      <div class="tip-dot">3</div>
+      <p><strong>Use numbers</strong> — "7 Ways to…" outperforms generic titles because they set clear expectations.</p>
+    </div>
+    <div class="tip-item">
+      <div class="tip-dot">4</div>
+      <p><strong>Create curiosity gaps</strong> — "The #1 mistake most people make with…" drives clicks naturally.</p>
+    </div>
+    <div class="tip-item">
+      <div class="tip-dot">5</div>
+      <p><strong>Test multiple titles</strong> — use A/B testing with YouTube's built-in feature after uploading.</p>
+    </div>
+  </div>
+
+  <div class="tool-footer">
+    Powered by <a href="https://lightrux.name.ng">Lightrux</a> · Free SEO & Content Tools
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">✅ Copied!</div>
+
+<script>
+  var currentStyle = 'viral';
+
+  function setStyle(btn) {
+    document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+    btn.classList.add('active');
+    currentStyle = btn.getAttribute('data-style');
+  }
+
+  function updateChar() {
+    var val = document.getElementById('topicInput').value.length;
+    var el = document.getElementById('charCount');
+    el.textContent = val + ' / 120';
+    el.className = 'char-counter' + (val > 90 ? ' warn' : '');
+  }
+
+  // ── TITLE TEMPLATES ──
+  var templates = {
+    viral: [
+      'I Tried {topic} For 30 Days — Here\'s What Happened',
+      'Nobody Talks About This {topic} Secret (Until Now)',
+      'The Truth About {topic} Nobody Tells You',
+      'Why 99% of People Fail at {topic}',
+      'I Wish I Knew This About {topic} Sooner',
+      'This {topic} Trick Changed Everything For Me',
+      'Stop Doing This With {topic} Right Now',
+      '{topic}: What They Don\'t Want You To Know',
+      'The REAL Reason {topic} Works (Explained)',
+      'I Tested Every {topic} Method — Here\'s The Winner',
+      'Warning: Don\'t Try {topic} Without Watching This First',
+      '{topic} Is Changing Everything in {year}',
+      'My {topic} Results After 90 Days (Honest Review)',
+      'This Is Why Your {topic} Isn\'t Working',
+      'The Shocking Truth About {topic}',
+    ],
+    howto: [
+      'How to {topic} From Scratch (Step-by-Step)',
+      'How to {topic} Even If You\'re a Complete Beginner',
+      'How to {topic} in Under 10 Minutes',
+      'How I {topic} and Made It Work Fast',
+      'How to {topic} the Right Way in {year}',
+      'The Easiest Way to {topic} (No Experience Needed)',
+      'How to {topic} Like a Pro (Full Guide)',
+      'A Simple {niche} Guide: How to {topic}',
+      'How to Start {topic} With Zero Budget',
+      'How to {topic} Without Making Costly Mistakes',
+      'The Complete Beginner\'s Guide to {topic}',
+      'How to Actually {topic} (Real Method That Works)',
+      'How to {topic} Fast: The Proven System',
+      'Step-by-Step: How to {topic} for {audience}',
+      'How to {topic} — Everything You Need to Know',
+    ],
+    listicle: [
+      '10 {topic} Tips That Actually Work in {year}',
+      '7 Things I Wish I Knew Before Starting {topic}',
+      '5 Biggest {topic} Mistakes (And How to Fix Them)',
+      '12 Best Ways to {topic} on a Budget',
+      '8 {topic} Secrets the Experts Use Daily',
+      'Top 10 {topic} Strategies for {audience}',
+      '6 Reasons Your {topic} Isn\'t Working (Fix These)',
+      '15 {niche} Tips to {topic} Faster',
+      '3 Simple {topic} Hacks That Save Hours',
+      '9 Things Nobody Tells You About {topic}',
+      '7 Powerful {topic} Techniques for {year}',
+      '5 Free Tools to Help You {topic} Like a Pro',
+      '10 {topic} Facts That Will Blow Your Mind',
+      '4 Steps to {topic} Without Spending a Dime',
+      '11 Must-Know {topic} Lessons for {audience}',
+    ],
+    question: [
+      'Is {topic} Really Worth It? (Honest Answer)',
+      'Can You Actually {topic} in {year}?',
+      'Does {topic} Still Work? Here\'s the Truth',
+      'Why Is {topic} So Hard? (And How to Fix It)',
+      'Are You Making These {topic} Mistakes?',
+      'What Happens When You {topic} Every Day?',
+      'Which {topic} Method Is Best for {audience}?',
+      'Should You Start {topic} in {year}?',
+      'Is {topic} Dead or Just Getting Started?',
+      'What\'s the Fastest Way to {topic}?',
+      'Why Do Most People Fail at {topic}?',
+      'Is {topic} Possible for Beginners?',
+      'What No One Tells You About {topic}',
+      'Can a {audience} Really Succeed at {topic}?',
+      'Do You Know the Real Cost of Not Doing {topic}?',
+    ],
+    story: [
+      'I Started {topic} With Nothing — Here\'s My Story',
+      'My Honest {topic} Journey (6 Month Update)',
+      'How {topic} Completely Changed My Life',
+      'From Zero to Success: My {topic} Story',
+      'I Failed at {topic} 3 Times — Then This Happened',
+      'What I Learned After 1 Year of {topic}',
+      'My {topic} Transformation You Won\'t Believe',
+      'The Day {topic} Finally Made Sense to Me',
+      'I Quit Everything to Focus on {topic} — Was It Worth It?',
+      'How I {topic} With No Experience and Succeeded',
+      'The {topic} Lesson That Cost Me Everything',
+      'Behind the Scenes: My Real {topic} Results',
+      'I Tried {topic} So You Don\'t Have To',
+      'Nobody Believed I Could {topic} — I Proved Them Wrong',
+      'The Turning Point: How {topic} Saved My {niche} Career',
+    ],
+    secret: [
+      'The {topic} Secret Experts Don\'t Want You to Know',
+      'Hidden {topic} Method That Changed Everything',
+      'The Untold Truth About {topic} in {year}',
+      'What Big {niche} Brands Hide About {topic}',
+      'The Underground {topic} Strategy (Finally Revealed)',
+      'Secret {topic} Formula Used by Top {niche} Creators',
+      '{topic}: The Method They Never Teach You',
+      'The Insider\'s Guide to {topic} (No Hype)',
+      'Exposed: The Real Way to {topic}',
+      'Classified {topic} Tactics for Serious {audience}',
+      'The {topic} Blueprint They Don\'t Publish',
+      'Why Successful People Do {topic} Differently',
+      'The {niche} Industry\'s Best Kept {topic} Secret',
+      'Leaked: The {topic} Strategy That Works',
+      'What Nobody Publicly Says About {topic}',
+    ]
+  };
+
+  function capitalize(str) {
+    if (!str) return '';
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
+  function fillTemplate(tpl, topic, keyword, niche, audience) {
+    var nicheLabels = {
+      general: 'content', finance: 'finance', tech: 'tech', fitness: 'fitness',
+      food: 'food', travel: 'travel', education: 'education', gaming: 'gaming',
+      beauty: 'beauty', business: 'business', blogging: 'blogging', motivation: 'mindset'
+    };
+    var audienceLabels = {
+      everyone: 'beginners', beginners: 'beginners', advanced: 'pros',
+      students: 'students', entrepreneurs: 'entrepreneurs', parents: 'parents', professionals: 'professionals'
+    };
+    var topicStr = capitalize(keyword ? keyword : topic);
+    var nicheStr = nicheLabels[niche] || 'content';
+    var audienceStr = audienceLabels[audience] || 'beginners';
+    var year = new Date().getFullYear();
+
+    return tpl
+      .replace(/\{topic\}/g, topicStr)
+      .replace(/\{niche\}/g, capitalize(nicheStr))
+      .replace(/\{audience\}/g, audienceStr)
+      .replace(/\{year\}/g, year);
+  }
+
+  function shuffle(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+    }
+    return a;
+  }
+
+  function generateTitles() {
+    var topic = document.getElementById('topicInput').value.trim();
+    if (!topic) {
+      showToast('⚠️ Please enter a video topic first!');
+      document.getElementById('topicInput').focus();
+      return;
+    }
+
+    var keyword = document.getElementById('keywordInput').value.trim();
+    var niche = document.getElementById('nicheSelect').value;
+    var audience = document.getElementById('audienceSelect').value;
+
+    var btn = document.getElementById('genBtn');
+    var loading = document.getElementById('loading');
+    var resultsWrap = document.getElementById('resultsWrap');
+
+    btn.disabled = true;
+    loading.classList.add('show');
+    resultsWrap.classList.remove('show');
+
+    setTimeout(function() {
+      var pool = shuffle(templates[currentStyle] || templates.viral);
+      var selected = pool.slice(0, 10);
+      var titles = selected.map(function(tpl) {
+        return fillTemplate(tpl, topic, keyword, niche, audience);
+      });
+
+      var list = document.getElementById('titlesList');
+      list.innerHTML = '';
+
+      titles.forEach(function(title, i) {
+        var item = document.createElement('div');
+        item.className = 'title-item';
+        item.style.animationDelay = (i * 0.05) + 's';
+        item.innerHTML =
+          '<div class="title-num">' + (i + 1) + '</div>' +
+          '<div class="title-text">' + escapeHtml(title) + '</div>' +
+          '<button class="copy-btn" onclick="copyTitle(this, \'' + escapeAttr(title) + '\')">Copy</button>';
+        list.appendChild(item);
+      });
+
+      document.getElementById('resultsCount').textContent = '10 titles';
+      loading.classList.remove('show');
+      resultsWrap.classList.add('show');
+      btn.disabled = false;
+
+      // Scroll to results
+      setTimeout(function() {
+        document.getElementById('resultsWrap').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 100);
+
+    }, 900);
+  }
+
+  function escapeHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+  function escapeAttr(str) {
+    return str.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+  }
+
+  function copyTitle(btn, title) {
+    navigator.clipboard.writeText(title).then(function() {
+      btn.textContent = '✓ Copied';
+      btn.classList.add('copied');
+      setTimeout(function() {
+        btn.textContent = 'Copy';
+        btn.classList.remove('copied');
+      }, 2000);
+    }).catch(function() {
+      var ta = document.createElement('textarea');
+      ta.value = title;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      btn.textContent = '✓ Copied';
+      btn.classList.add('copied');
+      setTimeout(function() { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+    });
+  }
+
+  function copyAll() {
+    var items = document.querySelectorAll('.title-text');
+    var all = Array.from(items).map(function(el, i) { return (i+1) + '. ' + el.textContent; }).join('\n');
+    navigator.clipboard.writeText(all).then(function() {
+      showToast('✅ All 10 titles copied!');
+    }).catch(function() {
+      var ta = document.createElement('textarea');
+      ta.value = all;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      showToast('✅ All 10 titles copied!');
+    });
+  }
+
+  function showToast(msg) {
+    var t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(function() { t.classList.remove('show'); }, 2500);
+  }
+
+  // Allow Enter key to generate
+  document.getElementById('topicInput').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') generateTitles();
+  });
+</script>
+</body>
+</html>
