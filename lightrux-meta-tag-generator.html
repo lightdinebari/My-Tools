@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Free Meta Tag Generator by Lightrux. Generate SEO-optimized meta titles, descriptions, Open Graph, and Twitter Card tags instantly. No sign-up needed.">
+<title>Meta Tag Generator – Free SEO Tool | Lightrux</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy:    #0d1b2a;
+    --navy2:   #112236;
+    --navy3:   #1a3a5c;
+    --blue:    #4fc3f7;
+    --blue2:   #29b6f6;
+    --orange:  #ff6d00;
+    --orange2: #ff9100;
+    --white:   #ffffff;
+    --gray:    #8fafc8;
+    --light:   #f0f7ff;
+    --border:  rgba(79,195,247,0.15);
+    --green:   #4ade80;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--light);
+    color: var(--navy);
+    min-height: 100vh;
+  }
+
+  /* ── BRAND BAR ── */
+  .brand-bar {
+    background: var(--navy);
+    padding: 12px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .brand-logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--white);
+    text-decoration: none;
+    letter-spacing: -0.5px;
+  }
+  .brand-logo span { color: var(--orange); }
+  .brand-badge {
+    border: 1.5px solid var(--blue);
+    color: var(--blue);
+    font-size: 0.63rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    text-transform: uppercase;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--white);
+    padding: 34px 20px 26px;
+    text-align: center;
+    border-bottom: 1px solid rgba(79,195,247,0.1);
+  }
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: #f0f7ff;
+    border: 1px solid rgba(79,195,247,0.25);
+    color: var(--blue2);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 16px;
+  }
+  .hero-tag::before {
+    content: '';
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--blue2);
+    display: inline-block;
+  }
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.7rem, 5vw, 2.5rem);
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--navy);
+    margin-bottom: 10px;
+  }
+  .hero h1 .blue { color: var(--blue2); }
+  .hero h1 .orange { color: var(--orange); }
+  .hero p {
+    color: var(--gray);
+    font-size: 0.93rem;
+    max-width: 480px;
+    margin: 0 auto 22px;
+    line-height: 1.65;
+  }
+
+  /* ── TABS ── */
+  .tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+  }
+  .tab-btn {
+    background: var(--navy);
+    color: var(--white);
+    border: none;
+    border-radius: 30px;
+    padding: 9px 16px;
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: background 0.2s, transform 0.15s;
+    font-family: 'DM Sans', sans-serif;
+    white-space: nowrap;
+  }
+  .tab-btn:hover { background: var(--navy3); transform: translateY(-1px); }
+  .tab-btn.active { background: var(--orange); }
+
+  /* ── LAYOUT ── */
+  .tool-wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 22px 14px 44px;
+  }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--navy);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(13,27,42,0.18);
+    margin-bottom: 16px;
+  }
+  .card-inner { padding: 22px 20px; }
+
+  /* ── SECTION LABEL ── */
+  .sec-label {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 18px;
+  }
+  .sec-icon {
+    width: 30px; height: 30px;
+    background: rgba(79,195,247,0.12);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+  .sec-label span {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--white);
+  }
+
+  /* ── FIELDS ── */
+  .field { margin-bottom: 15px; }
+  .field label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--gray);
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-bottom: 7px;
+  }
+  .field label .hint {
+    color: var(--blue);
+    font-weight: 400;
+    text-transform: none;
+    font-size: 0.72rem;
+    letter-spacing: 0;
+  }
+  .char-bar {
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 10px;
+    background: rgba(79,195,247,0.1);
+    color: var(--blue);
+    transition: background 0.2s, color 0.2s;
+    white-space: nowrap;
+  }
+  .char-bar.ok   { background: rgba(74,222,128,0.12); color: var(--green); }
+  .char-bar.warn { background: rgba(255,145,0,0.12);  color: var(--orange2); }
+  .char-bar.bad  { background: rgba(239,68,68,0.12);  color: #f87171; }
+
+  input[type="text"], input[type="url"], textarea, select {
+    width: 100%;
+    background: #112236;
+    border: 1.5px solid rgba(79,195,247,0.15);
+    border-radius: 10px;
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.93rem;
+    padding: 12px 14px;
+    outline: none;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  input::placeholder, textarea::placeholder { color: #3d6080; }
+  input:focus, textarea:focus, select:focus { border-color: var(--blue2); }
+  textarea { resize: vertical; min-height: 78px; }
+  select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%234fc3f7' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 40px;
+    cursor: pointer;
+  }
+  select option { background: #112236; color: var(--white); }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  @media (max-width: 500px) {
+    .field-row { grid-template-columns: 1fr; }
+    .card-inner { padding: 18px 14px; }
+    .hero { padding: 26px 14px 20px; }
+    .tab-btn { padding: 8px 12px; font-size: 0.74rem; }
+  }
+
+  .divider {
+    border: none;
+    border-top: 1px solid rgba(79,195,247,0.1);
+    margin: 18px 0;
+  }
+
+  /* ── TOGGLE ROW ── */
+  .toggle-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(79,195,247,0.07);
+  }
+  .toggle-row:last-child { border-bottom: none; }
+  .toggle-info { flex: 1; padding-right: 12px; }
+  .toggle-info strong {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 2px;
+  }
+  .toggle-info small { font-size: 0.75rem; color: var(--gray); }
+
+  .toggle {
+    position: relative;
+    width: 42px; height: 24px;
+    flex-shrink: 0;
+  }
+  .toggle input { opacity: 0; width: 0; height: 0; }
+  .toggle-slider {
+    position: absolute;
+    inset: 0;
+    background: #1a3a5c;
+    border-radius: 24px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .toggle-slider::before {
+    content: '';
+    position: absolute;
+    width: 18px; height: 18px;
+    left: 3px; top: 3px;
+    background: var(--white);
+    border-radius: 50%;
+    transition: transform 0.2s;
+  }
+  .toggle input:checked + .toggle-slider { background: var(--orange); }
+  .toggle input:checked + .toggle-slider::before { transform: translateX(18px); }
+
+  /* ── GENERATE BTN ── */
+  .gen-btn {
+    width: 100%;
+    background: linear-gradient(135deg, var(--orange), var(--orange2));
+    color: var(--white);
+    border: none;
+    border-radius: 12px;
+    padding: 15px;
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: opacity 0.2s, transform 0.15s;
+    letter-spacing: 0.3px;
+  }
+  .gen-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+  .gen-btn:active { transform: translateY(0); }
+
+  /* ── OUTPUT SECTION ── */
+  .output-section { display: none; }
+  .output-section.show { display: block; }
+
+  .output-card {
+    background: var(--navy);
+    border-radius: 14px;
+    overflow: hidden;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 20px rgba(13,27,42,0.15);
+    animation: fadeUp 0.35s ease both;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .output-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    background: rgba(79,195,247,0.06);
+    border-bottom: 1px solid rgba(79,195,247,0.1);
+  }
+  .output-header-left {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .output-tag {
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--blue);
+  }
+  .output-badge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+    background: rgba(74,222,128,0.12);
+    color: var(--green);
+  }
+
+  .copy-tag-btn {
+    background: rgba(79,195,247,0.1);
+    border: 1px solid rgba(79,195,247,0.2);
+    color: var(--blue);
+    border-radius: 7px;
+    padding: 5px 12px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    font-family: 'DM Sans', sans-serif;
+    white-space: nowrap;
+  }
+  .copy-tag-btn:hover { background: var(--blue2); color: var(--navy); }
+  .copy-tag-btn.copied { background: rgba(74,222,128,0.15); border-color: rgba(74,222,128,0.3); color: var(--green); }
+
+  .output-code {
+    padding: 14px 16px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.78rem;
+    color: #a8d8f0;
+    line-height: 1.7;
+    word-break: break-all;
+    white-space: pre-wrap;
+    overflow-x: auto;
+  }
+  .output-code .tag-name { color: var(--orange2); }
+  .output-code .attr { color: var(--blue); }
+  .output-code .val { color: var(--green); }
+
+  /* ── COPY ALL ── */
+  .copy-all-btn {
+    width: 100%;
+    background: transparent;
+    border: 1.5px solid rgba(79,195,247,0.25);
+    color: var(--blue);
+    border-radius: 10px;
+    padding: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 4px;
+    transition: background 0.2s, border-color 0.2s;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .copy-all-btn:hover { background: rgba(79,195,247,0.08); border-color: var(--blue2); }
+
+  /* ── PREVIEW CARD ── */
+  .preview-card {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 18px;
+    margin-bottom: 16px;
+    border: 1px solid rgba(79,195,247,0.12);
+    display: none;
+  }
+  .preview-card.show { display: block; }
+  .preview-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.92rem;
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 12px;
+  }
+  .serp-box {
+    background: #f8faff;
+    border: 1px solid #e0eaf5;
+    border-radius: 10px;
+    padding: 14px;
+  }
+  .serp-url { font-size: 0.72rem; color: #3d8c40; margin-bottom: 3px; }
+  .serp-title { font-size: 1rem; color: #1a0dab; font-weight: 600; margin-bottom: 4px; line-height: 1.3; }
+  .serp-desc { font-size: 0.82rem; color: #4d5156; line-height: 1.5; }
+  .serp-title.too-long { color: #c0392b; }
+
+  /* ── TIPS ── */
+  .tips-card {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 20px;
+    border: 1px solid rgba(79,195,247,0.12);
+  }
+  .tips-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 14px;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .tip-item {
+    display: flex; gap: 10px;
+    margin-bottom: 11px; align-items: flex-start;
+  }
+  .tip-dot {
+    min-width: 20px; height: 20px;
+    background: linear-gradient(135deg, var(--orange), var(--orange2));
+    border-radius: 5px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.63rem; color: white; font-weight: 700;
+    flex-shrink: 0; margin-top: 1px;
+  }
+  .tip-item p { font-size: 0.82rem; color: #3d6080; line-height: 1.5; }
+  .tip-item p strong { color: var(--navy); }
+
+  /* ── FOOTER ── */
+  .tool-footer {
+    text-align: center;
+    margin-top: 28px;
+    color: var(--gray);
+    font-size: 0.78rem;
+  }
+  .tool-footer a { color: var(--blue2); text-decoration: none; }
+  .tool-footer a:hover { text-decoration: underline; }
+
+  /* ── TOAST ── */
+  .toast {
+    position: fixed;
+    bottom: 24px; left: 50%;
+    transform: translateX(-50%) translateY(60px);
+    background: var(--navy);
+    color: var(--white);
+    border: 1px solid rgba(79,195,247,0.3);
+    border-radius: 10px;
+    padding: 11px 22px;
+    font-size: 0.85rem; font-weight: 600;
+    z-index: 9999;
+    transition: transform 0.3s ease;
+    white-space: nowrap;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* ── ACTIVE TAB PANEL ── */
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+</style>
+</head>
+<body>
+
+<!-- BRAND BAR -->
+<div class="brand-bar">
+  <a href="https://lightrux.name.ng" class="brand-logo">Light<span>rux</span></a>
+  <div class="brand-badge">SEO Tools</div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">Meta Tag Generator</div>
+  <h1>Free <span class="blue">Meta Tag</span><br><span class="orange">Generator</span></h1>
+  <p>Fill in your page details and instantly generate SEO-optimized meta tags, Open Graph, and Twitter Card code — ready to paste.</p>
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('basic', this)">🏷️ Basic SEO</button>
+    <button class="tab-btn" onclick="switchTab('og', this)">📘 Open Graph</button>
+    <button class="tab-btn" onclick="switchTab('twitter', this)">🐦 Twitter Card</button>
+    <button class="tab-btn" onclick="switchTab('advanced', this)">⚙️ Advanced</button>
+  </div>
+</div>
+
+<!-- TOOL WRAP -->
+<div class="tool-wrap">
+
+  <div class="card">
+    <div class="card-inner">
+
+      <!-- TAB: BASIC SEO -->
+      <div class="tab-panel active" id="panel-basic">
+        <div class="sec-label">
+          <div class="sec-icon">🏷️</div>
+          <span>Basic SEO Tags</span>
+        </div>
+
+        <div class="field">
+          <label>
+            Page Title
+            <span class="char-bar" id="bar-title">0 / 60</span>
+          </label>
+          <input type="text" id="metaTitle" placeholder="e.g. Free Blogging Tips for Beginners | Lightrux" maxlength="120" oninput="updateBar('metaTitle','bar-title',60)">
+        </div>
+
+        <div class="field">
+          <label>
+            Meta Description
+            <span class="char-bar" id="bar-desc">0 / 160</span>
+          </label>
+          <textarea id="metaDesc" placeholder="e.g. Learn how to start a blog, grow traffic, and earn with AdSense. Free tips for beginners on Lightrux." maxlength="320" oninput="updateBar('metaDesc','bar-desc',160)"></textarea>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label>Keywords <span class="hint">— comma separated</span></label>
+            <input type="text" id="metaKeywords" placeholder="blogging, SEO, AdSense tips">
+          </div>
+          <div class="field">
+            <label>Author</label>
+            <input type="text" id="metaAuthor" placeholder="Lightrux">
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label>Robots</label>
+            <select id="metaRobots">
+              <option value="index, follow">index, follow</option>
+              <option value="noindex, follow">noindex, follow</option>
+              <option value="index, nofollow">index, nofollow</option>
+              <option value="noindex, nofollow">noindex, nofollow</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Language</label>
+            <select id="metaLang">
+              <option value="en">English</option>
+              <option value="fr">French</option>
+              <option value="es">Spanish</option>
+              <option value="de">German</option>
+              <option value="pt">Portuguese</option>
+              <option value="ar">Arabic</option>
+              <option value="zh">Chinese</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Canonical URL <span class="hint">— optional</span></label>
+          <input type="url" id="metaCanonical" placeholder="https://lightrux.name.ng/p/your-page">
+        </div>
+      </div>
+
+      <!-- TAB: OPEN GRAPH -->
+      <div class="tab-panel" id="panel-og">
+        <div class="sec-label">
+          <div class="sec-icon">📘</div>
+          <span>Open Graph (Facebook / LinkedIn)</span>
+        </div>
+
+        <div class="field">
+          <label>OG Title <span class="hint">— leave blank to use page title</span></label>
+          <input type="text" id="ogTitle" placeholder="Same as page title if left blank">
+        </div>
+
+        <div class="field">
+          <label>OG Description <span class="hint">— leave blank to use meta description</span></label>
+          <textarea id="ogDesc" placeholder="Same as meta description if left blank"></textarea>
+        </div>
+
+        <div class="field">
+          <label>Page URL</label>
+          <input type="url" id="ogUrl" placeholder="https://lightrux.name.ng/p/your-page">
+        </div>
+
+        <div class="field">
+          <label>Featured Image URL</label>
+          <input type="url" id="ogImage" placeholder="https://lightrux.name.ng/images/og-image.jpg">
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label>OG Type</label>
+            <select id="ogType">
+              <option value="website">website</option>
+              <option value="article">article</option>
+              <option value="blog">blog</option>
+              <option value="product">product</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Site Name</label>
+            <input type="text" id="ogSiteName" placeholder="Lightrux">
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB: TWITTER CARD -->
+      <div class="tab-panel" id="panel-twitter">
+        <div class="sec-label">
+          <div class="sec-icon">🐦</div>
+          <span>Twitter / X Card Tags</span>
+        </div>
+
+        <div class="field">
+          <label>Card Type</label>
+          <select id="twCard">
+            <option value="summary_large_image">Summary Large Image</option>
+            <option value="summary">Summary</option>
+            <option value="app">App</option>
+            <option value="player">Player</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Twitter Title <span class="hint">— leave blank to use page title</span></label>
+          <input type="text" id="twTitle" placeholder="Same as page title if left blank">
+        </div>
+
+        <div class="field">
+          <label>Twitter Description</label>
+          <textarea id="twDesc" placeholder="Same as meta description if left blank"></textarea>
+        </div>
+
+        <div class="field">
+          <label>Twitter Image URL</label>
+          <input type="url" id="twImage" placeholder="https://lightrux.name.ng/images/tw-card.jpg">
+        </div>
+
+        <div class="field">
+          <label>Twitter Handle <span class="hint">— optional</span></label>
+          <input type="text" id="twSite" placeholder="@lightrux">
+        </div>
+      </div>
+
+      <!-- TAB: ADVANCED -->
+      <div class="tab-panel" id="panel-advanced">
+        <div class="sec-label">
+          <div class="sec-icon">⚙️</div>
+          <span>Advanced Options</span>
+        </div>
+
+        <div class="toggle-row">
+          <div class="toggle-info">
+            <strong>Viewport Meta Tag</strong>
+            <small>Ensures proper mobile rendering</small>
+          </div>
+          <label class="toggle"><input type="checkbox" id="togViewport" checked><span class="toggle-slider"></span></label>
+        </div>
+        <div class="toggle-row">
+          <div class="toggle-info">
+            <strong>Charset (UTF-8)</strong>
+            <small>Required for proper character encoding</small>
+          </div>
+          <label class="toggle"><input type="checkbox" id="togCharset" checked><span class="toggle-slider"></span></label>
+        </div>
+        <div class="toggle-row">
+          <div class="toggle-info">
+            <strong>Theme Color</strong>
+            <small>Browser UI accent color on mobile</small>
+          </div>
+          <label class="toggle"><input type="checkbox" id="togTheme" checked><span class="toggle-slider"></span></label>
+        </div>
+        <div class="toggle-row">
+          <div class="toggle-info">
+            <strong>X-UA-Compatible</strong>
+            <small>Forces IE to use latest rendering engine</small>
+          </div>
+          <label class="toggle"><input type="checkbox" id="togXua"><span class="toggle-slider"></span></label>
+        </div>
+        <div class="toggle-row">
+          <div class="toggle-info">
+            <strong>Geo Tags</strong>
+            <small>Add geographic location meta tags</small>
+          </div>
+          <label class="toggle"><input type="checkbox" id="togGeo"><span class="toggle-slider"></span></label>
+        </div>
+
+        <div id="geoFields" style="display:none; margin-top:14px;">
+          <div class="field-row">
+            <div class="field">
+              <label>Region <span class="hint">— e.g. NG-LA</span></label>
+              <input type="text" id="geoRegion" placeholder="NG-LA">
+            </div>
+            <div class="field">
+              <label>Placename</label>
+              <input type="text" id="geoPlace" placeholder="Lagos">
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label>Latitude</label>
+              <input type="text" id="geoLat" placeholder="6.5244">
+            </div>
+            <div class="field">
+              <label>Longitude</label>
+              <input type="text" id="geoLon" placeholder="3.3792">
+            </div>
+          </div>
+        </div>
+
+        <div class="field" style="margin-top:14px;">
+          <label>Theme Color Value</label>
+          <input type="text" id="themeColor" placeholder="#0d1b2a" value="#0d1b2a">
+        </div>
+      </div>
+
+      <hr class="divider">
+      <button class="gen-btn" onclick="generateTags()">
+        <span>⚡</span> Generate Meta Tags
+      </button>
+
+    </div>
+  </div>
+
+  <!-- SERP PREVIEW -->
+  <div class="preview-card" id="serpPreview">
+    <div class="preview-title">🔍 Google Search Preview</div>
+    <div class="serp-box">
+      <div class="serp-url" id="serpUrl">lightrux.name.ng</div>
+      <div class="serp-title" id="serpTitle">Your page title will appear here</div>
+      <div class="serp-desc" id="serpDesc">Your meta description will appear here. Keep it between 120–160 characters for best results.</div>
+    </div>
+  </div>
+
+  <!-- OUTPUT -->
+  <div class="output-section" id="outputSection">
+
+    <div class="output-card" id="outBasic">
+      <div class="output-header">
+        <div class="output-header-left">
+          <span class="output-tag">🏷️ Basic SEO</span>
+          <span class="output-badge">Essential</span>
+        </div>
+        <button class="copy-tag-btn" onclick="copyBlock('codeBasic', this)">Copy</button>
+      </div>
+      <pre class="output-code" id="codeBasic"></pre>
+    </div>
+
+    <div class="output-card" id="outOG">
+      <div class="output-header">
+        <div class="output-header-left">
+          <span class="output-tag">📘 Open Graph</span>
+          <span class="output-badge">Social</span>
+        </div>
+        <button class="copy-tag-btn" onclick="copyBlock('codeOG', this)">Copy</button>
+      </div>
+      <pre class="output-code" id="codeOG"></pre>
+    </div>
+
+    <div class="output-card" id="outTW">
+      <div class="output-header">
+        <div class="output-header-left">
+          <span class="output-tag">🐦 Twitter Card</span>
+          <span class="output-badge">Social</span>
+        </div>
+        <button class="copy-tag-btn" onclick="copyBlock('codeTW', this)">Copy</button>
+      </div>
+      <pre class="output-code" id="codeTW"></pre>
+    </div>
+
+    <div class="output-card" id="outAdv">
+      <div class="output-header">
+        <div class="output-header-left">
+          <span class="output-tag">⚙️ Advanced</span>
+          <span class="output-badge">Optional</span>
+        </div>
+        <button class="copy-tag-btn" onclick="copyBlock('codeAdv', this)">Copy</button>
+      </div>
+      <pre class="output-code" id="codeAdv"></pre>
+    </div>
+
+    <button class="copy-all-btn" onclick="copyAll()">
+      📋 Copy All Tags
+    </button>
+  </div>
+
+  <!-- TIPS -->
+  <div class="tips-card" style="margin-top:16px;">
+    <div class="tips-title">💡 Meta Tag Best Practices</div>
+    <div class="tip-item">
+      <div class="tip-dot">1</div>
+      <p><strong>Keep title under 60 characters</strong> — anything longer gets truncated in Google search results.</p>
+    </div>
+    <div class="tip-item">
+      <div class="tip-dot">2</div>
+      <p><strong>Meta description: 120–160 characters</strong> — this is your ad copy in search results. Make it count.</p>
+    </div>
+    <div class="tip-item">
+      <div class="tip-dot">3</div>
+      <p><strong>Always add Open Graph tags</strong> — controls how your page looks when shared on Facebook, WhatsApp & LinkedIn.</p>
+    </div>
+    <div class="tip-item">
+      <div class="tip-dot">4</div>
+      <p><strong>Use canonical URLs</strong> — prevents duplicate content issues, especially important for Blogger pages with ?m=1 URLs.</p>
+    </div>
+    <div class="tip-item">
+      <div class="tip-dot">5</div>
+      <p><strong>Keywords meta tag is ignored by Google</strong> — but still used by Bing and Yahoo, so it's worth adding.</p>
+    </div>
+  </div>
+
+  <div class="tool-footer">
+    Powered by <a href="https://lightrux.name.ng">Lightrux</a> · Free SEO Tools
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">✅ Copied!</div>
+
+<script>
+  // ── TAB SWITCHING ──
+  function switchTab(name, btn) {
+    document.querySelectorAll('.tab-panel').forEach(function(p) { p.classList.remove('active'); });
+    document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+    document.getElementById('panel-' + name).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // ── GEO TOGGLE ──
+  document.getElementById('togGeo').addEventListener('change', function() {
+    document.getElementById('geoFields').style.display = this.checked ? 'block' : 'none';
+  });
+
+  // ── CHAR BARS ──
+  function updateBar(inputId, barId, limit) {
+    var val = document.getElementById(inputId).value.length;
+    var el  = document.getElementById(barId);
+    el.textContent = val + ' / ' + limit;
+    el.className = 'char-bar';
+    if (val === 0) return;
+    if (val <= limit * 0.75) el.classList.add('ok');
+    else if (val <= limit)   el.classList.add('warn');
+    else                     el.classList.add('bad');
+    updateSerpPreview();
+  }
+
+  // ── SERP PREVIEW ──
+  function updateSerpPreview() {
+    var title   = document.getElementById('metaTitle').value;
+    var desc    = document.getElementById('metaDesc').value;
+    var url     = document.getElementById('metaCanonical').value || document.getElementById('ogUrl').value;
+
+    if (!title && !desc) return;
+
+    document.getElementById('serpPreview').classList.add('show');
+    var tEl = document.getElementById('serpTitle');
+    tEl.textContent = title || 'Your page title';
+    tEl.className = 'serp-title' + (title.length > 60 ? ' too-long' : '');
+    document.getElementById('serpDesc').textContent = desc || 'Your meta description will appear here.';
+    if (url) {
+      try {
+        var u = new URL(url);
+        document.getElementById('serpUrl').textContent = u.hostname + u.pathname;
+      } catch(e) {
+        document.getElementById('serpUrl').textContent = url;
+      }
+    }
+  }
+
+  document.getElementById('metaTitle').addEventListener('input', updateSerpPreview);
+  document.getElementById('metaDesc').addEventListener('input', updateSerpPreview);
+  document.getElementById('metaCanonical').addEventListener('input', updateSerpPreview);
+
+  // ── ESCAPE HTML ──
+  function esc(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  // ── GENERATE ──
+  function generateTags() {
+    var title     = document.getElementById('metaTitle').value.trim();
+    var desc      = document.getElementById('metaDesc').value.trim();
+    var keywords  = document.getElementById('metaKeywords').value.trim();
+    var author    = document.getElementById('metaAuthor').value.trim();
+    var robots    = document.getElementById('metaRobots').value;
+    var lang      = document.getElementById('metaLang').value;
+    var canonical = document.getElementById('metaCanonical').value.trim();
+
+    if (!title && !desc) {
+      showToast('⚠️ Please enter at least a title or description!');
+      return;
+    }
+
+    // ── BASIC ──
+    var basic = '';
+    if (title)    basic += '<meta name="title" content="' + esc(title) + '">\n';
+    if (desc)     basic += '<meta name="description" content="' + esc(desc) + '">\n';
+    if (keywords) basic += '<meta name="keywords" content="' + esc(keywords) + '">\n';
+    if (author)   basic += '<meta name="author" content="' + esc(author) + '">\n';
+    basic += '<meta name="robots" content="' + robots + '">\n';
+    basic += '<meta http-equiv="content-language" content="' + lang + '">';
+    if (canonical) basic += '\n<link rel="canonical" href="' + esc(canonical) + '">';
+    document.getElementById('codeBasic').textContent = basic;
+
+    // ── OG ──
+    var ogTitle    = document.getElementById('ogTitle').value.trim()    || title;
+    var ogDesc     = document.getElementById('ogDesc').value.trim()     || desc;
+    var ogUrl      = document.getElementById('ogUrl').value.trim()      || canonical;
+    var ogImage    = document.getElementById('ogImage').value.trim();
+    var ogType     = document.getElementById('ogType').value;
+    var ogSiteName = document.getElementById('ogSiteName').value.trim();
+
+    var og = '';
+    og += '<meta property="og:type" content="' + ogType + '">\n';
+    if (ogTitle)    og += '<meta property="og:title" content="' + esc(ogTitle) + '">\n';
+    if (ogDesc)     og += '<meta property="og:description" content="' + esc(ogDesc) + '">\n';
+    if (ogUrl)      og += '<meta property="og:url" content="' + esc(ogUrl) + '">\n';
+    if (ogImage)    og += '<meta property="og:image" content="' + esc(ogImage) + '">\n';
+    if (ogSiteName) og += '<meta property="og:site_name" content="' + esc(ogSiteName) + '">';
+    document.getElementById('codeOG').textContent = og.trim();
+
+    // ── TWITTER ──
+    var twCard  = document.getElementById('twCard').value;
+    var twTitle = document.getElementById('twTitle').value.trim() || title;
+    var twDesc  = document.getElementById('twDesc').value.trim()  || desc;
+    var twImage = document.getElementById('twImage').value.trim();
+    var twSite  = document.getElementById('twSite').value.trim();
+
+    var tw = '';
+    tw += '<meta name="twitter:card" content="' + twCard + '">\n';
+    if (twTitle) tw += '<meta name="twitter:title" content="' + esc(twTitle) + '">\n';
+    if (twDesc)  tw += '<meta name="twitter:description" content="' + esc(twDesc) + '">\n';
+    if (twImage) tw += '<meta name="twitter:image" content="' + esc(twImage) + '">\n';
+    if (twSite)  tw += '<meta name="twitter:site" content="' + esc(twSite) + '">';
+    document.getElementById('codeTW').textContent = tw.trim();
+
+    // ── ADVANCED ──
+    var adv = '';
+    if (document.getElementById('togCharset').checked)
+      adv += '<meta charset="UTF-8">\n';
+    if (document.getElementById('togViewport').checked)
+      adv += '<meta name="viewport" content="width=device-width, initial-scale=1.0">\n';
+    if (document.getElementById('togXua').checked)
+      adv += '<meta http-equiv="X-UA-Compatible" content="IE=edge">\n';
+    if (document.getElementById('togTheme').checked) {
+      var tc = document.getElementById('themeColor').value.trim() || '#0d1b2a';
+      adv += '<meta name="theme-color" content="' + esc(tc) + '">\n';
+    }
+    if (document.getElementById('togGeo').checked) {
+      var gr = document.getElementById('geoRegion').value.trim();
+      var gp = document.getElementById('geoPlace').value.trim();
+      var gl = document.getElementById('geoLat').value.trim();
+      var gn = document.getElementById('geoLon').value.trim();
+      if (gr) adv += '<meta name="geo.region" content="' + esc(gr) + '">\n';
+      if (gp) adv += '<meta name="geo.placename" content="' + esc(gp) + '">\n';
+      if (gl && gn) adv += '<meta name="geo.position" content="' + esc(gl) + ';' + esc(gn) + '">\n';
+      if (gl && gn) adv += '<meta name="ICBM" content="' + esc(gl) + ', ' + esc(gn) + '">\n';
+    }
+    document.getElementById('codeAdv').textContent = adv.trim();
+
+    // ── SHOW OUTPUT ──
+    document.getElementById('outputSection').classList.add('show');
+    setTimeout(function() {
+      document.getElementById('outputSection').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 100);
+
+    showToast('✅ Meta tags generated!');
+  }
+
+  // ── COPY BLOCK ──
+  function copyBlock(id, btn) {
+    var text = document.getElementById(id).textContent;
+    doClipboard(text, function() {
+      btn.textContent = '✓ Copied';
+      btn.classList.add('copied');
+      setTimeout(function() { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+    });
+  }
+
+  // ── COPY ALL ──
+  function copyAll() {
+    var parts = ['codeBasic','codeOG','codeTW','codeAdv'];
+    var all = parts.map(function(id) {
+      var t = document.getElementById(id).textContent.trim();
+      return t ? '<!-- ' + id.replace('code','') + ' -->\n' + t : '';
+    }).filter(Boolean).join('\n\n');
+    doClipboard(all, function() { showToast('✅ All tags copied!'); });
+  }
+
+  function doClipboard(text, cb) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(cb).catch(function() { fallbackCopy(text, cb); });
+    } else { fallbackCopy(text, cb); }
+  }
+  function fallbackCopy(text, cb) {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.focus(); ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    cb();
+  }
+
+  function showToast(msg) {
+    var t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(function() { t.classList.remove('show'); }, 2500);
+  }
+</script>
+</body>
+</html>
