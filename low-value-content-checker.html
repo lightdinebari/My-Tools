@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Low Value Content Checker – Lightrux</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body style="margin:0;padding:0;background:#0d1b2a;font-family:'DM Sans',sans-serif;color:#e0eaf5;min-height:100vh;">
+
+<!-- BRAND BAR -->
+<div style="background:#0a1520;border-bottom:1px solid #1a2e45;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;">
+  <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;letter-spacing:-0.5px;">
+    <span style="color:#ffffff;">Light</span><span style="color:#ff6d00;">rux</span>
+  </div>
+  <span style="background:#1a3a5c;color:#4fc3f7;font-family:'DM Sans',sans-serif;font-size:11px;font-weight:600;padding:5px 12px;border-radius:20px;letter-spacing:0.5px;text-transform:uppercase;">SEO Tool</span>
+</div>
+
+<!-- MAIN WRAPPER -->
+<div style="max-width:720px;margin:0 auto;padding:30px 16px 60px;">
+
+  <!-- TOOL HEADER -->
+  <div style="text-align:center;margin-bottom:36px;">
+    <h1 style="font-family:'Syne',sans-serif;font-size:clamp(24px,5vw,36px);font-weight:800;color:#ffffff;margin:0 0 10px;line-height:1.2;">Low Value Content Checker</h1>
+    <p style="font-family:'DM Sans',sans-serif;font-size:15px;color:#7fb3d3;margin:0;font-style:italic;">Is your website content good enough for Google and AdSense?</p>
+    <div style="width:48px;height:3px;background:linear-gradient(90deg,#4fc3f7,#ff6d00);border-radius:2px;margin:16px auto 0;"></div>
+  </div>
+
+  <!-- TOOL CARD -->
+  <div style="background:#112233;border:1px solid #1a3a5c;border-radius:16px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,0.4);">
+
+    <!-- STEP 1: URL INPUT -->
+    <div id="lvc-step-url" style="padding:32px 28px;">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+        <div style="width:28px;height:28px;background:#4fc3f7;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:13px;color:#0d1b2a;flex-shrink:0;">1</div>
+        <h2 style="font-family:'Syne',sans-serif;font-size:17px;font-weight:700;color:#ffffff;margin:0;">Enter Your Website URL</h2>
+      </div>
+      <p style="font-family:'DM Sans',sans-serif;font-size:14px;color:#7fb3d3;margin:12px 0 20px;line-height:1.6;">Paste your blog or website URL below to get started. We will use this to personalize your content quality report.</p>
+
+      <input id="lvc-url-input" type="url" placeholder="https://yourblog.com" style="width:100%;box-sizing:border-box;background:#0d1b2a;border:1.5px solid #1a3a5c;border-radius:10px;padding:14px 16px;font-family:'DM Sans',sans-serif;font-size:15px;color:#e0eaf5;outline:none;transition:border-color 0.2s;" onfocus="this.style.borderColor='#4fc3f7'" onblur="this.style.borderColor='#1a3a5c'">
+      <div id="lvc-url-error" style="display:none;color:#ff6b6b;font-size:13px;margin-top:8px;font-family:'DM Sans',sans-serif;">Please enter a valid URL (e.g. https://yourblog.com)</div>
+
+      <button onclick="lvcStartSurvey()" style="margin-top:20px;width:100%;background:linear-gradient(135deg,#ff6d00,#ff8c00);color:#ffffff;font-family:'Syne',sans-serif;font-weight:700;font-size:15px;border:none;border-radius:10px;padding:15px;cursor:pointer;letter-spacing:0.3px;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.88'" onmouseout="this.style.opacity='1'">Start Content Check &rarr;</button>
+
+      <p style="font-family:'DM Sans',sans-serif;font-size:12px;color:#4a6a85;margin:14px 0 0;text-align:center;">Your URL is used only to personalize your report. We do not crawl or store your site data.</p>
+    </div>
+
+    <!-- STEP 2: SURVEY -->
+    <div id="lvc-step-survey" style="display:none;padding:28px;">
+
+      <!-- Site URL badge -->
+      <div id="lvc-site-badge" style="background:#0d1b2a;border:1px solid #1a3a5c;border-radius:8px;padding:10px 14px;margin-bottom:22px;display:flex;align-items:center;gap:8px;">
+        <span style="color:#4fc3f7;font-size:13px;">&#128279;</span>
+        <span id="lvc-site-label" style="font-family:'DM Sans',sans-serif;font-size:13px;color:#7fb3d3;word-break:break-all;"></span>
+      </div>
+
+      <!-- Progress bar -->
+      <div style="margin-bottom:22px;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+          <span style="font-family:'DM Sans',sans-serif;font-size:12px;color:#4a6a85;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;">Your Progress</span>
+          <span id="lvc-progress-label" style="font-family:'DM Sans',sans-serif;font-size:12px;color:#4fc3f7;font-weight:600;">Question 1 of 10</span>
+        </div>
+        <div style="background:#0d1b2a;border-radius:99px;height:6px;overflow:hidden;">
+          <div id="lvc-progress-bar" style="height:6px;background:linear-gradient(90deg,#4fc3f7,#00e5ff);border-radius:99px;width:10%;transition:width 0.4s ease;"></div>
+        </div>
+      </div>
+
+      <!-- Question counter -->
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:18px;">
+        <div id="lvc-q-num" style="width:32px;height:32px;background:linear-gradient(135deg,#4fc3f7,#0090c8);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:14px;color:#0d1b2a;flex-shrink:0;">1</div>
+        <p id="lvc-question-text" style="font-family:'DM Sans',sans-serif;font-size:15px;color:#e0eaf5;margin:0;line-height:1.55;font-weight:500;"></p>
+      </div>
+
+      <!-- Answer buttons -->
+      <div style="display:flex;flex-direction:column;gap:10px;" id="lvc-answers">
+        <button onclick="lvcAnswer('yes')" id="lvc-btn-yes" style="background:#0d1b2a;border:1.5px solid #1a3a5c;border-radius:10px;padding:13px 18px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:#e0eaf5;cursor:pointer;text-align:left;transition:all 0.2s;display:flex;align-items:center;gap:10px;" onmouseover="lvcHover(this)" onmouseout="lvcUnhover(this)">
+          <span style="width:20px;height:20px;border-radius:50%;border:2px solid #4a6a85;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;"></span> Yes
+        </button>
+        <button onclick="lvcAnswer('sometimes')" id="lvc-btn-sometimes" style="background:#0d1b2a;border:1.5px solid #1a3a5c;border-radius:10px;padding:13px 18px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:#e0eaf5;cursor:pointer;text-align:left;transition:all 0.2s;display:flex;align-items:center;gap:10px;" onmouseover="lvcHover(this)" onmouseout="lvcUnhover(this)">
+          <span style="width:20px;height:20px;border-radius:50%;border:2px solid #4a6a85;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;"></span> Sometimes
+        </button>
+        <button onclick="lvcAnswer('no')" id="lvc-btn-no" style="background:#0d1b2a;border:1.5px solid #1a3a5c;border-radius:10px;padding:13px 18px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:#e0eaf5;cursor:pointer;text-align:left;transition:all 0.2s;display:flex;align-items:center;gap:10px;" onmouseover="lvcHover(this)" onmouseout="lvcUnhover(this)">
+          <span style="width:20px;height:20px;border-radius:50%;border:2px solid #4a6a85;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;font-size:10px;"></span> No
+        </button>
+      </div>
+    </div>
+
+    <!-- STEP 3: RESULTS -->
+    <div id="lvc-step-results" style="display:none;padding:28px;">
+
+      <!-- Site badge -->
+      <div id="lvc-result-site-badge" style="background:#0d1b2a;border:1px solid #1a3a5c;border-radius:8px;padding:10px 14px;margin-bottom:24px;display:flex;align-items:center;gap:8px;">
+        <span style="color:#4fc3f7;font-size:13px;">&#128279;</span>
+        <span id="lvc-result-site-label" style="font-family:'DM Sans',sans-serif;font-size:13px;color:#7fb3d3;word-break:break-all;"></span>
+      </div>
+
+      <!-- Score circle -->
+      <div style="text-align:center;margin-bottom:28px;">
+        <div style="display:inline-flex;flex-direction:column;align-items:center;justify-content:center;width:130px;height:130px;border-radius:50%;border:4px solid #1a3a5c;background:#0d1b2a;position:relative;margin-bottom:14px;">
+          <div id="lvc-score-ring" style="position:absolute;inset:0;border-radius:50%;"></div>
+          <span id="lvc-score-number" style="font-family:'Syne',sans-serif;font-size:38px;font-weight:800;color:#ffffff;line-height:1;position:relative;z-index:1;"></span>
+          <span style="font-family:'DM Sans',sans-serif;font-size:12px;color:#4a6a85;position:relative;z-index:1;">out of 100</span>
+        </div>
+        <div id="lvc-score-label" style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;margin-bottom:6px;"></div>
+        <div id="lvc-score-sublabel" style="font-family:'DM Sans',sans-serif;font-size:13px;color:#7fb3d3;max-width:400px;margin:0 auto;line-height:1.5;"></div>
+      </div>
+
+      <!-- Disclaimer -->
+      <div style="background:#0a1a2a;border:1px solid #1a3a5c;border-left:3px solid #ff6d00;border-radius:8px;padding:12px 14px;margin-bottom:24px;">
+        <p style="font-family:'DM Sans',sans-serif;font-size:12px;color:#7fb3d3;margin:0;line-height:1.6;">&#9888;&#65039; This score is based on your answers only. It does not guarantee AdSense approval or Google ranking. Final decisions are always at Google's discretion based on content quality, traffic, and policy compliance.</p>
+      </div>
+
+      <!-- Breakdown -->
+      <div style="margin-bottom:24px;">
+        <h3 style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#ffffff;margin:0 0 14px;display:flex;align-items:center;gap:8px;">&#128202; Question Breakdown</h3>
+        <div id="lvc-breakdown" style="display:flex;flex-direction:column;gap:8px;"></div>
+      </div>
+
+      <!-- What to fix -->
+      <div id="lvc-fix-section" style="margin-bottom:28px;display:none;">
+        <h3 style="font-family:'Syne',sans-serif;font-size:15px;font-weight:700;color:#ffffff;margin:0 0 14px;display:flex;align-items:center;gap:8px;">&#128295; What To Fix Before Applying</h3>
+        <div id="lvc-fix-list" style="display:flex;flex-direction:column;gap:10px;"></div>
+      </div>
+
+      <!-- Action buttons -->
+      <div style="display:flex;flex-wrap:wrap;gap:10px;">
+        <button onclick="lvcRetake()" style="flex:1;min-width:140px;background:#0d1b2a;border:1.5px solid #4fc3f7;border-radius:10px;padding:13px;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:#4fc3f7;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.background='#0a2035'" onmouseout="this.style.background='#0d1b2a'">&#8592; Retake Quiz</button>
+        <button onclick="lvcCopyScore()" style="flex:1;min-width:140px;background:linear-gradient(135deg,#ff6d00,#ff8c00);border:none;border-radius:10px;padding:13px;font-family:'Syne',sans-serif;font-weight:700;font-size:13px;color:#ffffff;cursor:pointer;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.88'" onmouseout="this.style.opacity='1'">&#128203; Copy My Score</button>
+      </div>
+    </div>
+
+  </div>
+  <!-- END TOOL CARD -->
+
+  <!-- ABOUT SECTION -->
+  <div style="margin-top:44px;">
+    <h2 style="font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:#ffffff;margin:0 0 12px;">What Is the Low Value Content Checker?</h2>
+    <p style="font-family:'DM Sans',sans-serif;font-size:14px;color:#7fb3d3;line-height:1.75;margin:0 0 16px;">The <strong style="color:#e0eaf5;">Lightrux Low Value Content Checker</strong> is a free self-assessment tool that helps bloggers and website owners understand whether their content meets Google's quality standards — before they get rejected by AdSense or penalized in search rankings.</p>
+    <p style="font-family:'DM Sans',sans-serif;font-size:14px;color:#7fb3d3;line-height:1.75;margin:0;">Instead of guessing what is wrong with your site, answer 10 targeted questions based on real Google quality signals and receive an instant content quality score with clear action steps to improve.</p>
+  </div>
+
+  <!-- WHAT GOOGLE LOOKS FOR -->
+  <div style="margin-top:36px;background:#112233;border:1px solid #1a3a5c;border-radius:14px;padding:24px 22px;">
+    <h2 style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:#ffffff;margin:0 0 14px;">What Does Google Consider Low Value Content?</h2>
+    <p style="font-family:'DM Sans',sans-serif;font-size:14px;color:#7fb3d3;line-height:1.7;margin:0 0 14px;">Google's quality systems flag websites and pages that show these signals:</p>
+    <ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:9px;">
+      <li style="font-family:'DM Sans',sans-serif;font-size:14px;color:#7fb3d3;line-height:1.6;">Copied, rewritten, or scraped content from other sources</li>
+      <li style="font-family:'DM Sans',sans-serif;font-size:14px;color:#7fb3d3;line-height:1.6;">Short articles with little depth or useful information</li>
+      <li style="font-family:'DM Sans',sans-serif;font-size:14px;color:#7fb3d3;line-height:1.6;">Content that lacks personal experience, opinion, or original insight</li>
+      <li style="font-family:'DM Sans',sans-serif;font-size:14px;color:#7fb3d3;line-height:1.6;">Pages with almost no text or meaningful value for the reader</li>
+      <li style="font-family:'DM Sans',sans-serif;font-size:14px;color:#7fb3d3;line-height:1.6;">Sites focused mainly on affiliate links or ads rather than helping users</li>
+      <li style="font-family:'DM Sans',sans-serif;font-size:14px;color:#7fb3d3;line-height:1.6;">Duplicate or near-identical content across multiple pages</li>
+      <li style="font-family:'DM Sans',sans-serif;font-size:14px;color:#7fb3d3;line-height:1.6;">Missing essential pages such as About, Contact, or Privacy Policy</li>
+      <li style="font-family:'DM Sans',sans-serif;font-size:14px;color:#7fb3d3;line-height:1.6;">Excessive ads, popups, or intrusive elements that reduce user experience</li>
+      <li style="font-family:'DM Sans',sans-serif;font-size:14px;color:#7fb3d3;line-height:1.6;">Outdated content that has never been refreshed or updated</li>
+    </ul>
+  </div>
+
+  <!-- FAQ -->
+  <div style="margin-top:36px;">
+    <h2 style="font-family:'Syne',sans-serif;font-size:20px;font-weight:700;color:#ffffff;margin:0 0 16px;">Frequently Asked Questions</h2>
+    <div style="display:flex;flex-direction:column;gap:8px;" id="lvc-faq">
+
+      <div style="background:#112233;border:1px solid #1a3a5c;border-radius:10px;overflow:hidden;">
+        <button onclick="lvcToggleFaq(this)" style="width:100%;background:none;border:none;padding:16px 18px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:#e0eaf5;cursor:pointer;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:12px;">
+          How accurate is this checker?
+          <span style="color:#4fc3f7;font-size:18px;flex-shrink:0;transition:transform 0.2s;">&#9660;</span>
+        </button>
+        <div style="display:none;padding:0 18px 16px;font-family:'DM Sans',sans-serif;font-size:13px;color:#7fb3d3;line-height:1.7;">This tool is based on the real signals Google uses to evaluate content quality. Because you answer from your direct knowledge of your own site, the results are more reliable than any automated crawler. Your honesty determines your accuracy.</div>
+      </div>
+
+      <div style="background:#112233;border:1px solid #1a3a5c;border-radius:10px;overflow:hidden;">
+        <button onclick="lvcToggleFaq(this)" style="width:100%;background:none;border:none;padding:16px 18px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:#e0eaf5;cursor:pointer;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:12px;">
+          Will a high score guarantee AdSense approval?
+          <span style="color:#4fc3f7;font-size:18px;flex-shrink:0;transition:transform 0.2s;">&#9660;</span>
+        </button>
+        <div style="display:none;padding:0 18px 16px;font-family:'DM Sans',sans-serif;font-size:13px;color:#7fb3d3;line-height:1.7;">No. A high score means your content aligns with Google's known quality signals, which improves your chances. However, AdSense approval is always at Google's discretion and depends on additional factors including account history, traffic, and manual review.</div>
+      </div>
+
+      <div style="background:#112233;border:1px solid #1a3a5c;border-radius:10px;overflow:hidden;">
+        <button onclick="lvcToggleFaq(this)" style="width:100%;background:none;border:none;padding:16px 18px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:#e0eaf5;cursor:pointer;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:12px;">
+          Does this tool actually scan my website?
+          <span style="color:#4fc3f7;font-size:18px;flex-shrink:0;transition:transform 0.2s;">&#9660;</span>
+        </button>
+        <div style="display:none;padding:0 18px 16px;font-family:'DM Sans',sans-serif;font-size:13px;color:#7fb3d3;line-height:1.7;">No. This is a self-assessment tool. It uses your answers to generate a quality score. Your URL is used only to personalize your report and is not stored, crawled, or analyzed in any way.</div>
+      </div>
+
+      <div style="background:#112233;border:1px solid #1a3a5c;border-radius:10px;overflow:hidden;">
+        <button onclick="lvcToggleFaq(this)" style="width:100%;background:none;border:none;padding:16px 18px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:#e0eaf5;cursor:pointer;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:12px;">
+          How do I fix a low value content rejection from AdSense?
+          <span style="color:#4fc3f7;font-size:18px;flex-shrink:0;transition:transform 0.2s;">&#9660;</span>
+        </button>
+        <div style="display:none;padding:0 18px 16px;font-family:'DM Sans',sans-serif;font-size:13px;color:#7fb3d3;line-height:1.7;">Start by rewriting thin posts to be longer, more detailed, and more helpful. Add personal experience and original opinions. Remove or noindex pages with no value. Ensure your About, Contact, and Privacy Policy pages are complete. Then reapply after making meaningful improvements.</div>
+      </div>
+
+      <div style="background:#112233;border:1px solid #1a3a5c;border-radius:10px;overflow:hidden;">
+        <button onclick="lvcToggleFaq(this)" style="width:100%;background:none;border:none;padding:16px 18px;font-family:'DM Sans',sans-serif;font-size:14px;font-weight:600;color:#e0eaf5;cursor:pointer;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:12px;">
+          Is this tool completely free?
+          <span style="color:#4fc3f7;font-size:18px;flex-shrink:0;transition:transform 0.2s;">&#9660;</span>
+        </button>
+        <div style="display:none;padding:0 18px 16px;font-family:'DM Sans',sans-serif;font-size:13px;color:#7fb3d3;line-height:1.7;">Yes, 100% free. No account, no email, no payment required. Lightrux builds free tools for bloggers and creators worldwide. Use the Low Value Content Checker as many times as you need.</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER CREDIT -->
+  <div style="text-align:center;margin-top:44px;padding-top:24px;border-top:1px solid #1a3a5c;">
+    <p style="font-family:'DM Sans',sans-serif;font-size:12px;color:#4a6a85;margin:0;">Built by <strong style="color:#4fc3f7;">Lightrux</strong> &middot; Free Tools for Bloggers &amp; Creators &middot; <a href="https://www.lightrux.name.ng/p/privacy-policy.html" style="color:#4a6a85;text-decoration:none;">Privacy Policy</a></p>
+  </div>
+
+</div>
+<!-- END MAIN WRAPPER -->
+
+<script>
+var lvcQuestions = [
+  {
+    text: "Does your website contain mostly copied or rewritten content from other websites?",
+    reverse: false,
+    tip: "Rewrite your content from scratch using original research, personal experience, and your own words. Copied or spun content is the top reason for AdSense low value rejections."
+  },
+  {
+    text: "Do you publish very short articles with little useful information for readers?",
+    reverse: false,
+    tip: "Aim for at least 600 to 1000 words per post. More importantly, make sure every post genuinely answers a question or solves a problem for your reader."
+  },
+  {
+    text: "Do your posts lack personal insights, real experience, or original opinions?",
+    reverse: false,
+    tip: "Add your own perspective, experience, or tested results to every post. Google rewards content that shows E-E-A-T — Experience, Expertise, Authoritativeness, and Trust."
+  },
+  {
+    text: "Are there pages on your website with almost no text or meaningful content?",
+    reverse: false,
+    tip: "Identify empty or near-empty pages and either improve them with real content or set them to noindex in your SEO settings so Google ignores them."
+  },
+  {
+    text: "Does your website focus mainly on affiliate links or ads instead of helpful information?",
+    reverse: false,
+    tip: "Content should always come first. Reduce the ratio of ads and affiliate links compared to your actual helpful content. Google expects users to get value before seeing promotions."
+  },
+  {
+    text: "Do multiple pages on your site cover nearly the same topic with very similar wording?",
+    reverse: false,
+    tip: "Merge similar posts into one comprehensive piece. Duplicate or near-duplicate content dilutes your site's authority and confuses Google about which page to rank."
+  },
+  {
+    text: "Is your website missing important pages like About, Contact, or Privacy Policy?",
+    reverse: false,
+    tip: "Create an About page that introduces you or your brand, a Contact page for user trust, and a Privacy Policy page disclosing how you handle user data. These are required for AdSense."
+  },
+  {
+    text: "Does your content provide original experience, tutorials, opinions, or real value to visitors?",
+    reverse: true,
+    tip: "Keep doing this. Original, helpful content is exactly what Google and AdSense reward. Focus on depth, real examples, and content that actually helps your reader."
+  },
+  {
+    text: "Are there too many ads, popups, or distracting elements compared to actual content?",
+    reverse: false,
+    tip: "Reduce ad density and remove aggressive popups. Google penalizes sites where ads and interruptions overwhelm the content experience. Content should always be the focus."
+  },
+  {
+    text: "Are most of your posts outdated with no recent updates or improvements?",
+    reverse: false,
+    tip: "Regularly review and update older posts with fresh information, new examples, and corrected details. Updated content signals to Google that your site is actively maintained."
+  }
+];
+
+var lvcAnswers = [];
+var lvcCurrent = 0;
+var lvcSiteURL = '';
+
+function lvcStartSurvey() {
+  var input = document.getElementById('lvc-url-input').value.trim();
+  var errorEl = document.getElementById('lvc-url-error');
+  if (!input || (!input.startsWith('http://') && !input.startsWith('https://'))) {
+    errorEl.style.display = 'block';
+    return;
+  }
+  errorEl.style.display = 'none';
+  lvcSiteURL = input;
+  lvcAnswers = [];
+  lvcCurrent = 0;
+  document.getElementById('lvc-site-label').textContent = lvcSiteURL;
+  document.getElementById('lvc-step-url').style.display = 'none';
+  document.getElementById('lvc-step-survey').style.display = 'block';
+  lvcShowQuestion();
+}
+
+function lvcShowQuestion() {
+  var q = lvcQuestions[lvcCurrent];
+  document.getElementById('lvc-question-text').textContent = q.text;
+  document.getElementById('lvc-q-num').textContent = lvcCurrent + 1;
+  document.getElementById('lvc-progress-label').textContent = 'Question ' + (lvcCurrent + 1) + ' of 10';
+  document.getElementById('lvc-progress-bar').style.width = ((lvcCurrent + 1) / 10 * 100) + '%';
+  var btns = ['lvc-btn-yes','lvc-btn-sometimes','lvc-btn-no'];
+  for (var i = 0; i < btns.length; i++) {
+    var b = document.getElementById(btns[i]);
+    b.style.background = '#0d1b2a';
+    b.style.borderColor = '#1a3a5c';
+    b.style.color = '#e0eaf5';
+    b.querySelector('span').textContent = '';
+    b.querySelector('span').style.borderColor = '#4a6a85';
+    b.querySelector('span').style.background = 'transparent';
+  }
+}
+
+function lvcHover(el) {
+  el.style.borderColor = '#4fc3f7';
+  el.style.background = '#0a2035';
+}
+
+function lvcUnhover(el) {
+  el.style.borderColor = '#1a3a5c';
+  el.style.background = '#0d1b2a';
+}
+
+function lvcAnswer(val) {
+  lvcAnswers.push({ q: lvcCurrent, val: val, reverse: lvcQuestions[lvcCurrent].reverse });
+
+  var btnMap = { yes: 'lvc-btn-yes', sometimes: 'lvc-btn-sometimes', no: 'lvc-btn-no' };
+  var chosen = document.getElementById(btnMap[val]);
+  chosen.style.borderColor = '#4fc3f7';
+  chosen.style.background = '#0a2035';
+  chosen.querySelector('span').textContent = '✓';
+  chosen.querySelector('span').style.background = '#4fc3f7';
+  chosen.querySelector('span').style.borderColor = '#4fc3f7';
+  chosen.querySelector('span').style.color = '#0d1b2a';
+
+  setTimeout(function() {
+    lvcCurrent++;
+    if (lvcCurrent < 10) {
+      lvcShowQuestion();
+    } else {
+      lvcShowResults();
+    }
+  }, 350);
+}
+
+function lvcCalcScore() {
+  var total = 0;
+  for (var i = 0; i < lvcAnswers.length; i++) {
+    var a = lvcAnswers[i];
+    var pts = 0;
+    if (!a.reverse) {
+      if (a.val === 'no') pts = 10;
+      else if (a.val === 'sometimes') pts = 5;
+      else pts = 0;
+    } else {
+      if (a.val === 'yes') pts = 10;
+      else if (a.val === 'sometimes') pts = 5;
+      else pts = 0;
+    }
+    total += pts;
+  }
+  return total;
+}
+
+function lvcShowResults() {
+  document.getElementById('lvc-step-survey').style.display = 'none';
+  document.getElementById('lvc-step-results').style.display = 'block';
+
+  var score = lvcCalcScore();
+  document.getElementById('lvc-result-site-label').textContent = lvcSiteURL;
+  document.getElementById('lvc-score-number').textContent = score;
+
+  var label, sublabel, color;
+  if (score >= 80) {
+    label = '&#127881; Strong Content Quality';
+    sublabel = 'Your website shows strong content quality signals. Keep maintaining these standards to stay in good standing with Google and AdSense.';
+    color = '#00c853';
+  } else if (score >= 60) {
+    label = '&#128994; Decent — Room to Improve';
+    sublabel = 'Your content quality is acceptable but has some gaps. Address the flagged areas below to improve your standing with Google and AdSense.';
+    color = '#4fc3f7';
+  } else if (score >= 40) {
+    label = '&#128993; Needs Improvement';
+    sublabel = 'Several low value content signals were detected on your site. Work through the recommendations below before applying for AdSense.';
+    color = '#ffb300';
+  } else {
+    label = '&#128308; High Risk of Low Value Rejection';
+    sublabel = 'Your site shows multiple low value content signals. Focus on improving your content quality significantly before applying for AdSense.';
+    color = '#ff5252';
+  }
+
+  document.getElementById('lvc-score-label').innerHTML = label;
+  document.getElementById('lvc-score-label').style.color = color;
+  document.getElementById('lvc-score-sublabel').textContent = sublabel.replace(/&#[0-9]+;/g, '');
+
+  var scoreEl = document.getElementById('lvc-score-number');
+  scoreEl.style.color = color;
+
+  // Breakdown
+  var breakdownEl = document.getElementById('lvc-breakdown');
+  breakdownEl.innerHTML = '';
+  var fixItems = [];
+
+  for (var i = 0; i < lvcAnswers.length; i++) {
+    var a = lvcAnswers[i];
+    var q = lvcQuestions[i];
+    var pts = 0;
+    var status, statusColor, statusBg, icon;
+
+    if (!a.reverse) {
+      if (a.val === 'no') { pts = 10; status = 'Good'; statusColor = '#00c853'; statusBg = 'rgba(0,200,83,0.08)'; icon = '&#10003;'; }
+      else if (a.val === 'sometimes') { pts = 5; status = 'Partial'; statusColor = '#ffb300'; statusBg = 'rgba(255,179,0,0.08)'; icon = '&#126;'; }
+      else { pts = 0; status = 'Risk'; statusColor = '#ff5252'; statusBg = 'rgba(255,82,82,0.08)'; icon = '&#33;'; fixItems.push(i); }
+    } else {
+      if (a.val === 'yes') { pts = 10; status = 'Good'; statusColor = '#00c853'; statusBg = 'rgba(0,200,83,0.08)'; icon = '&#10003;'; }
+      else if (a.val === 'sometimes') { pts = 5; status = 'Partial'; statusColor = '#ffb300'; statusBg = 'rgba(255,179,0,0.08)'; icon = '&#126;'; fixItems.push(i); }
+      else { pts = 0; status = 'Risk'; statusColor = '#ff5252'; statusBg = 'rgba(255,82,82,0.08)'; icon = '&#33;'; fixItems.push(i); }
+    }
+
+    var row = document.createElement('div');
+    row.style.cssText = 'background:' + statusBg + ';border:1px solid ' + statusColor + '30;border-radius:8px;padding:11px 14px;display:flex;align-items:flex-start;gap:10px;';
+    row.innerHTML = '<div style="width:22px;height:22px;border-radius:50%;background:' + statusColor + ';display:flex;align-items:center;justify-content:center;font-size:11px;color:#fff;font-weight:700;flex-shrink:0;margin-top:1px;">' + icon + '</div>' +
+      '<div style="flex:1;min-width:0;">' +
+        '<div style="font-family:\'DM Sans\',sans-serif;font-size:13px;color:#e0eaf5;line-height:1.5;">Q' + (i+1) + '. ' + q.text + '</div>' +
+        '<div style="font-family:\'DM Sans\',sans-serif;font-size:11px;color:' + statusColor + ';margin-top:3px;font-weight:600;">' + status + ' &middot; ' + pts + '/10</div>' +
+      '</div>';
+    breakdownEl.appendChild(row);
+  }
+
+  // Fix section
+  var fixSection = document.getElementById('lvc-fix-section');
+  var fixList = document.getElementById('lvc-fix-list');
+  fixList.innerHTML = '';
+  if (fixItems.length > 0) {
+    fixSection.style.display = 'block';
+    for (var j = 0; j < fixItems.length; j++) {
+      var idx = fixItems[j];
+      var fixEl = document.createElement('div');
+      fixEl.style.cssText = 'background:#0d1b2a;border:1px solid #1a3a5c;border-left:3px solid #ff6d00;border-radius:8px;padding:12px 14px;';
+      fixEl.innerHTML = '<div style="font-family:\'DM Sans\',sans-serif;font-size:13px;font-weight:600;color:#ffffff;margin-bottom:5px;">Q' + (idx+1) + '. ' + lvcQuestions[idx].text + '</div>' +
+        '<div style="font-family:\'DM Sans\',sans-serif;font-size:13px;color:#7fb3d3;line-height:1.6;">' + lvcQuestions[idx].tip + '</div>';
+      fixList.appendChild(fixEl);
+    }
+  } else {
+    fixSection.style.display = 'none';
+  }
+}
+
+function lvcRetake() {
+  lvcAnswers = [];
+  lvcCurrent = 0;
+  document.getElementById('lvc-step-results').style.display = 'none';
+  document.getElementById('lvc-step-url').style.display = 'block';
+  document.getElementById('lvc-url-input').value = '';
+}
+
+function lvcCopyScore() {
+  var score = lvcCalcScore();
+  var text = 'My Low Value Content Score: ' + score + '/100 — checked with the Lightrux Low Value Content Checker at https://www.lightrux.name.ng';
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text);
+  } else {
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+  }
+  var btn = event.target;
+  var orig = btn.textContent;
+  btn.textContent = 'Copied!';
+  setTimeout(function() { btn.innerHTML = '&#128203; Copy My Score'; }, 2000);
+}
+
+function lvcToggleFaq(btn) {
+  var content = btn.nextElementSibling;
+  var arrow = btn.querySelector('span');
+  if (content.style.display === 'none' || content.style.display === '') {
+    content.style.display = 'block';
+    arrow.style.transform = 'rotate(180deg)';
+  } else {
+    content.style.display = 'none';
+    arrow.style.transform = 'rotate(0deg)';
+  }
+}
+</script>
+
+</body>
+</html>
