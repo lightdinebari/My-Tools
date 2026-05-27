@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Blog Post Prompt Generator – Lightrux</title>
+<meta name="description" content="Generate SEO-ready, Blogger-optimized blog post prompts in seconds. Free tool by Lightrux.">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0d1b2a;
+    --navy-2: #112236;
+    --navy-3: #162d44;
+    --navy-4: #1c3a55;
+    --blue: #4fc3f7;
+    --blue-dim: #2a8bbf;
+    --blue-glow: rgba(79,195,247,0.12);
+    --orange: #ff6d00;
+    --orange-hover: #e05e00;
+    --orange-glow: rgba(255,109,0,0.15);
+    --white: #ffffff;
+    --grey: #a0b4c8;
+    --grey-dim: #5a7a94;
+    --border: rgba(79,195,247,0.15);
+    --border-focus: rgba(79,195,247,0.5);
+    --radius: 12px;
+    --radius-sm: 8px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--navy);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.65;
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  .lx-header {
+    background: var(--navy-2);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+
+  .lx-logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 800;
+    text-decoration: none;
+    letter-spacing: -0.5px;
+  }
+  .lx-logo span:first-child { color: var(--white); }
+  .lx-logo span:last-child { color: var(--orange); }
+
+  .lx-badge {
+    background: var(--orange-glow);
+    border: 1px solid rgba(255,109,0,0.3);
+    color: var(--orange);
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  /* ── HERO ── */
+  .lx-hero {
+    text-align: center;
+    padding: 52px 20px 40px;
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .lx-tool-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--blue-glow);
+    border: 1px solid var(--border);
+    color: var(--blue);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 14px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+  }
+
+  .lx-hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(26px, 5vw, 40px);
+    font-weight: 800;
+    line-height: 1.2;
+    color: var(--white);
+    margin-bottom: 14px;
+    letter-spacing: -0.5px;
+  }
+
+  .lx-hero h1 span { color: var(--blue); }
+
+  .lx-hero p {
+    color: var(--grey);
+    font-size: 15px;
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* ── MAIN CONTAINER ── */
+  .lx-container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 16px 60px;
+  }
+
+  /* ── CARD ── */
+  .lx-card {
+    background: var(--navy-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+
+  .lx-card-header {
+    background: var(--navy-3);
+    padding: 16px 22px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .lx-card-icon {
+    width: 32px;
+    height: 32px;
+    background: var(--blue-glow);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    flex-shrink: 0;
+  }
+
+  .lx-card-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .lx-card-subtitle {
+    font-size: 12px;
+    color: var(--grey-dim);
+    margin-top: 1px;
+  }
+
+  .lx-card-body { padding: 22px; }
+
+  /* ── FORM FIELDS ── */
+  .lx-field { margin-bottom: 20px; }
+  .lx-field:last-child { margin-bottom: 0; }
+
+  .lx-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+
+  .lx-label-text {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--white);
+    letter-spacing: 0.2px;
+  }
+
+  .lx-label-tag {
+    font-size: 11px;
+    font-weight: 500;
+    padding: 2px 8px;
+    border-radius: 10px;
+  }
+
+  .lx-tag-required {
+    background: rgba(255,109,0,0.12);
+    color: var(--orange);
+    border: 1px solid rgba(255,109,0,0.25);
+  }
+
+  .lx-tag-optional {
+    background: var(--blue-glow);
+    color: var(--blue);
+    border: 1px solid var(--border);
+  }
+
+  .lx-hint {
+    font-size: 12px;
+    color: var(--grey-dim);
+    margin-bottom: 8px;
+    line-height: 1.5;
+  }
+
+  input[type="text"],
+  textarea {
+    width: 100%;
+    background: var(--navy-3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    color: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    padding: 12px 14px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    -webkit-appearance: none;
+  }
+
+  input[type="text"]::placeholder,
+  textarea::placeholder {
+    color: var(--grey-dim);
+    font-size: 13px;
+  }
+
+  input[type="text"]:focus,
+  textarea:focus {
+    border-color: var(--border-focus);
+    box-shadow: 0 0 0 3px var(--blue-glow);
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 90px;
+    line-height: 1.6;
+  }
+
+  /* ── GENERATE BUTTON ── */
+  .lx-btn-generate {
+    width: 100%;
+    background: var(--orange);
+    color: var(--white);
+    border: none;
+    border-radius: var(--radius-sm);
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 16px 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+    letter-spacing: 0.3px;
+    margin-top: 4px;
+  }
+
+  .lx-btn-generate:hover {
+    background: var(--orange-hover);
+    box-shadow: 0 6px 24px var(--orange-glow);
+    transform: translateY(-1px);
+  }
+
+  .lx-btn-generate:active { transform: translateY(0); }
+
+  .lx-btn-generate.loading {
+    opacity: 0.75;
+    pointer-events: none;
+  }
+
+  .lx-btn-generate svg.spin {
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  /* ── OUTPUT ── */
+  .lx-output { display: none; }
+  .lx-output.visible { display: block; }
+
+  .lx-output-header {
+    background: var(--navy-3);
+    padding: 14px 22px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .lx-output-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--white);
+  }
+
+  .lx-output-dot {
+    width: 8px;
+    height: 8px;
+    background: #4caf50;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .lx-output-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .lx-btn-copy,
+  .lx-btn-reset {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: var(--radius-sm);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+  }
+
+  .lx-btn-copy {
+    background: var(--blue);
+    color: var(--navy);
+  }
+
+  .lx-btn-copy:hover { background: #38b0e8; }
+
+  .lx-btn-copy.copied {
+    background: #4caf50;
+    color: var(--white);
+  }
+
+  .lx-btn-reset {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--grey);
+  }
+
+  .lx-btn-reset:hover {
+    border-color: rgba(79,195,247,0.4);
+    color: var(--white);
+  }
+
+  .lx-output-body { padding: 22px; }
+
+  .lx-prompt-box {
+    background: var(--navy-3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 18px;
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: #d0e8f5;
+    white-space: pre-wrap;
+    word-break: break-word;
+    max-height: 520px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--navy-4) transparent;
+  }
+
+  .lx-prompt-box::-webkit-scrollbar { width: 5px; }
+  .lx-prompt-box::-webkit-scrollbar-track { background: transparent; }
+  .lx-prompt-box::-webkit-scrollbar-thumb { background: var(--navy-4); border-radius: 10px; }
+
+  /* ── HOW TO USE ── */
+  .lx-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 14px;
+    padding: 22px;
+  }
+
+  .lx-step {
+    background: var(--navy-3);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 16px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+  }
+
+  .lx-step-num {
+    width: 26px;
+    height: 26px;
+    background: var(--orange);
+    color: var(--white);
+    border-radius: 50%;
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .lx-step-text {
+    font-size: 13px;
+    color: var(--grey);
+    line-height: 1.55;
+  }
+
+  .lx-step-text strong {
+    display: block;
+    color: var(--white);
+    font-size: 13px;
+    margin-bottom: 3px;
+  }
+
+  /* ── TIPS ── */
+  .lx-tips { padding: 0 22px 22px; }
+
+  .lx-tip-item {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .lx-tip-item:last-child { border-bottom: none; }
+
+  .lx-tip-icon {
+    color: var(--blue);
+    font-size: 15px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .lx-tip-text {
+    font-size: 13px;
+    color: var(--grey);
+    line-height: 1.55;
+  }
+
+  .lx-tip-text strong { color: var(--white); }
+
+  /* ── DIVIDER ── */
+  .lx-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 0 22px;
+  }
+
+  /* ── FOOTER ── */
+  .lx-footer {
+    text-align: center;
+    padding: 24px 20px;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--grey-dim);
+  }
+
+  .lx-footer a {
+    color: var(--blue);
+    text-decoration: none;
+  }
+
+  .lx-footer a:hover { text-decoration: underline; }
+
+  /* ── ERROR ── */
+  .lx-error {
+    display: none;
+    background: rgba(255, 80, 80, 0.08);
+    border: 1px solid rgba(255, 80, 80, 0.25);
+    border-radius: var(--radius-sm);
+    color: #ff8a8a;
+    font-size: 13px;
+    padding: 10px 14px;
+    margin-top: 12px;
+  }
+
+  .lx-error.visible { display: block; }
+
+  /* ── CHAR COUNTER ── */
+  .lx-char-count {
+    font-size: 11px;
+    color: var(--grey-dim);
+    text-align: right;
+    margin-top: 5px;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .lx-hero { padding: 36px 16px 28px; }
+    .lx-card-body { padding: 16px; }
+    .lx-card-header { padding: 14px 16px; }
+    .lx-output-header { padding: 12px 16px; }
+    .lx-output-body { padding: 16px; }
+    .lx-steps { grid-template-columns: 1fr; padding: 16px; gap: 10px; }
+    .lx-tips { padding: 0 16px 16px; }
+    .lx-divider { margin: 0 16px; }
+    .lx-btn-generate { font-size: 15px; padding: 15px 20px; }
+    .lx-prompt-box { font-size: 13px; max-height: 380px; }
+    .lx-output-actions { width: 100%; }
+    .lx-btn-copy, .lx-btn-reset { flex: 1; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="lx-header">
+  <a href="https://www.lightrux.name.ng" class="lx-logo">
+    <span>Light</span><span>rux</span>
+  </a>
+  <span class="lx-badge">SEO Tools</span>
+</header>
+
+<!-- HERO -->
+<div class="lx-hero">
+  <div class="lx-tool-label">
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+    Free SEO Tool
+  </div>
+  <h1>AI Blog Post <span>Prompt Generator</span></h1>
+  <p>Enter your topic, keywords, and optional internal links. Get a fully structured, SEO-ready prompt built to Blogger standards — ready to paste into any AI tool.</p>
+</div>
+
+<!-- MAIN -->
+<div class="lx-container">
+
+  <!-- INPUT CARD -->
+  <div class="lx-card">
+    <div class="lx-card-header">
+      <div class="lx-card-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4fc3f7" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      </div>
+      <div>
+        <div class="lx-card-title">Post Details</div>
+        <div class="lx-card-subtitle">Fill in the fields below to generate your prompt</div>
+      </div>
+    </div>
+    <div class="lx-card-body">
+
+      <!-- Field 1: Topic -->
+      <div class="lx-field">
+        <div class="lx-label">
+          <span class="lx-label-text">Blog Topic or Title</span>
+          <span class="lx-label-tag lx-tag-required">Required</span>
+        </div>
+        <p class="lx-hint">Be specific. A clear title produces a better prompt than a vague topic.</p>
+        <input type="text" id="field-topic" placeholder="e.g. How to Fix Blogger Images That Look Blurry on Mobile" maxlength="200">
+        <div class="lx-char-count"><span id="topic-count">0</span> / 200</div>
+      </div>
+
+      <!-- Field 2: Keywords -->
+      <div class="lx-field">
+        <div class="lx-label">
+          <span class="lx-label-text">Target Keywords</span>
+          <span class="lx-label-tag lx-tag-required">Required</span>
+        </div>
+        <p class="lx-hint">List your main and secondary keywords separated by commas.</p>
+        <input type="text" id="field-keywords" placeholder="e.g. fix blurry Blogger images, Blogger image quality, Blogger mobile images" maxlength="300">
+        <div class="lx-char-count"><span id="keywords-count">0</span> / 300</div>
+      </div>
+
+      <!-- Field 3: Internal Links -->
+      <div class="lx-field">
+        <div class="lx-label">
+          <span class="lx-label-text">Internal Links to Include</span>
+          <span class="lx-label-tag lx-tag-optional">Optional</span>
+        </div>
+        <p class="lx-hint">Paste your post URLs and a short description of each, one per line. The prompt will instruct the AI to weave them in naturally.</p>
+        <textarea id="field-links" placeholder="e.g.&#10;https://www.lightrux.name.ng/2026/04/... — How to Fix Blogger Posts Not Indexed&#10;https://www.lightrux.name.ng/2026/05/... — AdSense Earnings Guide"></textarea>
+      </div>
+
+      <!-- Generate Button -->
+      <button class="lx-btn-generate" id="btn-generate" onclick="generatePrompt()">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        Generate Prompt
+      </button>
+
+      <div class="lx-error" id="lx-error">Please fill in the Blog Topic and Target Keywords before generating.</div>
+
+    </div>
+  </div>
+
+  <!-- OUTPUT CARD -->
+  <div class="lx-card lx-output" id="lx-output">
+    <div class="lx-output-header">
+      <div class="lx-output-title">
+        <div class="lx-output-dot"></div>
+        Your Prompt is Ready
+      </div>
+      <div class="lx-output-actions">
+        <button class="lx-btn-copy" id="btn-copy" onclick="copyPrompt()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Copy Prompt
+        </button>
+        <button class="lx-btn-reset" onclick="resetTool()">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.72"/></svg>
+          Reset
+        </button>
+      </div>
+    </div>
+    <div class="lx-output-body">
+      <div class="lx-prompt-box" id="lx-prompt-box"></div>
+    </div>
+  </div>
+
+  <!-- HOW TO USE -->
+  <div class="lx-card">
+    <div class="lx-card-header">
+      <div class="lx-card-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4fc3f7" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+      </div>
+      <div>
+        <div class="lx-card-title">How to Use This Tool</div>
+        <div class="lx-card-subtitle">3 steps to your next viral blog post</div>
+      </div>
+    </div>
+    <div class="lx-steps">
+      <div class="lx-step">
+        <div class="lx-step-num">1</div>
+        <div class="lx-step-text">
+          <strong>Fill in your details</strong>
+          Enter your blog topic, target keywords, and any internal links you want included.
+        </div>
+      </div>
+      <div class="lx-step">
+        <div class="lx-step-num">2</div>
+        <div class="lx-step-text">
+          <strong>Generate and copy</strong>
+          Click Generate Prompt, then copy the full prompt with one click.
+        </div>
+      </div>
+      <div class="lx-step">
+        <div class="lx-step-num">3</div>
+        <div class="lx-step-text">
+          <strong>Paste into any AI tool</strong>
+          Use it in ChatGPT, Claude, or Gemini. Your Blogger-ready post comes out structured and SEO-optimized.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TIPS -->
+  <div class="lx-card">
+    <div class="lx-card-header">
+      <div class="lx-card-icon">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4fc3f7" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </div>
+      <div>
+        <div class="lx-card-title">Pro Tips for Better Results</div>
+        <div class="lx-card-subtitle">Get the most out of every generated prompt</div>
+      </div>
+    </div>
+    <div class="lx-tips">
+      <div class="lx-tip-item">
+        <span class="lx-tip-icon">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+        <span class="lx-tip-text"><strong>Be specific with your title.</strong> "How to Speed Up a Blogger Blog" produces a better prompt than just "Blogger speed".</span>
+      </div>
+      <div class="lx-tip-item">
+        <span class="lx-tip-icon">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+        <span class="lx-tip-text"><strong>Include 3 to 5 keywords.</strong> One primary keyword plus 2 to 4 secondary ones gives the AI the right SEO context.</span>
+      </div>
+      <div class="lx-tip-item">
+        <span class="lx-tip-icon">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+        <span class="lx-tip-text"><strong>Add internal links with descriptions.</strong> Telling the AI what each link is about helps it weave them in naturally rather than dumping them at the end.</span>
+      </div>
+      <div class="lx-tip-item">
+        <span class="lx-tip-icon">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+        <span class="lx-tip-text"><strong>Review before pasting into Blogger.</strong> Always check external links open correctly and verify internal links point to live pages.</span>
+      </div>
+      <div class="lx-tip-item">
+        <span class="lx-tip-icon">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+        <span class="lx-tip-text"><strong>Paste into Blogger HTML view directly.</strong> The prompt instructs the AI to output Blogger-safe HTML. Switch to HTML mode before pasting, not Compose mode.</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="lx-footer">
+  Powered by <a href="https://www.lightrux.name.ng" target="_blank" rel="noopener noreferrer">Lightrux</a> &middot; Free SEO Tools for Bloggers
+</footer>
+
+<script>
+  // Char counters
+  document.getElementById('field-topic').addEventListener('input', function() {
+    document.getElementById('topic-count').textContent = this.value.length;
+  });
+  document.getElementById('field-keywords').addEventListener('input', function() {
+    document.getElementById('keywords-count').textContent = this.value.length;
+  });
+
+  function generatePrompt() {
+    const topic = document.getElementById('field-topic').value.trim();
+    const keywords = document.getElementById('field-keywords').value.trim();
+    const links = document.getElementById('field-links').value.trim();
+    const errorEl = document.getElementById('lx-error');
+    const outputEl = document.getElementById('lx-output');
+    const promptBox = document.getElementById('lx-prompt-box');
+    const btn = document.getElementById('btn-generate');
+
+    // Validate
+    if (!topic || !keywords) {
+      errorEl.classList.add('visible');
+      return;
+    }
+    errorEl.classList.remove('visible');
+
+    // Loading state
+    btn.classList.add('loading');
+    btn.innerHTML = `
+      <svg class="spin" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg>
+      Generating...
+    `;
+
+    setTimeout(() => {
+      const prompt = buildPrompt(topic, keywords, links);
+      promptBox.textContent = prompt;
+      outputEl.classList.add('visible');
+
+      // Scroll to output
+      outputEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      // Reset button
+      btn.classList.remove('loading');
+      btn.innerHTML = `
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        Generate Prompt
+      `;
+    }, 600);
+  }
+
+  function buildPrompt(topic, keywords, links) {
+    const keywordList = keywords.split(',').map(k => k.trim()).filter(Boolean);
+    const primaryKeyword = keywordList[0] || topic;
+    const secondaryKeywords = keywordList.slice(1).join(', ');
+
+    let internalLinksSection = '';
+    if (links) {
+      internalLinksSection = `
+
+INTERNAL LINKS TO INCLUDE:
+Weave the following internal links naturally into the post where contextually relevant. Do not group them together or add them at the end. Each link should appear as part of a sentence and feel like a natural continuation of the content. Do not use target="_blank" on internal links.
+
+${links}`;
+    }
+
+    const prompt = `Write a 2,500-word blog post titled "${topic}" following ALL of the instructions below exactly.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CONTENT BRIEF
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+TOPIC: ${topic}
+PRIMARY KEYWORD: ${primaryKeyword}${secondaryKeywords ? `\nSECONDARY KEYWORDS: ${secondaryKeywords}` : ''}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+TONE AND STYLE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+- Write in a natural, human tone. The content must not sound robotic, AI-generated, or overly formal.
+- Use a conversational first-person style, as if you are talking directly to a fellow blogger or content creator.
+- Include personal experiences, relatable scenarios, and honest observations to make the content feel authentic.
+- The target audience is bloggers, content creators, and website owners who are building or growing their blogs.
+- Write content that complies fully with Google's content policies and has strong organic ranking potential.
+- Do not use emojis anywhere in the article.
+- Do not use em dash symbols (—) anywhere in the article. Use commas, colons, or a new sentence instead.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+E-E-A-T REQUIREMENTS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+The content must reflect Google's E-E-A-T principles:
+- Experience: Share or imply first-hand experience with the topic.
+- Expertise: Demonstrate clear knowledge and depth on the subject.
+- Authoritativeness: Reference accurate, well-known facts and sources where appropriate.
+- Trustworthiness: Be honest, avoid exaggeration, and do not make unverifiable claims.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+SEO AND HEADING STRUCTURE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+- Use EXACTLY ONE <h1> tag in the entire article. This must be the blog post title only.
+- Use <h2> tags for all main sections.
+- Use <h3> tags for sub-sections under any <h2>.
+- Do not use more than one <h1> tag under any circumstance.
+- Heading hierarchy must follow this order: h1 > h2 > h3. Never skip levels.
+- Naturally include the primary keyword "${primaryKeyword}" in the <h1>, at least one <h2>, and in the first paragraph.
+- Distribute secondary keywords naturally throughout the post without keyword stuffing.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+HTML FORMAT RULES (BLOGGER-SAFE)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Output the entire article in clean HTML that can be pasted directly into Blogger's HTML view and will convert correctly into Compose mode without going blank or breaking.
+
+ALLOWED HTML TAGS ONLY:
+h1, h2, h3, p, ul, ol, li, div, a, b, i, br, strong, em
+
+DO NOT USE any of the following tags:
+- article, section, nav, header, footer, main, aside, figure, figcaption
+- Any semantic HTML5 structural tags
+- <style> blocks or class attributes
+- Inline style attributes
+
+Use only basic tags and standard attributes. This ensures full compatibility when switching between Blogger's HTML mode and Compose mode.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+LINK RULES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+EXTERNAL LINKS:
+- Include 2 to 3 links to authoritative external sources (e.g. Google, Search Engine Journal, Ahrefs blog, Moz).
+- Use descriptive anchor text that reflects the linked content. Never use naked URLs.
+- All external links must use: target="_blank" rel="noopener noreferrer"
+- Only link to sources that are highly likely to be live and credible.
+
+INTERNAL LINKS:
+- Internal links must NOT use target="_blank".
+- Internal links must feel contextual and natural. They should support the post, not distract from it.
+- Never drive reader attention away from the main content toward another guide. Links should be subtle and woven into the reading flow.${internalLinksSection}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CONTENT STRUCTURE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Structure the article with the following sections:
+1. Introduction (hook the reader, state the problem, and introduce the topic naturally)
+2. Three to five main sections using <h2> headings, each with body content and optional <h3> sub-sections
+3. A practical tips or step-by-step section where relevant
+4. A conclusion that summarizes the key points and ends with a clear, helpful call to action
+
+Aim for approximately 2,500 words total. The content must be fully reader-focused. Do not include any behind-the-scenes instructions, address the site owner directly, or leave placeholder text in the final output.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+FINAL CHECKLIST BEFORE OUTPUTTING
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Before outputting the article, verify:
+[ ] Exactly one <h1> tag used
+[ ] No em dashes anywhere
+[ ] No emojis anywhere
+[ ] No semantic HTML5 tags used
+[ ] No <style> blocks or inline styles
+[ ] External links have target="_blank" rel="noopener noreferrer"
+[ ] Internal links do not have target="_blank"
+[ ] Approximately 2,500 words
+[ ] Conversational, first-person tone throughout
+[ ] Primary keyword in <h1>, first paragraph, and at least one <h2>
+
+Output the final HTML article only. Do not include any preamble, explanation, or notes outside of the article HTML.`;
+
+    return prompt;
+  }
+
+  function copyPrompt() {
+    const promptText = document.getElementById('lx-prompt-box').textContent;
+    const btn = document.getElementById('btn-copy');
+
+    navigator.clipboard.writeText(promptText).then(() => {
+      btn.classList.add('copied');
+      btn.innerHTML = `
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        Copied!
+      `;
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        btn.innerHTML = `
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Copy Prompt
+        `;
+      }, 2500);
+    }).catch(() => {
+      // Fallback for older browsers
+      const el = document.createElement('textarea');
+      el.value = promptText;
+      el.style.position = 'fixed';
+      el.style.opacity = '0';
+      document.body.appendChild(el);
+      el.select();
+      document.execCommand('copy');
+      document.body.removeChild(el);
+      btn.classList.add('copied');
+      btn.innerHTML = `
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        Copied!
+      `;
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        btn.innerHTML = `
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          Copy Prompt
+        `;
+      }, 2500);
+    });
+  }
+
+  function resetTool() {
+    document.getElementById('field-topic').value = '';
+    document.getElementById('field-keywords').value = '';
+    document.getElementById('field-links').value = '';
+    document.getElementById('topic-count').textContent = '0';
+    document.getElementById('keywords-count').textContent = '0';
+    document.getElementById('lx-output').classList.remove('visible');
+    document.getElementById('lx-error').classList.remove('visible');
+    document.getElementById('lx-prompt-box').textContent = '';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Allow Enter key on text inputs to trigger generate
+  document.getElementById('field-topic').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') generatePrompt();
+  });
+  document.getElementById('field-keywords').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') generatePrompt();
+  });
+</script>
+</body>
+</html>
