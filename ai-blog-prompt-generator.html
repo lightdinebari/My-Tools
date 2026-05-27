@@ -788,16 +788,16 @@ ${links}`;
 
     const prompt = `Write a 2,500-word blog post titled "${topic}" following ALL of the instructions below exactly.
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+---
 CONTENT BRIEF
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+---
 
 TOPIC: ${topic}
 PRIMARY KEYWORD: ${primaryKeyword}${secondaryKeywords ? `\nSECONDARY KEYWORDS: ${secondaryKeywords}` : ''}
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+---
 TONE AND STYLE
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+---
 
 - Write in a natural, human tone. The content must not sound robotic, AI-generated, or overly formal.
 - Use a conversational first-person style, as if you are talking directly to a fellow blogger or content creator.
@@ -805,11 +805,11 @@ TONE AND STYLE
 - The target audience is bloggers, content creators, and website owners who are building or growing their blogs.
 - Write content that complies fully with Google's content policies and has strong organic ranking potential.
 - Do not use emojis anywhere in the article.
-- Do not use em dash symbols (—) anywhere in the article. Use commas, colons, or a new sentence instead.
+- Do not use em dash symbols anywhere in the article. Use commas, colons, or a new sentence instead.
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+---
 E-E-A-T REQUIREMENTS
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+---
 
 The content must reflect Google's E-E-A-T principles:
 - Experience: Share or imply first-hand experience with the topic.
@@ -817,9 +817,9 @@ The content must reflect Google's E-E-A-T principles:
 - Authoritativeness: Reference accurate, well-known facts and sources where appropriate.
 - Trustworthiness: Be honest, avoid exaggeration, and do not make unverifiable claims.
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+---
 SEO AND HEADING STRUCTURE
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+---
 
 - Use EXACTLY ONE <h1> tag in the entire article. This must be the blog post title only.
 - Use <h2> tags for all main sections.
@@ -829,9 +829,9 @@ SEO AND HEADING STRUCTURE
 - Naturally include the primary keyword "${primaryKeyword}" in the <h1>, at least one <h2>, and in the first paragraph.
 - Distribute secondary keywords naturally throughout the post without keyword stuffing.
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+---
 HTML FORMAT RULES (BLOGGER-SAFE)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+---
 
 Output the entire article in clean HTML that can be pasted directly into Blogger's HTML view and will convert correctly into Compose mode without going blank or breaking.
 
@@ -841,14 +841,14 @@ h1, h2, h3, p, ul, ol, li, div, a, b, i, br, strong, em
 DO NOT USE any of the following tags:
 - article, section, nav, header, footer, main, aside, figure, figcaption
 - Any semantic HTML5 structural tags
-- <style> blocks or class attributes
+- style blocks or class attributes
 - Inline style attributes
 
 Use only basic tags and standard attributes. This ensures full compatibility when switching between Blogger's HTML mode and Compose mode.
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+---
 LINK RULES
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+---
 
 EXTERNAL LINKS:
 - Include 2 to 3 links to authoritative external sources (e.g. Google, Search Engine Journal, Ahrefs blog, Moz).
@@ -861,33 +861,33 @@ INTERNAL LINKS:
 - Internal links must feel contextual and natural. They should support the post, not distract from it.
 - Never drive reader attention away from the main content toward another guide. Links should be subtle and woven into the reading flow.${internalLinksSection}
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+---
 CONTENT STRUCTURE
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+---
 
 Structure the article with the following sections:
 1. Introduction (hook the reader, state the problem, and introduce the topic naturally)
-2. Three to five main sections using <h2> headings, each with body content and optional <h3> sub-sections
+2. Three to five main sections using h2 headings, each with body content and optional h3 sub-sections
 3. A practical tips or step-by-step section where relevant
 4. A conclusion that summarizes the key points and ends with a clear, helpful call to action
 
 Aim for approximately 2,500 words total. The content must be fully reader-focused. Do not include any behind-the-scenes instructions, address the site owner directly, or leave placeholder text in the final output.
 
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+---
 FINAL CHECKLIST BEFORE OUTPUTTING
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+---
 
 Before outputting the article, verify:
-[ ] Exactly one <h1> tag used
+[ ] Exactly one h1 tag used
 [ ] No em dashes anywhere
 [ ] No emojis anywhere
 [ ] No semantic HTML5 tags used
-[ ] No <style> blocks or inline styles
+[ ] No style blocks or inline styles
 [ ] External links have target="_blank" rel="noopener noreferrer"
 [ ] Internal links do not have target="_blank"
 [ ] Approximately 2,500 words
 [ ] Conversational, first-person tone throughout
-[ ] Primary keyword in <h1>, first paragraph, and at least one <h2>
+[ ] Primary keyword in h1, first paragraph, and at least one h2
 
 Output the final HTML article only. Do not include any preamble, explanation, or notes outside of the article HTML.`;
 
