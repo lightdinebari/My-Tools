@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Free SEO Checker for Blogger</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --blue: #1A73E8;
+    --blue-dark: #1558b0;
+    --blue-light: #e8f0fe;
+    --green: #1e8e3e;
+    --green-light: #e6f4ea;
+    --red: #d93025;
+    --red-light: #fce8e6;
+    --orange: #f29900;
+    --orange-light: #fef7e0;
+    --gray-900: #1a1a2e;
+    --gray-700: #3c4043;
+    --gray-500: #5f6368;
+    --gray-200: #e8eaed;
+    --gray-100: #f8f9fa;
+    --white: #ffffff;
+    --radius: 10px;
+    --shadow: 0 2px 12px rgba(0,0,0,0.08);
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--gray-100);
+    color: var(--gray-700);
+    line-height: 1.6;
+    font-size: 15px;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #0d47a1 0%, #1A73E8 60%, #42a5f5 100%);
+    color: white;
+    text-align: center;
+    padding: 48px 20px 40px;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-size: clamp(22px, 5vw, 34px);
+    font-weight: 700;
+    line-height: 1.25;
+    margin-bottom: 12px;
+  }
+  .hero p {
+    font-size: 15px;
+    opacity: 0.88;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  /* MAIN LAYOUT */
+  .container {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 28px 16px 60px;
+  }
+
+  /* CARD */
+  .card {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+  .card-title {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--blue);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* FORM ELEMENTS */
+  label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gray-700);
+    margin-bottom: 6px;
+  }
+  input[type="text"], textarea {
+    width: 100%;
+    border: 1.5px solid var(--gray-200);
+    border-radius: 8px;
+    padding: 11px 14px;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    color: var(--gray-900);
+    background: var(--white);
+    transition: border-color 0.2s;
+    outline: none;
+    resize: vertical;
+  }
+  input[type="text"]:focus, textarea:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(26,115,232,0.12);
+  }
+  textarea { min-height: 180px; }
+  .hint {
+    font-size: 12px;
+    color: var(--gray-500);
+    margin-top: 5px;
+  }
+  .field { margin-bottom: 18px; }
+
+  /* BUTTON */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--blue);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 13px 28px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    width: 100%;
+    justify-content: center;
+  }
+  .btn:hover { background: var(--blue-dark); }
+  .btn:active { transform: scale(0.98); }
+  .btn-reset {
+    background: transparent;
+    color: var(--gray-500);
+    border: 1.5px solid var(--gray-200);
+    margin-top: 10px;
+    font-size: 13px;
+    padding: 10px 20px;
+  }
+  .btn-reset:hover { background: var(--gray-100); }
+
+  /* SCORE SECTION */
+  #results { display: none; }
+
+  .score-wrap {
+    text-align: center;
+    padding: 28px 16px 20px;
+  }
+  .score-ring {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 14px;
+    border: 6px solid;
+    transition: all 0.4s;
+  }
+  .score-ring .score-num {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1;
+  }
+  .score-ring .score-label {
+    font-size: 11px;
+    font-weight: 600;
+    opacity: 0.7;
+    margin-top: 2px;
+  }
+  .score-verdict {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .score-sub {
+    font-size: 13px;
+    color: var(--gray-500);
+  }
+
+  /* PROGRESS BAR */
+  .progress-bar-wrap {
+    background: var(--gray-200);
+    border-radius: 99px;
+    height: 8px;
+    margin: 16px 0 24px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    border-radius: 99px;
+    transition: width 0.6s ease;
+  }
+
+  /* CHECKLIST */
+  .checklist-title {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--gray-500);
+    margin-bottom: 12px;
+  }
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .check-item:last-child { border-bottom: none; }
+  .check-icon {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    flex-shrink: 0;
+    margin-top: 1px;
+    font-weight: 700;
+  }
+  .pass .check-icon { background: var(--green-light); color: var(--green); }
+  .fail .check-icon { background: var(--red-light); color: var(--red); }
+  .warn .check-icon { background: var(--orange-light); color: var(--orange); }
+  .check-text { flex: 1; }
+  .check-text strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--gray-900);
+    margin-bottom: 2px;
+  }
+  .check-text span {
+    font-size: 13px;
+    color: var(--gray-500);
+  }
+
+  /* TIPS */
+  .tip-box {
+    background: var(--blue-light);
+    border-left: 4px solid var(--blue);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 16px;
+    font-size: 13px;
+    color: var(--gray-700);
+    margin-top: 4px;
+  }
+  .tip-box strong { color: var(--blue-dark); }
+
+  /* HOW IT WORKS */
+  .steps { display: flex; flex-direction: column; gap: 14px; }
+  .step {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .step-num {
+    background: var(--blue);
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .step-text strong { display: block; font-size: 14px; font-weight: 600; color: var(--gray-900); }
+  .step-text span { font-size: 13px; color: var(--gray-500); }
+
+  /* WHAT WE CHECK */
+  .checks-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  @media (max-width: 480px) { .checks-grid { grid-template-columns: 1fr; } }
+  .checks-grid-item {
+    background: var(--gray-100);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 13px;
+    color: var(--gray-700);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .checks-grid-item span { color: var(--green); font-weight: 700; }
+
+  /* FOOTER NOTE */
+  .footer-note {
+    text-align: center;
+    font-size: 12px;
+    color: var(--gray-500);
+    margin-top: 28px;
+    padding: 0 16px;
+  }
+  .footer-note a { color: var(--blue); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">🛠 Free SEO Tool</div>
+  <h1>Free SEO Checker for Blogger</h1>
+  <p>Paste your blog post content and target keyword. Get an instant SEO score with a clear checklist before you publish.</p>
+</div>
+
+<!-- MAIN -->
+<div class="container">
+
+  <!-- INPUT CARD -->
+  <div class="card">
+    <div class="card-title">📝 Enter Your Post Details</div>
+
+    <div class="field">
+      <label for="postTitle">Post Title</label>
+      <input type="text" id="postTitle" placeholder="e.g. How to Fix Crawled Currently Not Indexed on Blogger" />
+    </div>
+
+    <div class="field">
+      <label for="targetKeyword">Target Keyword</label>
+      <input type="text" id="targetKeyword" placeholder="e.g. crawled currently not indexed blogger" />
+      <div class="hint">The main keyword you want this post to rank for.</div>
+    </div>
+
+    <div class="field">
+      <label for="metaDescription">Meta Description</label>
+      <input type="text" id="metaDescription" placeholder="e.g. Learn how to fix crawled currently not indexed on Blogger with these proven steps." />
+      <div class="hint">The short description shown in Google search results. Aim for 140–160 characters.</div>
+    </div>
+
+    <div class="field">
+      <label for="postContent">Full Post Content</label>
+      <textarea id="postContent" placeholder="Paste your full blog post text here. Include all headings, paragraphs, and body content. Do not paste raw HTML tags."></textarea>
+      <div class="hint">Plain text only — no HTML tags needed. Paste your post exactly as written.</div>
+    </div>
+
+    <button class="btn" onclick="runCheck()">
+      ⚡ Check My SEO Score
+    </button>
+    <button class="btn btn-reset" onclick="resetTool()">
+      🔄 Reset
+    </button>
+  </div>
+
+  <!-- RESULTS CARD -->
+  <div id="results">
+    <div class="card">
+      <div class="score-wrap">
+        <div class="score-ring" id="scoreRing">
+          <span class="score-num" id="scoreNum">0</span>
+          <span class="score-label">/ 100</span>
+        </div>
+        <div class="score-verdict" id="scoreVerdict"></div>
+        <div class="score-sub" id="scoreSub"></div>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar-fill" id="progressBar" style="width:0%"></div>
+        </div>
+      </div>
+
+      <div class="checklist-title">SEO Checklist</div>
+      <div id="checklist"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">💡 Top Fixes For You</div>
+      <div id="tipsList"></div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="card">
+    <div class="card-title">📖 How It Works</div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">
+          <strong>Enter your post details</strong>
+          <span>Add your title, target keyword, meta description, and full post content above.</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">
+          <strong>Click Check My SEO Score</strong>
+          <span>The tool analyzes your content instantly — no login or account needed.</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">
+          <strong>See your score and fix issues</strong>
+          <span>Review your checklist, apply the suggested fixes, then publish with confidence.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- WHAT WE CHECK -->
+  <div class="card">
+    <div class="card-title">✅ What This Tool Checks</div>
+    <div class="checks-grid">
+      <div class="checks-grid-item"><span>✓</span> Keyword in title</div>
+      <div class="checks-grid-item"><span>✓</span> Keyword in first paragraph</div>
+      <div class="checks-grid-item"><span>✓</span> Keyword in meta description</div>
+      <div class="checks-grid-item"><span>✓</span> Meta description length</div>
+      <div class="checks-grid-item"><span>✓</span> Post word count</div>
+      <div class="checks-grid-item"><span>✓</span> Keyword density</div>
+      <div class="checks-grid-item"><span>✓</span> H2 / H3 headings used</div>
+      <div class="checks-grid-item"><span>✓</span> Title length (50–60 chars)</div>
+      <div class="checks-grid-item"><span>✓</span> Keyword in a heading</div>
+      <div class="checks-grid-item"><span>✓</span> Keyword in last paragraph</div>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    A free SEO tool by <a href="https://www.rankriseseo.name.ng/" target="_blank" rel="noopener noreferrer">RankRise SEO</a> · No login required · Works for Blogger, WordPress &amp; all platforms
+  </div>
+
+</div>
+
+<script>
+function runCheck() {
+  var title = document.getElementById('postTitle').value.trim();
+  var keyword = document.getElementById('targetKeyword').value.trim().toLowerCase();
+  var meta = document.getElementById('metaDescription').value.trim();
+  var content = document.getElementById('postContent').value.trim();
+
+  if (!title || !keyword || !content) {
+    alert('Please fill in your Post Title, Target Keyword, and Post Content before checking.');
+    return;
+  }
+
+  var titleLow = title.toLowerCase();
+  var metaLow = meta.toLowerCase();
+  var contentLow = content.toLowerCase();
+
+  // Split content into paragraphs
+  var paragraphs = content.split(/\n+/).filter(function(p){ return p.trim().length > 0; });
+  var firstPara = paragraphs.length > 0 ? paragraphs[0].toLowerCase() : '';
+  var lastPara = paragraphs.length > 1 ? paragraphs[paragraphs.length - 1].toLowerCase() : firstPara;
+
+  // Word count
+  var words = content.split(/\s+/).filter(function(w){ return w.length > 0; });
+  var wordCount = words.length;
+
+  // Keyword frequency
+  var kwWords = keyword.split(/\s+/);
+  var kwRegex = new RegExp(keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+  var kwMatches = (content.match(kwRegex) || []).length;
+  var kwDensity = wordCount > 0 ? (kwMatches / wordCount) * 100 : 0;
+
+  // Heading detection (H2/H3 patterns in plain text)
+  var hasHeadings = /^#{2,3}\s|^[A-Z][^\n]{10,60}\n[-=]{3,}/.test(content) ||
+    paragraphs.filter(function(p){ return p.length < 80 && p === p.trim() && !p.endsWith('.'); }).length >= 2;
+
+  // Keyword in heading (short non-sentence lines)
+  var headingLines = paragraphs.filter(function(p){ return p.length < 100 && !p.endsWith('.') && p.trim().length > 5; });
+  var kwInHeading = headingLines.some(function(h){ return h.toLowerCase().indexOf(keyword) > -1; });
+
+  // Title length
+  var titleLen = title.length;
+
+  // Run checks
+  var checks = [];
+  var score = 0;
+
+  function addCheck(pass, warn, label, detail, points) {
+    var status = pass ? 'pass' : (warn ? 'warn' : 'fail');
+    if (pass) score += points;
+    else if (warn) score += Math.floor(points / 2);
+    checks.push({ status: status, label: label, detail: detail });
+  }
+
+  addCheck(titleLow.indexOf(keyword) > -1, false,
+    'Keyword in title',
+    titleLow.indexOf(keyword) > -1
+      ? 'Your target keyword appears in the post title. ✓'
+      : 'Your target keyword is missing from the title. Add it naturally.',
+    15);
+
+  addCheck(firstPara.indexOf(keyword) > -1, false,
+    'Keyword in first paragraph',
+    firstPara.indexOf(keyword) > -1
+      ? 'Keyword found in your opening paragraph. ✓'
+      : 'Include your keyword naturally within the first 100 words.',
+    12);
+
+  addCheck(meta.length > 0 && metaLow.indexOf(keyword) > -1,
+    meta.length > 0 && metaLow.indexOf(keyword) === -1,
+    'Keyword in meta description',
+    meta.length === 0
+      ? 'Meta description is missing. Add one in Blogger under "Search Description".'
+      : metaLow.indexOf(keyword) > -1
+        ? 'Keyword found in meta description. ✓'
+        : 'Your meta description does not include the target keyword.',
+    10);
+
+  addCheck(meta.length >= 140 && meta.length <= 160,
+    meta.length > 0 && (meta.length < 140 || meta.length > 160),
+    'Meta description length',
+    meta.length === 0
+      ? 'No meta description found.'
+      : 'Your meta description is ' + meta.length + ' characters. ' +
+        (meta.length < 140 ? 'Too short — aim for 140–160 characters.'
+        : meta.length > 160 ? 'Too long — Google may cut it off. Keep it under 160.'
+        : 'Perfect length. ✓'),
+    8);
+
+  addCheck(wordCount >= 1000, wordCount >= 600 && wordCount < 1000,
+    'Post word count (' + wordCount + ' words)',
+    wordCount >= 1000
+      ? 'Good length. Posts over 1,000 words tend to rank better. ✓'
+      : wordCount >= 600
+        ? 'Post is a bit short. Aim for at least 1,000 words for better ranking.'
+        : 'Post is too short (' + wordCount + ' words). Expand it to at least 800–1,000 words.',
+    12);
+
+  addCheck(kwDensity >= 0.5 && kwDensity <= 2.5,
+    (kwDensity > 0 && kwDensity < 0.5) || kwDensity > 2.5,
+    'Keyword density (' + kwDensity.toFixed(1) + '%)',
+    kwDensity === 0
+      ? 'Keyword not found in content. Use it naturally throughout the post.'
+      : kwDensity < 0.5
+        ? 'Keyword appears too rarely. Use it more naturally in your content.'
+        : kwDensity > 2.5
+          ? 'Keyword density is too high (' + kwDensity.toFixed(1) + '%). Reduce usage to avoid keyword stuffing.'
+          : 'Keyword density is within the ideal range (0.5–2.5%). ✓',
+    10);
+
+  addCheck(hasHeadings, false,
+    'Headings used (H2 / H3)',
+    hasHeadings
+      ? 'Your post appears to use subheadings. Good structure helps readers and Google. ✓'
+      : 'No clear subheadings detected. Break your post into sections with H2 and H3 headings.',
+    10);
+
+  addCheck(kwInHeading, false,
+    'Keyword in a heading',
+    kwInHeading
+      ? 'Target keyword found in a subheading. ✓'
+      : 'Try including your keyword in at least one H2 or H3 heading.',
+    8);
+
+  addCheck(titleLen >= 50 && titleLen <= 65,
+    titleLen > 40 && titleLen < 50,
+    'Title length (' + titleLen + ' characters)',
+    titleLen < 40
+      ? 'Title is too short (' + titleLen + ' chars). Aim for 50–65 characters.'
+      : titleLen > 65
+        ? 'Title may be too long (' + titleLen + ' chars). Google cuts titles above ~65 characters.'
+        : 'Title length is good. ✓',
+    8);
+
+  addCheck(lastPara.indexOf(keyword) > -1, false,
+    'Keyword in conclusion',
+    lastPara.indexOf(keyword) > -1
+      ? 'Keyword found in your closing paragraph. ✓'
+      : 'Include your keyword naturally in your final paragraph.',
+    7);
+
+  // Cap score at 100
+  if (score > 100) score = 100;
+
+  // Display
+  document.getElementById('results').style.display = 'block';
+  document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  // Score ring
+  var ring = document.getElementById('scoreRing');
+  var ringColor = score >= 80 ? '#1e8e3e' : score >= 55 ? '#f29900' : '#d93025';
+  ring.style.borderColor = ringColor;
+  ring.style.color = ringColor;
+  document.getElementById('scoreNum').textContent = score;
+  document.getElementById('progressBar').style.width = score + '%';
+  document.getElementById('progressBar').style.background = ringColor;
+
+  var verdict = score >= 80 ? '🟢 SEO Ready' : score >= 55 ? '🟡 Needs Improvement' : '🔴 Not Ready to Publish';
+  var sub = score >= 80
+    ? 'Your post is well-optimized. Go ahead and publish!'
+    : score >= 55
+      ? 'A few fixes will significantly improve your ranking chances.'
+      : 'Several important SEO elements are missing. Fix them before publishing.';
+  document.getElementById('scoreVerdict').textContent = verdict;
+  document.getElementById('scoreSub').textContent = sub;
+
+  // Checklist
+  var cl = document.getElementById('checklist');
+  cl.innerHTML = '';
+  checks.forEach(function(c) {
+    var icon = c.status === 'pass' ? '✓' : c.status === 'warn' ? '!' : '✗';
+    var div = document.createElement('div');
+    div.className = 'check-item ' + c.status;
+    div.innerHTML =
+      '<div class="check-icon">' + icon + '</div>' +
+      '<div class="check-text"><strong>' + c.label + '</strong><span>' + c.detail + '</span></div>';
+    cl.appendChild(div);
+  });
+
+  // Tips
+  var tips = document.getElementById('tipsList');
+  tips.innerHTML = '';
+  var failItems = checks.filter(function(c){ return c.status === 'fail' || c.status === 'warn'; });
+  if (failItems.length === 0) {
+    tips.innerHTML = '<div class="tip-box"><strong>Great work!</strong> Your post passes all key SEO checks. Publish it and submit the URL to Google Search Console for faster indexing.</div>';
+  } else {
+    failItems.slice(0, 4).forEach(function(c) {
+      var box = document.createElement('div');
+      box.className = 'tip-box';
+      box.style.marginBottom = '10px';
+      box.innerHTML = '<strong>Fix:</strong> ' + c.detail;
+      tips.appendChild(box);
+    });
+  }
+}
+
+function resetTool() {
+  document.getElementById('postTitle').value = '';
+  document.getElementById('targetKeyword').value = '';
+  document.getElementById('metaDescription').value = '';
+  document.getElementById('postContent').value = '';
+  document.getElementById('results').style.display = 'none';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>
